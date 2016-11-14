@@ -1,0 +1,20 @@
+
+repositories {
+	maven {
+		jcenter()
+		url 'https://dl.bintray.com/earthcomputer/meme'
+	}
+	dependencies {
+		classpath 'net.earthcomputer.meme:meme-gradle:1.0.0.12'
+	}
+}
+
+apply plugin: 'net.earthcomputer.meme.sane'
+
+meme {
+	artifactId = 'meme-sane'
+	bintrayPackageName = 'meme-sane'
+}
+
+group = 'net.earthcomputer.meme'
+version = "${versionMajor}.${versionMinor}.${versionRevision}.${versionBuildNumber}"
