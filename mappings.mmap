@@ -1,0 +1,111 @@
+CLASS none/ok net/minecraft/engine/util/JsonUtils Utilities to do with Json
+	METHOD a (Lcom/google/gson/Gson;Ljava/io/Reader;Ljava/lang/Class;Z)Ljava/lang/Object;
+	METHOD a deserialize (Lcom/google/gson/Gson;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object; Deserializes the given Json to the given type @return An instance of the given type equivalent to the given Json
+		ARG 0 gson The Gson to use
+		ARG 1 json The Json input
+		ARG 2 type The type of output
+	METHOD a isString (Lcom/google/gson/JsonElement;)Z Test whether the given Json element is a string @return True when the given Json element is a string
+		ARG 0 element The Json element to test
+	METHOD a getAsString (Lcom/google/gson/JsonElement;Ljava/lang/String;)Ljava/lang/String; Gets the string value of the given element, throwing an\nexception if it cannot be made into a string @return The string value of the given element
+		ARG 0 element The element to find the string value of
+		ARG 1 name The display name of the element to be displayed in the\nevent of it not being a string
+	METHOD a objectContainsString (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object contains a string at the given key @return True when the object has a string associated with the given key
+		ARG 0 containingObject The object to test
+		ARG 1 key The key we're looking for
+	METHOD a getStringWithDefault (Lcom/google/gson/JsonObject;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; Gets the string at the given key in the given object @return The string value found, or <tt>_default</tt> if not found
+		ARG 0 containingObject The object to test
+		ARG 1 key The key we're looking for
+		ARG 2 _default The value to return if the key wasn't present
+	METHOD b isNumber (Lcom/google/gson/JsonElement;)Z Test whether the given Json element is a number @return True when the given Json element is a number
+		ARG 0 element The Json element to test
+	METHOD c getAsBoolean (Lcom/google/gson/JsonElement;Ljava/lang/String;)Z Gets the boolean value of the given element, throwing an
+\nexception if it cannot be made into a boolean @return The boolean value of the element
+		ARG 0 element The element to test
+		ARG 1 name The display name of the element to be displayed in the
+\nevent that it is not a boolean
+	METHOD c objectContainsBoolean (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object contains a boolean at the given key @return True when a boolean is associated with the given key
+		ARG 0 containingObject The object to test
+		ARG 1 key The key we're looking for
+	METHOD d objectContainsArray (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object has a Json array at the given key @return True when the given object has an array associated with the given key
+		ARG 0 containingObject The object to test
+		ARG 1 key The key we're looking for
+	METHOD f objectContainsPrimitive (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object contains the given key,
+\nand the element associated with that key is primitive @return True when the the value associated with the key is primitive
+		ARG 0 containingObject The object to test
+		ARG 1 key The key we're looking for
+	METHOD g objectContainsKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object contains the given key @return True when the given object contains the given key
+		ARG 0 containingObject The object to test
+		ARG 1 key The key we're looking for
+	METHOD h getString (Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljava/lang/String; Gets the string value at the given key in the given object @return The string value associated with the given key
+		ARG 0 containingObject The object to test
+		ARG 1 key The key we're looking for
+CLASS none/beq net/minecraft/engine/client/MinecraftClient Global variables for a Minecraft client
+	FIELD J LOGGER Lorg/apache/logging/log4j/Logger; The logger
+	FIELD R INSTANCE Lnone/beq; The singleton
+	FIELD t hitResult Lnone/bds; The ray trace result of the player's line of sight
+	METHOD G shutdown ()V Called when the game stops
+	METHOD I currentTime ()J Gets the current time in milliseconds @return The current time in milliseconds
+	METHOD a showChatDebugMessage (Ljava/lang/String;[Ljava/lang/Object;)V
+		ARG 0 translationKey
+		ARG 1 translationArgs
+CLASS none/bex
+	METHOD a getSessionId ()Ljava/lang/String;
+	METHOD c getUsername ()Ljava/lang/String;
+CLASS net/minecraft/client/main/Main net/minecraft/client/main/Main The client main class
+	CLASS net/minecraft/client/main/Main$1
+		METHOD getPasswordAuthentication getPasswordAuthentication ()Ljava/net/PasswordAuthentication;
+			VAR 27 proxyUser
+			VAR 28 proxyPass
+	CLASS net/minecraft/client/main/Main$2
+		METHOD run run ()V
+	METHOD a argExists (Ljava/lang/String;)Z An argument exists if it is non-null and not empty @return Whether the given argument exists
+		ARG 0 argValue The value of the argument to test
+	METHOD main main ([Ljava/lang/String;)V The main method
+		ARG 0 args Program arguments
+		VAR 1 parser
+		VAR 2 serverOpt
+		VAR 3 portOpt
+		VAR 4 gameDirOpt
+		VAR 5 assetsDirOpt
+		VAR 6 resourcePackDirOpt
+		VAR 7 proxyHostOpt
+		VAR 8 proxyPortOpt
+		VAR 9 proxyUserOpt
+		VAR 10 proxyPassOpt
+		VAR 11 usernameOpt
+		VAR 12 uuidOpt
+		VAR 13 accessTokenOpt
+		VAR 14 versionOpt
+		VAR 15 widthOpt
+		VAR 16 heightOpt
+		VAR 17 userPropertiesOpt
+		VAR 18 profilePropertiesOpt
+		VAR 19 assetIndexOpt
+		VAR 20 userTypeOpt
+		VAR 21 versionTypeOpt
+		VAR 22 nonOpts
+		VAR 23 optionSet
+		VAR 24 ignoredArgs
+		VAR 25 proxyHost
+		VAR 26 proxy
+		VAR 27 proxyUser
+		VAR 28 proxyPass
+		VAR 29 width
+		VAR 30 height
+		VAR 31 isFullscreen
+		VAR 32 checkGlErrors
+		VAR 33 isDemo
+		VAR 34 version
+		VAR 35 gson
+		VAR 36 userProperties
+		VAR 37 profileProperties
+		VAR 38 versionType
+		VAR 39 gameDir
+		VAR 40 assetsDir
+		VAR 41 resourcePackDir
+		VAR 42 uuid
+		VAR 43 assetIndex
+		VAR 44 server
+		VAR 45 port
+CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever Used to see if we are in vanilla
+	METHOD getClientModName getClientModName ()Ljava/lang/String; Returns "vanilla" in vanilla @return The client brand

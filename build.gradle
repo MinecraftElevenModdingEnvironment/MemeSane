@@ -1,11 +1,17 @@
 
-repositories {
-	maven {
+buildscript {
+	repositories {
 		jcenter()
-		url 'https://dl.bintray.com/earthcomputer/meme'
+		maven {
+			url 'https://dl.bintray.com/earthcomputer/meme'
+		}
+		maven {
+			name "Cuchaz Custom Repository"
+			url 'http://maven.cuchazinteractive.com'
+		}
 	}
 	dependencies {
-		classpath 'net.earthcomputer.meme:meme-gradle:1.0.0.12'
+		classpath 'net.earthcomputer.meme:meme-gradle:1.0.0.31'
 	}
 }
 
