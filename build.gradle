@@ -11,7 +11,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'net.earthcomputer.meme:meme-gradle:1.0.0.31'
+		classpath 'net.earthcomputer.meme:meme-gradle:1.0.0.38'
 	}
 }
 

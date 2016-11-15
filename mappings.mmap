@@ -1,3 +1,118 @@
+CLASS none/b net/minecraft/engine/exceptions/CrashReport
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD b message Ljava/lang/String;
+	FIELD c cause Ljava/lang/Throwable;
+	METHOD <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+		ARG 0 message
+		ARG 1 cause
+	METHOD a getMessage ()Ljava/lang/String;
+	METHOD a makeCrashReport (Ljava/lang/Throwable;Ljava/lang/String;)Lnone/b;
+	METHOD b getCause ()Ljava/lang/Throwable;
+CLASS none/f net/minecraft/engine/exceptions/ReportedException An exception with a CrashReport associated with it
+	FIELD a crashReport Lnone/b; The crash report associated with this ReportedException
+	METHOD <init> (Lnone/b;)V
+		ARG 0 crashReport
+	METHOD a getCrashReport ()Lnone/b; Gets the crash report associated with this ReportedException @return The crash report associated with this ReportedException
+	METHOD getCause getCause ()Ljava/lang/Throwable; Gets the cause of this throwable @return The cause of this throwable
+	METHOD getMessage getMessage ()Ljava/lang/String; Returns the display message of this throwable @return The display message of this throwable
+CLASS none/co net/minecraft/engine/util/BlockPos
+	CLASS none/co$a
+		FIELD b x I
+		FIELD c y I
+		FIELD d z I
+		METHOD <init> (III)V
+			ARG 0 x
+			ARG 1 y
+			ARG 2 z
+		METHOD <init> (Lnone/co;)V
+			ARG 0 pos
+		METHOD a add (DDD)Lnone/co;
+			ARG 0 x
+			ARG 1 y
+			ARG 2 z
+		METHOD a add (III)Lnone/co;
+		METHOD p getX ()I
+		METHOD q getY ()I
+		METHOD r getZ ()I
+	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
+	METHOD <init> (DDD)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD <init> (III)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD <init> (Lnone/dl;)V
+		ARG 0 other
+	METHOD <init> (Lnone/sm;)V
+		ARG 0 entity
+	METHOD a add (DDD)Lnone/co;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD a add (III)Lnone/co;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD a add (Lnone/dl;)Lnone/co;
+		ARG 0 other
+	METHOD b subtract (Lnone/dl;)Lnone/co;
+		ARG 0 other
+CLASS none/cv net/minecraft/engine/util/EnumFacing
+	FIELD a DOWN Lnone/cv;
+	FIELD b UP Lnone/cv;
+	FIELD c NORTH Lnone/cv;
+	FIELD d SOUTH Lnone/cv;
+	FIELD e WEST Lnone/cv;
+	FIELD f EAST Lnone/cv;
+CLASS none/dl net/minecraft/engine/util/Vec3i
+	FIELD a x I
+	FIELD b y I
+	FIELD c z I
+	FIELD e ORIGIN Lnone/dl;
+	METHOD <init> (III)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD equals (Ljava/lang/Object;)Z
+		ARG 0 other
+	METHOD f distanceSq (DDD)D
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD g distanceSqToCenter (DDD)D
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD h distance (III)D
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD n distanceSq (Lnone/dl;)D
+		ARG 0 other
+	METHOD p getX ()I
+	METHOD q getY ()I
+	METHOD r getZ ()I
+CLASS none/kq net/minecraft/engine/util/ResourceLocation
+CLASS none/no net/minecraft/engine/sound/EnumSoundType
+	FIELD a MASTER Lnone/no;
+	FIELD b MUSIC Lnone/no;
+	FIELD c RECORD Lnone/no;
+	FIELD d WEATHER Lnone/no;
+	FIELD e BLOCK Lnone/no;
+	FIELD f HOSTILE Lnone/no;
+	FIELD g NEUTRAL Lnone/no;
+	FIELD h PLAYER Lnone/no;
+	FIELD i AMBIENT Lnone/no;
+	FIELD j VOICE Lnone/no;
+	FIELD k BY_NAME Ljava/util/Map;
+	FIELD l name Ljava/lang/String;
+	METHOD a getName ()Ljava/lang/String;
+	METHOD a getByName (Ljava/lang/String;)Lnone/no;
+		ARG 0 name
+	METHOD b getNames ()Ljava/util/Set;
+	METHOD values values ()[Lnone/no;
 CLASS none/ok net/minecraft/engine/util/JsonUtils Utilities to do with Json
 	METHOD a (Lcom/google/gson/Gson;Ljava/io/Reader;Ljava/lang/Class;Z)Ljava/lang/Object;
 	METHOD a deserialize (Lcom/google/gson/Gson;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object; Deserializes the given Json to the given type @return An instance of the given type equivalent to the given Json
@@ -18,19 +133,16 @@ CLASS none/ok net/minecraft/engine/util/JsonUtils Utilities to do with Json
 		ARG 2 _default The value to return if the key wasn't present
 	METHOD b isNumber (Lcom/google/gson/JsonElement;)Z Test whether the given Json element is a number @return True when the given Json element is a number
 		ARG 0 element The Json element to test
-	METHOD c getAsBoolean (Lcom/google/gson/JsonElement;Ljava/lang/String;)Z Gets the boolean value of the given element, throwing an
-\nexception if it cannot be made into a boolean @return The boolean value of the element
+	METHOD c getAsBoolean (Lcom/google/gson/JsonElement;Ljava/lang/String;)Z Gets the boolean value of the given element, throwing an\nexception if it cannot be made into a boolean @return The boolean value of the element
 		ARG 0 element The element to test
-		ARG 1 name The display name of the element to be displayed in the
-\nevent that it is not a boolean
+		ARG 1 name The display name of the element to be displayed in the\nevent that it is not a boolean
 	METHOD c objectContainsBoolean (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object contains a boolean at the given key @return True when a boolean is associated with the given key
 		ARG 0 containingObject The object to test
 		ARG 1 key The key we're looking for
 	METHOD d objectContainsArray (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object has a Json array at the given key @return True when the given object has an array associated with the given key
 		ARG 0 containingObject The object to test
 		ARG 1 key The key we're looking for
-	METHOD f objectContainsPrimitive (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object contains the given key,
-\nand the element associated with that key is primitive @return True when the the value associated with the key is primitive
+	METHOD f objectContainsPrimitive (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object contains the given key,\nand the element associated with that key is primitive @return True when the the value associated with the key is primitive
 		ARG 0 containingObject The object to test
 		ARG 1 key The key we're looking for
 	METHOD g objectContainsKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z Test whether the given object contains the given key @return True when the given object contains the given key
@@ -39,18 +151,632 @@ CLASS none/ok net/minecraft/engine/util/JsonUtils Utilities to do with Json
 	METHOD h getString (Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljava/lang/String; Gets the string value at the given key in the given object @return The string value associated with the given key
 		ARG 0 containingObject The object to test
 		ARG 1 key The key we're looking for
+CLASS none/rf net/minecraft/engine/world/EnumDifficulty
+	FIELD a PEACEFUL Lnone/rf;
+	FIELD b EASY Lnone/rf;
+	FIELD c NORMAL Lnone/rf;
+	FIELD d HARD Lnone/rf;
+	METHOD values values ()[Lnone/rf;
+CLASS none/sm net/minecraft/engine/entity/Entity
+	FIELD p posX D
+	FIELD q posY D
+	FIELD r posZ D
+	METHOD <init> (Lnone/ajq;)V
+		ARG 0 world
+CLASS none/su net/minecraft/engine/entity/EnumHandedness
+	FIELD a LEFT_HANDED Lnone/su;
+	FIELD b RIGHT_HANDED Lnone/su;
+	METHOD a opposite ()Lnone/su;
+CLASS none/aax
+	CLASS none/aax$b EnumChatVisibility
+		FIELD a FULL Lnone/aax$b;
+		FIELD b SYSTEM Lnone/aax$b;
+		FIELD c HIDDEN Lnone/aax$b;
+CLASS none/afg net/minecraft/engine/item/Item
+CLASS none/afi net/minecraft/engine/item/ItemStack
+CLASS none/ajq net/minecraft/engine/world/World
+CLASS none/aju net/minecraft/engine/world/IBlockAccess
+CLASS none/ali net/minecraft/engine/block/BlockAir
+CLASS none/als net/minecraft/engine/block/Block
+	FIELD a AIR_ID Lnone/kq;
+	FIELD d unlocalizedName Ljava/lang/String;
+	FIELD h registry Lnone/ct;
+	FIELD q hardness F
+	FIELD r blastResistance F
+	METHOD a getTranslationKey ()Ljava/lang/String;
+	METHOD a registerBlock (ILjava/lang/String;Lnone/als;)V
+		ARG 0 id
+		ARG 1 resLocation
+		ARG 2 block
+	METHOD a registerBlock (ILnone/kq;Lnone/als;)V
+		ARG 0 id
+		ARG 1 resLocation
+		ARG 2 block
+	METHOD b setBlastResistance (F)Lnone/als;
+		ARG 0 thirdOfBlastResistance
+	METHOD c setHardness (F)Lnone/als;
+		ARG 0 hardness
+	METHOD c setUnlocalizedName (Ljava/lang/String;)Lnone/als;
+		ARG 0 unlocalizedName
+	METHOD w registerBlocks ()V
+CLASS none/alt net/minecraft/vanilla/block/Blocks
+	FIELD A sandstone Lnone/als;
+	FIELD B noteblock Lnone/als;
+	FIELD C bed Lnone/als;
+	FIELD D golden_rail Lnone/als;
+	FIELD E detector_rail Lnone/als;
+	FIELD F sticky_piston Lnone/ata;
+	FIELD G web Lnone/als;
+	FIELD H tallgrass Lnone/arg;
+	FIELD I deadbush Lnone/amp;
+	FIELD J piston Lnone/ata;
+	FIELD K piston_head Lnone/atb;
+	FIELD L wool Lnone/als;
+	FIELD M piston_extension Lnone/atc;
+	FIELD N yellow_flower Lnone/anm;
+	FIELD O red_flower Lnone/anm;
+	FIELD P brown_mushroom Lnone/aly;
+	FIELD Q red_mushroom Lnone/aly;
+	FIELD R gold_block Lnone/als;
+	FIELD S iron_block Lnone/als;
+	FIELD T double_stone_slab Lnone/anz;
+	FIELD U stone_slab Lnone/anz;
+	FIELD V brick_block Lnone/als;
+	FIELD W tnt Lnone/als;
+	FIELD X bookshelf Lnone/als;
+	FIELD Y mossy_cobblestone Lnone/als;
+	FIELD Z obsidian Lnone/als;
+	FIELD aA iron_door Lnone/amv;
+	FIELD aB wooden_pressure_plate Lnone/als;
+	FIELD aC redstone_ore Lnone/als;
+	FIELD aD lit_redstone_ore Lnone/als;
+	FIELD aE unlit_redstone_torch Lnone/als;
+	FIELD aF redstone_torch Lnone/als;
+	FIELD aG stone_button Lnone/als;
+	FIELD aH snow_layer Lnone/als;
+	FIELD aI ice Lnone/als;
+	FIELD aJ snow Lnone/als;
+	FIELD aK cactus Lnone/ama;
+	FIELD aL clay Lnone/als;
+	FIELD a air Lnone/als;
+	FIELD aM reeds Lnone/aqc;
+	FIELD aN jukebox Lnone/als;
+	FIELD aO fence Lnone/als;
+	FIELD aP spruce_fence Lnone/als;
+	FIELD aQ birch_fence Lnone/als;
+	FIELD aR jungle_fence Lnone/als;
+	FIELD aS dark_oak_fence Lnone/als;
+	FIELD aT acacia_fence Lnone/als;
+	FIELD aU pumpkin Lnone/als;
+	FIELD aV netherrack Lnone/als;
+	FIELD aW soul_sand Lnone/als;
+	FIELD aX glowstone Lnone/als;
+	FIELD aY portal Lnone/apm;
+	FIELD aZ lit_pumpkin Lnone/als;
+	FIELD aa torch Lnone/als;
+	FIELD ab fire Lnone/anl;
+	FIELD ac mob_spawner Lnone/als;
+	FIELD ad oak_stairs Lnone/als;
+	FIELD ae chest Lnone/ame;
+	FIELD af redstone_wire Lnone/apz;
+	FIELD ag diamond_ore Lnone/als;
+	FIELD ah diamond_block Lnone/als;
+	FIELD ai crafting_table Lnone/als;
+	FIELD aj wheat Lnone/als;
+	FIELD ak farmland Lnone/als;
+	FIELD al furnace Lnone/als;
+	FIELD am lit_furnace Lnone/als;
+	FIELD an standing_sign Lnone/als;
+	FIELD ao wooden_door Lnone/amv;
+	FIELD ap spruce_door Lnone/amv;
+	FIELD aq birch_door Lnone/amv;
+	FIELD ar jungle_door Lnone/amv;
+	FIELD as acacia_door Lnone/amv;
+	FIELD at dark_oak_door Lnone/amv;
+	FIELD au ladder Lnone/als;
+	FIELD av rail Lnone/als;
+	FIELD aw stone_stairs Lnone/als;
+	FIELD ax wall_sign Lnone/als;
+	FIELD ay lever Lnone/als;
+	FIELD az stone_pressure_plate Lnone/als;
+	FIELD bA nether_brick_stairs Lnone/als;
+	FIELD bB nether_wart Lnone/als;
+	FIELD bC enchanting_table Lnone/als;
+	FIELD bD brewing_stand Lnone/als;
+	FIELD bE cauldron Lnone/amd;
+	FIELD bF end_portal Lnone/als;
+	FIELD bG end_portal_frame Lnone/als;
+	FIELD bH end_stone Lnone/als;
+	FIELD bI dragon_egg Lnone/als;
+	FIELD bJ redstone_lamp Lnone/als;
+	FIELD bK lit_redstone_lamp Lnone/als;
+	FIELD bL double_wooden_slab Lnone/anz;
+	FIELD b stone Lnone/als;
+	FIELD bM wooden_slab Lnone/anz;
+	FIELD bN cocoa Lnone/als;
+	FIELD bO sandstone_stairs Lnone/als;
+	FIELD bP emerald_ore Lnone/als;
+	FIELD bQ ender_chest Lnone/als;
+	FIELD bR tripwire_hook Lnone/arm;
+	FIELD bS tripwire Lnone/als;
+	FIELD bT emerald_block Lnone/als;
+	FIELD bU spruce_stairs Lnone/als;
+	FIELD bV birch_stairs Lnone/als;
+	FIELD bW jungle_stairs Lnone/als;
+	FIELD bX command_block Lnone/als;
+	FIELD bY beacon Lnone/alp;
+	FIELD bZ cobblestone_wall Lnone/als;
+	FIELD ba cake Lnone/als;
+	FIELD bb unpowered_repeater Lnone/aqe;
+	FIELD bc powered_repeater Lnone/aqe;
+	FIELD bd trapdoor Lnone/als;
+	FIELD be monster_egg Lnone/als;
+	FIELD bf stonebrick Lnone/als;
+	FIELD bg brown_mushroom_block Lnone/als;
+	FIELD bh red_mushroom_block Lnone/als;
+	FIELD bi iron_bars Lnone/als;
+	FIELD bj glass_pane Lnone/als;
+	FIELD bk melon_block Lnone/als;
+	FIELD bl pumpkin_stem Lnone/als;
+	FIELD bm melon_stem Lnone/als;
+	FIELD bn vine Lnone/als;
+	FIELD bo fence_gate Lnone/als;
+	FIELD bp spruce_fence_gate Lnone/als;
+	FIELD bq birch_fence_gate Lnone/als;
+	FIELD br jungle_fence_gate Lnone/als;
+	FIELD bs dark_oak_fence_gate Lnone/als;
+	FIELD bt acacia_fence_gate Lnone/als;
+	FIELD bu brick_stairs Lnone/als;
+	FIELD bv stone_brick_stairs Lnone/als;
+	FIELD bw mycelium Lnone/aow;
+	FIELD bx waterlily Lnone/als;
+	FIELD by nether_brick Lnone/als;
+	FIELD bz nether_brick_fence Lnone/als;
+	FIELD cA coal_block Lnone/als;
+	FIELD cB packed_ice Lnone/als;
+	FIELD cC acacia_stairs Lnone/als;
+	FIELD cD dark_oak_stairs Lnone/als;
+	FIELD cE slime Lnone/als;
+	FIELD cF double_plant Lnone/amw;
+	FIELD cG stained_glass Lnone/aqu;
+	FIELD cH stained_glass_pane Lnone/aqv;
+	FIELD cI prismarine Lnone/als;
+	FIELD cJ sea_lantern Lnone/als;
+	FIELD cK standing_banner Lnone/als;
+	FIELD cL wall_banner Lnone/als;
+	FIELD c grass Lnone/anv;
+	FIELD cM red_sandstone Lnone/als;
+	FIELD cN red_sandstone_stairs Lnone/als;
+	FIELD cO double_stone_slab2 Lnone/anz;
+	FIELD cP stone_slab2 Lnone/anz;
+	FIELD cQ end_rod Lnone/als;
+	FIELD cR chorus_plant Lnone/als;
+	FIELD cS chorus_flower Lnone/als;
+	FIELD cT purpur_block Lnone/als;
+	FIELD cU purpur_pillar Lnone/als;
+	FIELD cV purpur_stairs Lnone/als;
+	FIELD cW purpur_double_slab Lnone/anz;
+	FIELD cX purpur_slab Lnone/anz;
+	FIELD cY end_bricks Lnone/als;
+	FIELD cZ beetroots Lnone/als;
+	FIELD ca flower_pot Lnone/als;
+	FIELD cb carrots Lnone/als;
+	FIELD cc potatoes Lnone/als;
+	FIELD cd wooden_button Lnone/als;
+	FIELD ce skull Lnone/aqn;
+	FIELD cf anvil Lnone/als;
+	FIELD cg trapped_chest Lnone/als;
+	FIELD ch light_weighted_pressure_plate Lnone/als;
+	FIELD ci heavy_weighted_pressure_plate Lnone/als;
+	FIELD cj unpowered_comparator Lnone/aml;
+	FIELD ck powered_comparator Lnone/aml;
+	FIELD cl daylight_detector Lnone/amo;
+	FIELD cm daylight_detector_inverted Lnone/amo;
+	FIELD cn redstone_block Lnone/als;
+	FIELD co quartz_ore Lnone/als;
+	FIELD cp hopper Lnone/aof;
+	FIELD cq quartz_block Lnone/als;
+	FIELD cr quartz_stairs Lnone/als;
+	FIELD cs activator_rail Lnone/als;
+	FIELD ct dropper Lnone/als;
+	FIELD cu stained_hardened_clay Lnone/als;
+	FIELD cv barrier Lnone/als;
+	FIELD cw iron_trapdoor Lnone/als;
+	FIELD cx hay_block Lnone/als;
+	FIELD cy carpet Lnone/als;
+	FIELD cz hardened_clay Lnone/als;
+	FIELD dA black_shulker_box Lnone/als;
+	FIELD dB structure_block Lnone/als;
+	FIELD d dirt Lnone/als;
+	FIELD da grass_path Lnone/als;
+	FIELD db end_gateway Lnone/als;
+	FIELD dc repeating_command_block Lnone/als;
+	FIELD dd chain_command_block Lnone/als;
+	FIELD de frosted_ice Lnone/als;
+	FIELD df magma Lnone/als;
+	FIELD dg nether_wart_block Lnone/als;
+	FIELD dh red_nether_brick Lnone/als;
+	FIELD di bone_block Lnone/als;
+	FIELD dj structure_void Lnone/als;
+	FIELD dk observer Lnone/als;
+	FIELD dl white_shulker_box Lnone/als;
+	FIELD dm orange_shulker_box Lnone/als;
+	FIELD dn magenta_shulker_box Lnone/als;
+	FIELD do light_blue_shulker_box Lnone/als;
+	FIELD dp yellow_shulker_box Lnone/als;
+	FIELD dq lime_shulker_box Lnone/als;
+	FIELD dr pink_shulker_box Lnone/als;
+	FIELD ds gray_shulker_box Lnone/als;
+	FIELD dt silver_shulker_box Lnone/als;
+	FIELD du cyan_shulker_box Lnone/als;
+	FIELD dv purple_shulker_box Lnone/als;
+	FIELD dw blue_shulker_box Lnone/als;
+	FIELD dx brown_shulker_box Lnone/als;
+	FIELD dy green_shulker_box Lnone/als;
+	FIELD dz red_shulker_box Lnone/als;
+	FIELD e cobblestone Lnone/als;
+	FIELD f planks Lnone/als;
+	FIELD g sapling Lnone/als;
+	FIELD h bedrock Lnone/als;
+	FIELD i flowing_water Lnone/amz;
+	FIELD j water Lnone/aqy;
+	FIELD k flowing_lava Lnone/amz;
+	FIELD l lava Lnone/aqy;
+	FIELD m sand Lnone/aqh;
+	FIELD n gravel Lnone/als;
+	FIELD o gold_ore Lnone/als;
+	FIELD p iron_ore Lnone/als;
+	FIELD q coal_ore Lnone/als;
+	FIELD r log Lnone/als;
+	FIELD s log2 Lnone/als;
+	FIELD t leaves Lnone/aol;
+	FIELD u leaves2 Lnone/aol;
+	FIELD v sponge Lnone/als;
+	FIELD w glass Lnone/als;
+	FIELD x lapis_ore Lnone/als;
+	FIELD y lapis_block Lnone/als;
+	FIELD z dispenser Lnone/als;
+	METHOD a getBlock (Ljava/lang/String;)Lnone/als;
+CLASS none/arx net/minecraft/vanilla/tileentity/TileBanner
+CLASS none/arz net/minecraft/vanilla/tileentity/TileBeacon
+CLASS none/asa net/minecraft/engine/tileentity/TileEntity
+	METHOD a registerTileEntity (Ljava/lang/String;Ljava/lang/Class;)V
+CLASS none/asb net/minecraft/vanilla/tileentity/TileBrewingStand
+CLASS none/asc net/minecraft/vanilla/tileentity/TileChest
+CLASS none/asd net/minecraft/vanilla/tileentity/TileCommandBlock
+CLASS none/ase net/minecraft/vanilla/tileentity/TileComparator
+CLASS none/asf net/minecraft/vanilla/tileentity/TileDaylightDetector
+CLASS none/asg net/minecraft/vanilla/tileentity/TileDispenser
+CLASS none/ash net/minecraft/vanilla/tileentity/TileDropper
+CLASS none/asi net/minecraft/vanilla/tileentity/TileEnchantingTable
+CLASS none/asj net/minecraft/vanilla/tileentity/TileEnderChest
+CLASS none/ask net/minecraft/vanilla/tileentity/TileFlowerPot
+CLASS none/asl net/minecraft/vanilla/tileentity/TileFurnace
+CLASS none/asn net/minecraft/vanilla/tileentity/TileHopper
+CLASS none/asp net/minecraft/vanilla/tileentity/TileMobSpawner
+CLASS none/asq net/minecraft/vanilla/tileentity/TileNoteBlock
+CLASS none/ass net/minecraft/vanilla/tileentity/TileShulkerBox
+CLASS none/ast net/minecraft/vanilla/tileentity/TileSign
+CLASS none/asu net/minecraft/vanilla/tileentity/TileSkull
+CLASS none/asv net/minecraft/vanilla/tileentity/TileStructureBlock
+CLASS none/asw net/minecraft/vanilla/tileentity/TileEndGateway
+CLASS none/asx net/minecraft/vanilla/tileentity/TileEndPortal
+CLASS none/atd net/minecraft/vanilla/tileentity/TilePistonMoving
+CLASS none/atj net/minecraft/engine/block/IBlockState
+	METHOD v getBlock ()Lnone/als;
+CLASS none/atk
+	CLASS none/atk$a
+		METHOD v getBlock ()Lnone/als;
+CLASS none/azq net/minecraft/engine/block/Material
+CLASS none/ben net/minecraft/engine/client/settings/KeyBinding
 CLASS none/beq net/minecraft/engine/client/MinecraftClient Global variables for a Minecraft client
+	FIELD B profiler Lnone/ou;
 	FIELD J LOGGER Lorg/apache/logging/log4j/Logger; The logger
 	FIELD R INSTANCE Lnone/beq; The singleton
 	FIELD t hitResult Lnone/bds; The ray trace result of the player's line of sight
+	FIELD u gameSettings Lnone/bes;
 	METHOD G shutdown ()V Called when the game stops
 	METHOD I currentTime ()J Gets the current time in milliseconds @return The current time in milliseconds
+	METHOD a run ()V Called from the main method to run the game
+	METHOD a checkGlErrors (Ljava/lang/String;)V
+		ARG 0 phase
+		VAR 2 errorId
 	METHOD a showChatDebugMessage (Ljava/lang/String;[Ljava/lang/Object;)V
 		ARG 0 translationKey
 		ARG 1 translationArgs
+	METHOD an initializeGame ()V Initializes the game
+	METHOD as isJava64Bit ()Z
+	METHOD at startTimerHackThread ()V
+		VAR 1 thread
+	METHOD x isFancyGraphicsEnabled ()Z
+CLASS none/bes net/minecraft/engine/client/settings/GameSettings
+	FIELD A touchscreen Z
+	FIELD B mainHand Lnone/su;
+	FIELD C overrideWidth I
+	FIELD D overrideHeight I
+	FIELD E heldItemTooltips Z
+	FIELD F chatScale F
+	FIELD G chatWidth F
+	FIELD H chatHeightUnfocused F
+	FIELD I chatHeightFocused F
+	FIELD J showInventoryAchievementHint Z
+	FIELD K mipmapLevels I
+	FIELD L useNativeTransport Z
+	FIELD M entityShadows Z
+	FIELD N attackIndicator I
+	FIELD O enableWeakAttacks Z
+	FIELD P showSubtitles Z
+	FIELD Q realmsNotifications Z
+	FIELD R autoJump Z
+	FIELD S keyBindForward Lnone/ben;
+	FIELD T keyBindLeft Lnone/ben;
+	FIELD U keyBindBack Lnone/ben;
+	FIELD V keyBindRight Lnone/ben;
+	FIELD W keyBindJump Lnone/ben;
+	FIELD X keyBindSneak Lnone/ben;
+	FIELD Y keyBindSprint Lnone/ben;
+	FIELD Z keyBindInventory Lnone/ben;
+	FIELD aA gamma F
+	FIELD aB saturation F
+	FIELD aC guiScale I
+	FIELD aD particles I
+	FIELD aE lang Ljava/lang/String;
+	FIELD aF forceUnicodeFont Z
+	FIELD aG LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD aH GSON Lcom/google/gson/Gson;
+	FIELD aP volumes Ljava/util/Map;
+	FIELD aa keyBindSwapHands Lnone/ben;
+	FIELD ab keyBindDropItem Lnone/ben;
+	FIELD ac keyBindUseItem Lnone/ben;
+	FIELD ad keyBindAttack Lnone/ben;
+	FIELD ae keyBindPickBlock Lnone/ben;
+	FIELD af keyBindChat Lnone/ben;
+	FIELD ag keyBindShowPlayerList Lnone/ben;
+	FIELD ah keyBindCommand Lnone/ben;
+	FIELD ai keyBindScreenshot Lnone/ben;
+	FIELD aj keyBindTogglePerspective Lnone/ben;
+	FIELD ak keyBindSmoothCamera Lnone/ben;
+	FIELD al keyBindFullscreen Lnone/ben;
+	FIELD am keyBindSpectatorOutlines Lnone/ben;
+	FIELD an keyBindsHotbar [Lnone/ben;
+	FIELD ao keyBindings [Lnone/ben;
+	FIELD ap mc Lnone/beq;
+	FIELD aq difficulty Lnone/rf;
+	FIELD aw lastServer Ljava/lang/String;
+	FIELD az fov F
+	FIELD b mouseSensitivity F
+	FIELD c invertYMouse Z
+	FIELD d renderDistance I
+	FIELD e bobView Z
+	FIELD f anaglyph3d Z
+	FIELD g fboEnable Z
+	FIELD h maxFps I
+	FIELD i renderClouds I
+	FIELD j fancyGraphics Z
+	FIELD l resourcePacks Ljava/util/List;
+	FIELD m incompatibleResourcePacks Ljava/util/List;
+	FIELD n chatVisibility Lnone/aax$b;
+	FIELD o chatColors Z
+	FIELD p chatLinks Z
+	FIELD q chatLinksPrompt Z
+	FIELD r chatOpacity F
+	FIELD s snooperEnabled Z
+	FIELD t fullscreen Z
+	FIELD u enableVSync Z
+	FIELD v useVbo Z
+	FIELD w reducedDebugInfo Z
+	FIELD x hideServerAddress Z
+	FIELD y advancedItemTooltips Z
+	FIELD z pauseOnLostFocus Z
+	METHOD <init> (Lnone/beq;Ljava/io/File;)V
+		ARG 0 mc
+	METHOD a parseFloat (Ljava/lang/String;)F
 CLASS none/bex
 	METHOD a getSessionId ()Ljava/lang/String;
 	METHOD c getUsername ()Ljava/lang/String;
+CLASS none/bpw net/minecraft/engine/client/renderer/VertexBuffer
+	METHOD a begin (ILnone/bzg;)V
+	METHOD b pos (DDD)Lnone/bpw;
+	METHOD b color (IIII)Lnone/bpw;
+	METHOD d endVertex ()V
+CLASS none/bqe net/minecraft/engine/client/renderer/Gl
+	CLASS none/bqe$d ClearController
+		FIELD a clearDepth D
+		FIELD b clearColor Lnone/bqe$e;
+	CLASS none/bqe$e Color
+		FIELD a red F
+		FIELD b green F
+		FIELD c blue F
+		FIELD d alpha F
+	CLASS none/bqe$f LogicOpcodeController
+		FIELD b opcode I
+	CLASS none/bqe$g ColorMask
+		FIELD a red Z
+		FIELD b green Z
+		FIELD c blue Z
+		FIELD d alpha Z
+	CLASS none/bqe$j CullFaceController
+		FIELD b mode I
+	CLASS none/bqe$n FogController
+		FIELD b fogMode I
+		FIELD c density F
+		FIELD d fogStart F
+		FIELD e fogEnd F
+	FIELD i fogController Lnone/bqe$n;
+	FIELD j cullFaceController Lnone/bqe$j;
+	FIELD l logicOpcodeController Lnone/bqe$f;
+	FIELD n clearController Lnone/bqe$d;
+	FIELD s currentShadeModel I
+	FIELD u currentColorMask Lnone/bqe$g;
+	FIELD v currentColor Lnone/bqe$e;
+	METHOD A getTextures ()I
+	METHOD F loadIdentityMatrix ()V
+	METHOD G pushMatrix ()V
+	METHOD H popMatrix ()V
+	METHOD J endDrawing ()V
+	METHOD K endList ()V
+	METHOD L getErrorId ()I
+	METHOD a setClearDepth (D)V
+		ARG 0 depth
+	METHOD a scale (DDD)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD a loadOrthographicMatrix (DDDDDD)V
+		ARG 0 left
+		ARG 1 right
+		ARG 2 bottom
+		ARG 3 top
+		ARG 4 nearVal
+		ARG 5 farVal
+	METHOD a setFogDensity (F)V
+		ARG 0 density
+	METHOD a normal (FFF)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD a setClearColor (FFFF)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+		ARG 3 alpha
+	METHOD a setAlphaFunc (IF)V
+		ARG 0 functionId
+		ARG 1 ref
+	METHOD a setFloatTexEnvVar (IIF)V
+		ARG 0 targetEnvironment
+		ARG 1 variableId
+		ARG 2 value
+	METHOD a setIntTexEnvVar (III)V
+		ARG 0 targetEnvironment
+		ARG 1 variableId
+		ARG 2 value
+	METHOD a setLightVar (IILjava/nio/FloatBuffer;)V
+		ARG 0 lightId
+		ARG 1 variableId
+		ARG 2 value
+	METHOD a setLightModelVar (ILjava/nio/FloatBuffer;)V
+		ARG 0 variableId
+		ARG 1 value
+	METHOD a getIntVar (ILjava/nio/IntBuffer;)V
+		ARG 0 variableId
+		ARG 1 out
+	METHOD a multiplyMatrix (Ljava/nio/FloatBuffer;)V
+		ARG 0 matrix
+	METHOD a setTexGenMode (Lnone/bqe$u;I)V
+	METHOD a (Lnone/bqe$u;ILjava/nio/FloatBuffer;)V
+	METHOD a multiplyMatrix (Lorg/lwjgl/util/vector/Quaternion;)V
+		ARG 0 matrix
+	METHOD a enableDepthBufferWriting (Z)V
+		ARG 0 enabled
+	METHOD a setColorMask (ZZZZ)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+		ARG 3 alpha
+	METHOD b translate (DDD)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD b setFogStart (F)V
+		ARG 0 start
+	METHOD b texCoord (FF)V
+		ARG 0 u
+		ARG 1 v
+	METHOD b scale (FFF)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD b rotate (FFFF)V
+		ARG 0 angle
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+	METHOD b setBlendFunc (II)V
+		ARG 0 srcFactorId
+		ARG 1 dstFactorId
+	METHOD b setFloatTextureVar (IIF)V
+		ARG 0 textureType
+		ARG 1 variableId
+		ARG 2 value
+	METHOD b setIntTextureVar (III)V
+		ARG 0 textureType
+		ARG 1 variableId
+		ARG 2 value
+	METHOD b setViewport (IIII)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 width
+		ARG 3 height
+	METHOD b setTexEnvVar (IILjava/nio/FloatBuffer;)V
+		ARG 0 targetEnvironment
+		ARG 1 variableId
+		ARG 2 value
+	METHOD b setFogVar (ILjava/nio/FloatBuffer;)V
+		ARG 0 variableId
+		ARG 1 value
+	METHOD c setFogEnd (F)V
+		ARG 0 end
+	METHOD c translate (FFF)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD c setColor (FFFF)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+		ARG 3 alpha
+	METHOD c setDepthFunc (I)V
+		ARG 0 depthFuncId
+	METHOD c setIntFogVar (II)V
+		ARG 0 variableId
+		ARG 1 value
+	METHOD c getTextureVar (III)I
+		ARG 0 textureType
+		ARG 1 variableId
+		ARG 2 value
+	METHOD c getFloatVar (ILjava/nio/FloatBuffer;)V
+		ARG 0 variableId
+		ARG 1 out
+	METHOD d setLineWidth (F)V
+		ARG 0 lineWidth
+	METHOD d setColor (FFF)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+	METHOD d setBlendEquation (I)V
+		ARG 0 blendEquationId
+	METHOD d setPolygonMode (II)V
+		ARG 0 face
+		ARG 1 mode
+	METHOD e vertex (FFF)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD f setLogicOpcode (I)V
+		ARG 0 opcode
+	METHOD i bindTexture2D (I)V
+		ARG 0 textureId
+	METHOD j setShadeModel (I)V
+		ARG 0 shadeModel
+	METHOD m clear (I)V
+		ARG 0 bitToClear
+	METHOD n setMatrixMode (I)V
+		ARG 0 matrixMode
+	METHOD r beginDrawing (I)V
+		ARG 0 glMode
+	METHOD u getStringVar (I)Ljava/lang/String;
+		ARG 0 variableId
+	METHOD v getIntVar (I)I
+		ARG 0 variableId
+	METHOD w setFogMode (I)V
+		ARG 0 fogModeId
+	METHOD x setCullFaceMode (I)V
+		ARG 0 mode
+CLASS none/bqq
+	METHOD b end ()V
+CLASS none/bze net/minecraft/engine/client/renderer/VertexFormats
+	FIELD f POS_COLOR Lnone/bzg;
 CLASS net/minecraft/client/main/Main net/minecraft/client/main/Main The client main class
 	CLASS net/minecraft/client/main/Main$1
 		METHOD getPasswordAuthentication getPasswordAuthentication ()Ljava/net/PasswordAuthentication;
