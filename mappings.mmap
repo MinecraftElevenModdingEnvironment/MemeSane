@@ -60,6 +60,10 @@ CLASS none/co net/minecraft/engine/util/BlockPos
 	METHOD b subtract (Lnone/dl;)Lnone/co;
 		ARG 0 other
 CLASS none/cv net/minecraft/engine/util/EnumFacing
+	CLASS none/cv$a Axis
+		FIELD a X Lnone/cv$a;
+		FIELD b Y Lnone/cv$a;
+		FIELD c Z Lnone/cv$a;
 	CLASS none/cv$c Plane
 		FIELD a HORIZONTAL Lnone/cv$c;
 		FIELD b VERTICAL Lnone/cv$c;
@@ -98,6 +102,7 @@ CLASS none/dl net/minecraft/engine/util/Vec3i
 	METHOD p getX ()I
 	METHOD q getY ()I
 	METHOD r getZ ()I
+CLASS none/du net/minecraft/engine/nbt/NBTCompound
 CLASS none/kq net/minecraft/engine/util/ResourceLocation
 CLASS none/kt net/minecraft/engine/startup/Bootstrap
 	METHOD a hasInitialized ()Z
@@ -524,20 +529,26 @@ CLASS none/agq net/minecraft/vanilla/item/ItemSword
 CLASS none/ajq net/minecraft/engine/world/World
 CLASS none/aju net/minecraft/engine/world/IBlockAccess
 CLASS none/ali net/minecraft/engine/block/BlockAir
-CLASS none/alj
+CLASS none/alj net/minecraft/vanilla/block/BlockAnvil
+	FIELD a FACING Lnone/atw;
+	FIELD b DAMAGE Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/alk
-	CLASS none/alk$a
+CLASS none/alk net/minecraft/vanilla/block/BlockBanner
+	CLASS none/alk$a Standing
 		METHOD a getStateFromMeta (I)Lnone/atj;
 		METHOD e getMetaFromState (Lnone/atj;)I
-	CLASS none/alk$b
+	CLASS none/alk$b Wall
 		METHOD a getStateFromMeta (I)Lnone/atj;
 		METHOD e getMetaFromState (Lnone/atj;)I
+	FIELD a FACING Lnone/atw;
+	FIELD b ROTATION Lnone/aty;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
+CLASS none/all net/minecraft/vanilla/block/BlockBarrier
 CLASS none/alm net/minecraft/engine/block/BlockTileEntity
+CLASS none/aln net/minecraft/vanilla/block/BlockPressurePlate
 CLASS none/alo net/minecraft/vanilla/block/BlockAbstractRail
 	CLASS none/alo$b EnumShape
 		FIELD a NORTH_SOUTH Lnone/alo$b;
@@ -557,7 +568,7 @@ CLASS none/alo net/minecraft/vanilla/block/BlockAbstractRail
 		METHOD c isAscending ()Z
 		METHOD values values ()[Lnone/alo$b;
 	METHOD g getShapeProperty ()Lnone/atz;
-CLASS none/alp
+CLASS none/alp net/minecraft/vanilla/block/BlockBeacon
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/alq net/minecraft/vanilla/block/BlockBed
 	CLASS none/alq$a EnumPart
@@ -569,13 +580,18 @@ CLASS none/alq net/minecraft/vanilla/block/BlockBed
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
+CLASS none/alr net/minecraft/vanilla/block/BlockBeetroot
+	FIELD a AGE Lnone/aty;
+	METHOD e getAgeProperty ()Lnone/aty;
 CLASS none/als net/minecraft/engine/block/Block
 	FIELD a AIR_ID Lnone/kq;
 	FIELD d unlocalizedName Ljava/lang/String;
 	FIELD h registry Lnone/ct;
 	FIELD q hardness F
 	FIELD r blastResistance F
+	FIELD x material Lnone/azq;
 	METHOD a getTranslationKey ()Ljava/lang/String;
+	METHOD a setLightLevel (F)Lnone/als;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a registerBlock (ILjava/lang/String;Lnone/als;)V
 		ARG 0 id
@@ -837,27 +853,34 @@ CLASS none/alt net/minecraft/vanilla/block/Blocks
 	FIELD y lapis_block Lnone/als;
 	FIELD z dispenser Lnone/als;
 	METHOD a getBlock (Ljava/lang/String;)Lnone/als;
+CLASS none/alu net/minecraft/vanilla/block/BlockBone
 CLASS none/alw net/minecraft/vanilla/block/BlockBookshelf
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/alx
+CLASS none/alx net/minecraft/vanilla/block/BlockBrewingStand
+	FIELD a HAS_BOTTLE [Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aly net/minecraft/vanilla/block/BlockCrops
-CLASS none/alz
+CLASS none/alz net/minecraft/vanilla/block/BlockButton
+	FIELD a POWERED Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/ama
+CLASS none/ama net/minecraft/vanilla/block/BlockCactus
+	FIELD a AGE Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amb
+CLASS none/amb net/minecraft/vanilla/block/BlockCake
+	FIELD a BITES Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amd
+CLASS none/amc net/minecraft/vanilla/block/BlockCarrots
+CLASS none/amd net/minecraft/vanilla/block/BlockCauldron
+	FIELD a LEVEL Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
@@ -870,18 +893,26 @@ CLASS none/ame net/minecraft/vanilla/block/BlockChest
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amf
+CLASS none/amf net/minecraft/vanilla/block/BlockChorusFlower
+	FIELD a AGE Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amg
+CLASS none/amg net/minecraft/vanilla/block/BlockChorusPlant
+	FIELD a NORTH Lnone/atv;
+	FIELD b EAST Lnone/atv;
+	FIELD c SOUTH Lnone/atv;
+	FIELD d WEST Lnone/atv;
+	FIELD e UP Lnone/atv;
+	FIELD f DOWN Lnone/atv;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amh
+CLASS none/amh net/minecraft/vanilla/block/BlockClay
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/ami
+CLASS none/ami net/minecraft/vanilla/block/BlockCocoa
+	FIELD a AGE Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/amj net/minecraft/vanilla/block/BlockWool
@@ -889,12 +920,19 @@ CLASS none/amj net/minecraft/vanilla/block/BlockWool
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amk
+CLASS none/amk net/minecraft/vanilla/block/BlockCommandBlock
+	FIELD a FACING Lnone/atw;
+	FIELD b CONDITIONAL Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aml
+CLASS none/aml net/minecraft/vanilla/block/BlockComparator
+	CLASS none/aml$a EnumMode
+		FIELD a COMPARE Lnone/aml$a;
+		FIELD b SUBTRACT Lnone/aml$a;
+	FIELD a POWERED Lnone/atv;
+	FIELD b MODE Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
@@ -904,8 +942,10 @@ CLASS none/amn net/minecraft/vanilla/block/BlockWheat
 	FIELD c AGE Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
+	METHOD e getAgeProperty ()Lnone/aty;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amo
+CLASS none/amo net/minecraft/vanilla/block/BlockDaylightDetector
+	FIELD a POWER Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
@@ -921,6 +961,7 @@ CLASS none/amq net/minecraft/vanilla/block/BlockDetectorRail
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 	METHOD g getShapeProperty ()Lnone/atz;
+CLASS none/amr net/minecraft/vanilla/block/BlockDiode
 CLASS none/ams net/minecraft/vanilla/block/BlockDirectional
 	FIELD H FACING Lnone/atw;
 CLASS none/amt net/minecraft/vanilla/block/BlockDirt
@@ -960,30 +1001,52 @@ CLASS none/amv net/minecraft/vanilla/block/BlockDoor
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amw
+CLASS none/amw net/minecraft/vanilla/block/BlockDoublePlant
+	CLASS none/amw$a EnumHalf
+		FIELD a UPPER Lnone/amw$a;
+		FIELD b LOWER Lnone/amw$a;
+	CLASS none/amw$b EnumVariant
+		FIELD a SUNFLOWER Lnone/amw$b;
+		FIELD b SYRINGA Lnone/amw$b;
+		FIELD c DOUBLE_GRASS Lnone/amw$b;
+		FIELD d DOUBLE_FERN Lnone/amw$b;
+		FIELD e DOUBLE_ROSE Lnone/amw$b;
+		FIELD f PAEONIA Lnone/amw$b;
+		FIELD g BY_META [Lnone/amw$b;
+		FIELD h meta I
+		METHOD a getMeta ()I
+		METHOD a byMeta (I)Lnone/amw$b;
+		METHOD values values ()[Lnone/amw$b;
+	FIELD a VARIANT Lnone/atx;
+	FIELD c HALF Lnone/atx;
+	FIELD d FACING Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/amy
+CLASS none/amx net/minecraft/vanilla/block/BlockDragonEgg
+CLASS none/amy net/minecraft/vanilla/block/BlockDropper
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/amz net/minecraft/vanilla/block/BlockLiquidFlowing
-CLASS none/ana
+CLASS none/ana net/minecraft/vanilla/block/BlockEnchantmentTable
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
-CLASS none/anb
+CLASS none/anb net/minecraft/vanilla/block/BlockEndGateway
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
-CLASS none/anc
+CLASS none/anc net/minecraft/vanilla/block/BlockEndPortal
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
-CLASS none/and
+CLASS none/and net/minecraft/vanilla/block/BlockEndPortalFrame
+	FIELD a FACING Lnone/atw;
+	FIELD b EYE Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/ane
+CLASS none/ane net/minecraft/vanilla/block/BlockEndRod
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/anf
+CLASS none/anf net/minecraft/vanilla/block/BlockEnderChest
+	FIELD a FACING Lnone/atw;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
@@ -997,9 +1060,16 @@ CLASS none/ani net/minecraft/vanilla/block/BlockFarmland
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/anj
+CLASS none/anj net/minecraft/vanilla/block/BlockFence
+	FIELD a NORTH Lnone/atv;
+	FIELD b EAST Lnone/atv;
+	FIELD c SOUTH Lnone/atv;
+	FIELD d WEST Lnone/atv;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/ank
+CLASS none/ank net/minecraft/vanilla/block/BlockFenceGate
+	FIELD a OPEN Lnone/atv;
+	FIELD b POWERED Lnone/atv;
+	FIELD c IN_WALL Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/anl net/minecraft/vanilla/block/BlockFire
@@ -1049,11 +1119,37 @@ CLASS none/anm net/minecraft/vanilla/block/BlockFlower
 	METHOD e getFlowerType ()Lnone/anm$b;
 	METHOD e getMetaFromState (Lnone/atj;)I
 	METHOD g getOrCreateTypeProperty ()Lnone/atz;
-CLASS none/ann
+CLASS none/ann net/minecraft/vanilla/block/BlockFlowerPot
+	CLASS none/ann$a EnumContents
+		FIELD a EMPTY Lnone/ann$a;
+		FIELD b ROSE Lnone/ann$a;
+		FIELD c BLUE_ORCHID Lnone/ann$a;
+		FIELD d ALLIUM Lnone/ann$a;
+		FIELD e HOUSTONIA Lnone/ann$a;
+		FIELD f RED_TULIP Lnone/ann$a;
+		FIELD g ORANGE_TULIP Lnone/ann$a;
+		FIELD h WHITE_TULIP Lnone/ann$a;
+		FIELD i PINK_TULIP Lnone/ann$a;
+		FIELD j OXEYE_DAISY Lnone/ann$a;
+		FIELD k DANDELION Lnone/ann$a;
+		FIELD l OAK_SAPLING Lnone/ann$a;
+		FIELD m SPRUCE_SAPLING Lnone/ann$a;
+		FIELD n BIRCH_SAPLING Lnone/ann$a;
+		FIELD o JUNGLE_SAPLING Lnone/ann$a;
+		FIELD p ACACIA_SAPLING Lnone/ann$a;
+		FIELD q DARK_OAK_SAPLING Lnone/ann$a;
+		FIELD r MUSHROOM_RED Lnone/ann$a;
+		FIELD s MUSHROOM_BROWN Lnone/ann$a;
+		FIELD t DEAD_BUSH Lnone/ann$a;
+		FIELD u FERN Lnone/ann$a;
+		FIELD v CACTUS Lnone/ann$a;
+	FIELD a LEGACY_DATA Lnone/aty;
+	FIELD b CONTENTS Lnone/atx;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/ano
+CLASS none/ano net/minecraft/vanilla/block/BlockFrostedIce
+	FIELD a AGE Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/anp net/minecraft/vanilla/block/BlockDoubleRedSandstoneSlab
@@ -1067,9 +1163,9 @@ CLASS none/ans net/minecraft/vanilla/block/BlockFurnace
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/ant
+CLASS none/ant net/minecraft/vanilla/block/BlockGlass
 	METHOD a getAmountDropped (Ljava/util/Random;)I
-CLASS none/anu
+CLASS none/anu net/minecraft/vanilla/block/BlockGlowstone
 	METHOD a (ILjava/util/Random;)I
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
@@ -1077,7 +1173,7 @@ CLASS none/anv net/minecraft/vanilla/block/BlockGrass
 	FIELD a SNOWY Lnone/atv;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/anw
+CLASS none/anw net/minecraft/vanilla/block/BlockGrassPath
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 CLASS none/anx net/minecraft/vanilla/block/BlockGravel
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
@@ -1092,26 +1188,59 @@ CLASS none/anz net/minecraft/vanilla/block/BlockSlab
 	METHOD e isDouble ()Z
 CLASS none/aoa net/minecraft/vanilla/block/BlockSingleStoneSlab
 	METHOD e isDouble ()Z
+CLASS none/aob net/minecraft/vanilla/block/BlockTransparent
 CLASS none/aoc net/minecraft/vanilla/block/BlockSingleWoodenSlab
 	METHOD e isDouble ()Z
-CLASS none/aof
+CLASS none/aod net/minecraft/vanilla/block/BlockHardenedClay
+CLASS none/aoe net/minecraft/vanilla/block/BlockHay
+CLASS none/aof net/minecraft/vanilla/block/BlockHopper
+	CLASS none/aof$1
+		METHOD a apply (Lnone/cv;)Z
+	FIELD a FACING Lnone/atw;
+	FIELD b ENABLED Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aog net/minecraft/vanilla/block/BlockHorizontal
 	FIELD D FACING Lnone/atw;
-CLASS none/aoh
+CLASS none/aoh net/minecraft/vanilla/block/BlockBigMushroom
+	CLASS none/aoh$a EnumVariant
+		FIELD a NORTH_WEST Lnone/aoh$a;
+		FIELD b NORTH Lnone/aoh$a;
+		FIELD c NORTH_EAST Lnone/aoh$a;
+		FIELD d WEST Lnone/aoh$a;
+		FIELD e CENTER Lnone/aoh$a;
+		FIELD f EAST Lnone/aoh$a;
+		FIELD g SOUTH_WEST Lnone/aoh$a;
+		FIELD h SOUTH Lnone/aoh$a;
+		FIELD i SOUTH_EAST Lnone/aoh$a;
+		FIELD j STEM Lnone/aoh$a;
+		FIELD k ALL_INSIDE Lnone/aoh$a;
+		FIELD l ALL_OUTSIDE Lnone/aoh$a;
+		FIELD m ALL_STEM Lnone/aoh$a;
+		FIELD n BY_META [Lnone/aoh$a;
+		FIELD o meta I
+		METHOD a getMeta ()I
+		METHOD a byMeta (I)Lnone/aoh$a;
+		METHOD values values ()[Lnone/aoh$a;
+	FIELD a VARIANT Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aoi
+CLASS none/aoi net/minecraft/vanilla/block/BlockIce
 	METHOD a getAmountDropped (Ljava/util/Random;)I
-CLASS none/aoj
+CLASS none/aoj net/minecraft/vanilla/block/BlockJukebox
+	CLASS none/aoj$a TE
+		FIELD a record Lnone/afi;
+		METHOD a readFromNBT (Lnone/du;)V
+		METHOD b writeToNBT (Lnone/du;)Lnone/du;
+	FIELD a HAS_RECORD Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aok
+CLASS none/aok net/minecraft/vanilla/block/BlockLadder
+	FIELD a FACING Lnone/atw;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aol net/minecraft/vanilla/block/BlockLeaves
@@ -1119,7 +1248,25 @@ CLASS none/aol net/minecraft/vanilla/block/BlockLeaves
 	FIELD b CHECK_DECAY Lnone/atv;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/aon
+CLASS none/aon net/minecraft/vanilla/block/BlockLever
+	CLASS none/aon$a EnumDirection
+		FIELD a DOWN_X Lnone/aon$a;
+		FIELD b EAST Lnone/aon$a;
+		FIELD c WEST Lnone/aon$a;
+		FIELD d SOUTH Lnone/aon$a;
+		FIELD e NORTH Lnone/aon$a;
+		FIELD f UP_Z Lnone/aon$a;
+		FIELD g UP_X Lnone/aon$a;
+		FIELD h DOWN_Z Lnone/aon$a;
+		FIELD i BY_META [Lnone/aon$a;
+		FIELD j meta I
+		FIELD l facing Lnone/cv;
+		METHOD a getMeta ()I
+		METHOD a byMeta (I)Lnone/aon$a;
+		METHOD c getFacing ()Lnone/cv;
+		METHOD values values ()[Lnone/aon$a;
+	FIELD a FACING Lnone/atx;
+	FIELD b POWERED Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aoo net/minecraft/vanilla/block/BlockLiquid
@@ -1135,7 +1282,8 @@ CLASS none/aop net/minecraft/vanilla/block/BlockLog
 		FIELD c Z Lnone/aop$a;
 		FIELD d NONE Lnone/aop$a;
 	FIELD a AXIS Lnone/atx;
-CLASS none/aor
+CLASS none/aoq net/minecraft/vanilla/block/BlockMagma
+CLASS none/aor net/minecraft/vanilla/block/BlockMelon
 	METHOD a (ILjava/util/Random;)I
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
@@ -1143,24 +1291,60 @@ CLASS none/aot net/minecraft/vanilla/block/BlockMobSpawner
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/aou
+CLASS none/aou net/minecraft/vanilla/block/BlockMonsterEgg
+	CLASS none/aou$a EnumVariant
+		CLASS none/aou$a$1
+			METHOD d getBlockImpersonating ()Lnone/atj;
+		CLASS none/aou$a$2
+			METHOD d getBlockImpersonating ()Lnone/atj;
+		CLASS none/aou$a$3
+			METHOD d getBlockImpersonating ()Lnone/atj;
+		CLASS none/aou$a$4
+			METHOD d getBlockImpersonating ()Lnone/atj;
+		CLASS none/aou$a$5
+			METHOD d getBlockImpersonating ()Lnone/atj;
+		CLASS none/aou$a$6
+			METHOD d getBlockImpersonating ()Lnone/atj;
+		FIELD a STONE Lnone/aou$a;
+		FIELD b COBBLESTONE Lnone/aou$a;
+		FIELD c STONE_BRICK Lnone/aou$a;
+		FIELD d MOSSY_BRICK Lnone/aou$a;
+		FIELD e CRACKED_BRICK Lnone/aou$a;
+		FIELD f CHISELED_BRICK Lnone/aou$a;
+		FIELD g BY_META [Lnone/aou$a;
+		FIELD h meta I
+		METHOD a getMeta ()I
+		METHOD a byMeta (I)Lnone/aou$a;
+		METHOD d getBlockImpersonating ()Lnone/atj;
+		METHOD values values ()[Lnone/aou$a;
+	FIELD a VARIANT Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aov net/minecraft/vanilla/block/BlockMushroom
-CLASS none/aow
+CLASS none/aow net/minecraft/vanilla/block/BlockMycelium
+	FIELD a SNOWY Lnone/atv;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aoy
+CLASS none/aox net/minecraft/vanilla/block/BlockNetherBrick
+CLASS none/aoy net/minecraft/vanilla/block/BlockNetherWart
+	FIELD a AGE Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/apa
+CLASS none/aoz net/minecraft/vanilla/block/BlockNetherrack
+CLASS none/apa net/minecraft/vanilla/block/BlockLeavesNew
+	CLASS none/apa$1
+		METHOD a apply (Lnone/apl$a;)Z
+	FIELD e VARIANT Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/apb
+CLASS none/apb net/minecraft/vanilla/block/BlockLogNew
+	CLASS none/apb$1
+		METHOD a apply (Lnone/apl$a;)Z
+	FIELD b VARIANT Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
@@ -1184,7 +1368,8 @@ CLASS none/apd net/minecraft/vanilla/block/BlockBedrock
 CLASS none/ape net/minecraft/vanilla/block/BlockNoteBlock
 	FIELD a INSTRUMENTS Ljava/util/List;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
-CLASS none/apf
+CLASS none/apf net/minecraft/vanilla/block/BlockObserver
+	FIELD a POWERED Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/apg net/minecraft/vanilla/block/BlockObsidian
@@ -1208,7 +1393,7 @@ CLASS none/apj net/minecraft/vanilla/block/BlockOre
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD d getDamageDropped (Lnone/atj;)I
-CLASS none/apk
+CLASS none/apk net/minecraft/vanilla/block/BlockPackedIce
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 CLASS none/apl net/minecraft/vanilla/block/BlockPlanks
 	CLASS none/apl$a EnumVariant
@@ -1227,10 +1412,13 @@ CLASS none/apl net/minecraft/vanilla/block/BlockPlanks
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/apm
+CLASS none/apm net/minecraft/vanilla/block/BlockNetherPortal
+	FIELD a AXIS Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
+CLASS none/apn net/minecraft/vanilla/block/BlockPotato
+CLASS none/apo net/minecraft/vanilla/block/BlockRedstoneBlock
 CLASS none/app net/minecraft/vanilla/block/BlockPoweredRail
 	CLASS none/app$1
 		METHOD a apply (Lnone/alo$b;)Z
@@ -1239,14 +1427,32 @@ CLASS none/app net/minecraft/vanilla/block/BlockPoweredRail
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 	METHOD g getShapeProperty ()Lnone/atz;
-CLASS none/apq
+CLASS none/apq net/minecraft/vanilla/block/BlockPressurePlateUnweighted
+	CLASS none/apq$a EnumType
+	FIELD d POWERED Lnone/atv;
+	FIELD e type Lnone/apq$a;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/apr
+CLASS none/apr net/minecraft/vanilla/block/BlockPrismarine
+	CLASS none/apr$a EnumVariant
+		FIELD a PRISMARINE Lnone/apr$a;
+		FIELD b PRISMARINE_BRICKS Lnone/apr$a;
+		FIELD c DARK_PRISMARINE Lnone/apr$a;
+		FIELD d BY_META [Lnone/apr$a;
+		FIELD e meta I
+		METHOD a getMeta ()I
+		METHOD values values ()[Lnone/apr$a;
+	FIELD a VARIANT Lnone/atx;
+	FIELD b PRISMARINE_META I
+	FIELD c PRISMARINE_BRICKS_META I
+	FIELD d DARK_PRISMARINE_META I
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aps
+CLASS none/aps net/minecraft/vanilla/block/BlockPumpkin
+	CLASS none/aps$1
+		METHOD a apply (Lnone/atj;)Z
+	FIELD e IS_PUMPKIN Lcom/google/common/base/Predicate;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/apt net/minecraft/vanilla/block/BlockPurpurSlab
@@ -1260,21 +1466,44 @@ CLASS none/apt net/minecraft/vanilla/block/BlockPurpurSlab
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/apu
+CLASS none/apu net/minecraft/vanilla/block/BlockQuartz
+	CLASS none/apu$a EnumVariant
+		FIELD a DEFAULT Lnone/apu$a;
+		FIELD b CHISELED Lnone/apu$a;
+		FIELD c LINES_Y Lnone/apu$a;
+		FIELD d LINES_X Lnone/apu$a;
+		FIELD e LINES_Z Lnone/apu$a;
+		FIELD f BY_META [Lnone/apu$a;
+		FIELD g meta I
+		METHOD a getMeta ()I
+		METHOD values values ()[Lnone/apu$a;
+	FIELD a VARIANT Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/apv
+CLASS none/apv net/minecraft/vanilla/block/BlockRail
+	FIELD d SHAPE Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 	METHOD g getShapeProperty ()Lnone/atz;
 CLASS none/apw net/minecraft/vanilla/block/BlockRedFlower
 	METHOD e getFlowerType ()Lnone/anm$b;
-CLASS none/apx
+CLASS none/apx net/minecraft/vanilla/block/BlockRedSandstone
+	CLASS none/apx$a EnumType
+		FIELD a DEFAULT Lnone/apx$a;
+		FIELD b CHISELED Lnone/apx$a;
+		FIELD c SMOOTH Lnone/apx$a;
+		FIELD d BY_META [Lnone/apx$a;
+		FIELD e meta I
+		METHOD a getMeta ()I
+		METHOD a byMeta (I)Lnone/apx$a;
+		METHOD values values ()[Lnone/apx$a;
+	FIELD a TYPE Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/apy
+CLASS none/apy net/minecraft/vanilla/block/BlockRedstoneOre
+	FIELD a lit Z
 	METHOD a (ILjava/util/Random;)I
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
@@ -1291,19 +1520,25 @@ CLASS none/apz net/minecraft/vanilla/block/BlockRedstoneWire
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aqa
+CLASS none/aqa net/minecraft/vanilla/block/BlockRedstoneLamp
+	FIELD a lit Z
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/aqb
+CLASS none/aqb net/minecraft/vanilla/block/BlockRedstoneTorch
+	FIELD B lit Z
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/aqc
+CLASS none/aqc net/minecraft/vanilla/block/BlockReeds
+	FIELD a AGE Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aqe
+CLASS none/aqe net/minecraft/vanilla/block/BlockRepeater
+	FIELD a LOCKED Lnone/atv;
+	FIELD b DELAY Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aqf
+CLASS none/aqf net/minecraft/vanilla/block/BlockPillar
+	FIELD c AXIS Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aqh net/minecraft/vanilla/block/BlockSand
@@ -1339,41 +1574,52 @@ CLASS none/aqj net/minecraft/vanilla/block/BlockSapling
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aqk
+CLASS none/aqk net/minecraft/vanilla/block/BlockSeaLantern
 	METHOD a (ILjava/util/Random;)I
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/aql
+CLASS none/aql net/minecraft/vanilla/block/BlockShulkerBox
+	FIELD a FACING Lnone/atx;
+	FIELD b color Lnone/ael;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aqm net/minecraft/vanilla/block/BlockSign
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/aqn
+CLASS none/aqn net/minecraft/vanilla/block/BlockSkull
+	CLASS none/aqn$1
+		METHOD a apply (Lnone/atm;)Z
+	FIELD a FACING Lnone/atw;
+	FIELD b NODROP Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aqp
+CLASS none/aqo net/minecraft/vanilla/block/BlockSlime
+CLASS none/aqp net/minecraft/vanilla/block/BlockSnow
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/aqq
+CLASS none/aqq net/minecraft/vanilla/block/BlockSnowLayer
+	FIELD a LAYERS Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
+CLASS none/aqr net/minecraft/vanilla/block/BlockSoulSand
 CLASS none/aqt net/minecraft/vanilla/block/BlockSponge
 	FIELD a WET Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aqu
+CLASS none/aqu net/minecraft/vanilla/block/BlockStainedGlass
+	FIELD a COLOR Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aqv
+CLASS none/aqv net/minecraft/vanilla/block/BlockStainedGlassPane
+	FIELD a COLOR Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
@@ -1398,7 +1644,9 @@ CLASS none/aqx net/minecraft/vanilla/block/BlockStandingSign
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aqy net/minecraft/vanilla/block/BlockLiquidStill
-CLASS none/aqz
+CLASS none/aqz net/minecraft/vanilla/block/BlockStem
+	FIELD a AGE Lnone/aty;
+	FIELD c FACING Lnone/atw;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
@@ -1421,10 +1669,21 @@ CLASS none/ara net/minecraft/vanilla/block/BlockStone
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/arb
+CLASS none/arb net/minecraft/vanilla/block/BlockStonebrick
+	CLASS none/arb$a EnumVariant
+		FIELD a STONEBRICK Lnone/arb$a;
+		FIELD b MOSSY_STONEBRICK Lnone/arb$a;
+		FIELD c CRACKED_STONEBRICK Lnone/arb$a;
+		FIELD d CHISELED_STONEBRICK Lnone/arb$a;
+		FIELD e BY_META [Lnone/arb$a;
+		FIELD f meta I
+		METHOD a getMeta ()I
+		METHOD a byMeta (I)Lnone/arb$a;
+	FIELD a VARIANT Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
+CLASS none/arc net/minecraft/vanilla/block/BlockStoneButton
 CLASS none/ard net/minecraft/vanilla/block/BlockStoneSlab
 	CLASS none/ard$a EnumVariant
 		FIELD a STONE Lnone/ard$a;
@@ -1445,11 +1704,13 @@ CLASS none/ard net/minecraft/vanilla/block/BlockStoneSlab
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/are
+CLASS none/are net/minecraft/vanilla/block/BlockStructureBlock
+	FIELD a MODE Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
+CLASS none/arf net/minecraft/vanilla/block/BlockStructureVoid
 CLASS none/arg net/minecraft/vanilla/block/BlockTallGrass
 	CLASS none/arg$a EnumType
 		FIELD a DEAD_BUSH Lnone/arg$a;
@@ -1465,7 +1726,11 @@ CLASS none/arg net/minecraft/vanilla/block/BlockTallGrass
 	METHOD a (ILjava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/arh
+CLASS none/arh net/minecraft/vanilla/block/BlockPane
+	FIELD b NORTH Lnone/atv;
+	FIELD c EAST Lnone/atv;
+	FIELD d SOUTH Lnone/atv;
+	FIELD e WEST Lnone/atv;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/ari net/minecraft/vanilla/block/BlockTnt
@@ -1478,22 +1743,57 @@ CLASS none/arj net/minecraft/vanilla/block/BlockTorch
 	FIELD a FACING Lnone/atw;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/ark
+CLASS none/ark net/minecraft/vanilla/block/BlockTrapdoor
+	CLASS none/ark$a EnumHalf
+		FIELD a TOP Lnone/ark$a;
+		FIELD b BOTTOM Lnone/ark$a;
+	FIELD a FACING Lnone/atw;
+	FIELD b OPEN Lnone/atv;
+	FIELD c HALF Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/arl
+CLASS none/arl net/minecraft/vanilla/block/BlockTripwire
+	FIELD a POWERED Lnone/atv;
+	FIELD b ATTACHED Lnone/atv;
+	FIELD c DISARMED Lnone/atv;
+	FIELD d NORTH Lnone/atv;
+	FIELD e EAST Lnone/atv;
+	FIELD f SOUTH Lnone/atv;
+	FIELD g WEST Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/arm
+CLASS none/arm net/minecraft/vanilla/block/BlockTripwireHook
+	FIELD a FACING Lnone/atw;
+	FIELD b POWERED Lnone/atv;
+	FIELD c ATTACHED Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/arn
+CLASS none/arn net/minecraft/vanilla/block/BlockVine
+	FIELD a UP Lnone/atv;
+	FIELD b NORTH Lnone/atv;
+	FIELD c EAST Lnone/atv;
+	FIELD d SOUTH Lnone/atv;
+	FIELD e WEST Lnone/atv;
+	FIELD f VINE_ATTACH_PROPERTIES [Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/aro
+CLASS none/aro net/minecraft/vanilla/block/BlockCobblestoneWall
+	CLASS none/aro$a EnumVariant
+		FIELD a COBBLESTONE Lnone/aro$a;
+		FIELD b MOSSY_COBBLESTONE Lnone/aro$a;
+		FIELD c BY_META [Lnone/aro$a;
+		FIELD d meta I
+		METHOD a getMeta ()I
+		METHOD a byMeta (I)Lnone/aro$a;
+	FIELD a UP Lnone/atv;
+	FIELD b NORTH Lnone/atv;
+	FIELD c EAST Lnone/atv;
+	FIELD d SOUTH Lnone/atv;
+	FIELD e WEST Lnone/atv;
+	FIELD f VARIANT Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
@@ -1501,48 +1801,102 @@ CLASS none/arp net/minecraft/vanilla/block/BlockWallSign
 	FIELD b FACING Lnone/atw;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/arq
+CLASS none/arq net/minecraft/vanilla/block/BlockWaterlily
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/arr net/minecraft/vanilla/block/BlockWeb
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
-CLASS none/ars
+CLASS none/ars net/minecraft/vanilla/block/BlockPressurePlateWeighted
+	FIELD d POWER Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD e getMetaFromState (Lnone/atj;)I
+CLASS none/art net/minecraft/vanilla/block/BlockWoodenButton
 CLASS none/aru net/minecraft/vanilla/block/BlockWoodenSlab
 	FIELD d VARIANT Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/arv
+CLASS none/arv net/minecraft/vanilla/block/BlockCarpet
+	FIELD a COLOR Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/arw net/minecraft/vanilla/block/BlockYellowFlower
 	METHOD e getFlowerType ()Lnone/anm$b;
 CLASS none/arx net/minecraft/vanilla/tileentity/TileBanner
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/arz net/minecraft/vanilla/tileentity/TileBeacon
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asa net/minecraft/engine/tileentity/TileEntity
 	METHOD a registerTileEntity (Ljava/lang/String;Ljava/lang/Class;)V
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asb net/minecraft/vanilla/tileentity/TileBrewingStand
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asc net/minecraft/vanilla/tileentity/TileChest
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asd net/minecraft/vanilla/tileentity/TileCommandBlock
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/ase net/minecraft/vanilla/tileentity/TileComparator
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asf net/minecraft/vanilla/tileentity/TileDaylightDetector
 CLASS none/asg net/minecraft/vanilla/tileentity/TileDispenser
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/ash net/minecraft/vanilla/tileentity/TileDropper
 CLASS none/asi net/minecraft/vanilla/tileentity/TileEnchantingTable
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asj net/minecraft/vanilla/tileentity/TileEnderChest
 CLASS none/ask net/minecraft/vanilla/tileentity/TileFlowerPot
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asl net/minecraft/vanilla/tileentity/TileFurnace
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asn net/minecraft/vanilla/tileentity/TileHopper
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
+CLASS none/aso
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asp net/minecraft/vanilla/tileentity/TileMobSpawner
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asq net/minecraft/vanilla/tileentity/TileNoteBlock
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/ass net/minecraft/vanilla/tileentity/TileShulkerBox
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/ast net/minecraft/vanilla/tileentity/TileSign
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asu net/minecraft/vanilla/tileentity/TileSkull
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asv net/minecraft/vanilla/tileentity/TileStructureBlock
+	CLASS none/asv$a EnumMode
+		FIELD a SAVE Lnone/asv$a;
+		FIELD b LOAD Lnone/asv$a;
+		FIELD c CORNER Lnone/asv$a;
+		FIELD d DATA Lnone/asv$a;
+		FIELD e BY_META [Lnone/asv$a;
+		FIELD g meta I
+		METHOD a getMeta ()I
+		METHOD a byMeta (I)Lnone/asv$a;
+		METHOD values values ()[Lnone/asv$a;
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asw net/minecraft/vanilla/tileentity/TileEndGateway
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asx net/minecraft/vanilla/tileentity/TileEndPortal
 CLASS none/ata net/minecraft/vanilla/block/BlockPiston
 	FIELD B sticky Z
@@ -1566,6 +1920,8 @@ CLASS none/atc net/minecraft/vanilla/block/BlockPistonMoving
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/atd net/minecraft/vanilla/tileentity/TilePistonMoving
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/atj net/minecraft/engine/block/IBlockState
 	METHOD a withProperty (Lnone/atz;Ljava/lang/Comparable;)Lnone/atj;
 	METHOD c getProperty (Lnone/atz;)Ljava/lang/Comparable;
@@ -1575,6 +1931,7 @@ CLASS none/atk
 		METHOD a withProperty (Lnone/atz;Ljava/lang/Comparable;)Lnone/atj;
 		METHOD c getProperty (Lnone/atz;)Ljava/lang/Comparable;
 		METHOD v getBlock ()Lnone/als;
+CLASS none/atn net/minecraft/engine/block/BlockPattern
 CLASS none/atv net/minecraft/engine/block/PropertyBool
 	METHOD a create (Ljava/lang/String;)Lnone/atv;
 CLASS none/atw net/minecraft/engine/block/PropertyFacing
@@ -1583,6 +1940,7 @@ CLASS none/atw net/minecraft/engine/block/PropertyFacing
 CLASS none/atx net/minecraft/engine/block/PropertyEnum
 	METHOD a create (Ljava/lang/String;Ljava/lang/Class;)Lnone/atx;
 	METHOD a create (Ljava/lang/String;Ljava/lang/Class;Lcom/google/common/base/Predicate;)Lnone/atx;
+	METHOD a create (Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Enum;)Lnone/atx;
 CLASS none/aty net/minecraft/engine/block/PropertyInt
 	METHOD a create (Ljava/lang/String;II)Lnone/aty;
 CLASS none/atz net/minecraft/engine/block/IProperty
