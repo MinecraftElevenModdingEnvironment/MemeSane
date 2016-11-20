@@ -59,6 +59,18 @@ CLASS none/co net/minecraft/engine/util/BlockPos
 		ARG 0 other
 	METHOD b subtract (Lnone/dl;)Lnone/co;
 		ARG 0 other
+CLASS none/ct net/minecraft/engine/util/DefaultedMappedRegistry
+	FIELD d defaultKey Ljava/lang/Object;
+	FIELD e defaultValue Ljava/lang/Object;
+	METHOD a checkDefaultExists ()V
+	METHOD a getValue (I)Ljava/lang/Object;
+	METHOD a register (ILjava/lang/Object;Ljava/lang/Object;)V
+	METHOD a getId (Ljava/lang/Object;)I
+	METHOD a randomValue (Ljava/util/Random;)Ljava/lang/Object;
+	METHOD b getName (Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD c getValue (Ljava/lang/Object;)Ljava/lang/Object;
+CLASS none/cu
+	METHOD c getValue (Ljava/lang/Object;)Ljava/lang/Object;
 CLASS none/cv net/minecraft/engine/util/EnumFacing
 	CLASS none/cv$a Axis
 		FIELD a X Lnone/cv$a;
@@ -74,6 +86,36 @@ CLASS none/cv net/minecraft/engine/util/EnumFacing
 	FIELD e WEST Lnone/cv;
 	FIELD f EAST Lnone/cv;
 	METHOD values values ()[Lnone/cv;
+CLASS none/cx net/minecraft/engine/util/IIterable
+CLASS none/dc net/minecraft/engine/util/MappedRegistry
+	FIELD a idValueMapping Lnone/oh;
+	FIELD b valueToName Ljava/util/Map;
+	METHOD a getValue (I)Ljava/lang/Object;
+	METHOD a register (ILjava/lang/Object;Ljava/lang/Object;)V
+		ARG 0 id
+		ARG 1 name
+		ARG 2 value
+	METHOD a getId (Ljava/lang/Object;)I
+	METHOD b createNameToValueMap ()Ljava/util/Map;
+	METHOD b getName (Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD c getValue (Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD d containsName (Ljava/lang/Object;)Z
+	METHOD iterator iterator ()Ljava/util/Iterator;
+CLASS none/dh
+	METHOD a register (Ljava/lang/Object;Ljava/lang/Object;)V
+	METHOD c names ()Ljava/util/Set;
+	METHOD c getValue (Ljava/lang/Object;)Ljava/lang/Object;
+CLASS none/dj net/minecraft/engine/util/Registry
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD b valuesArray [Ljava/lang/Object;
+	FIELD c nameToValue Ljava/util/Map;
+	METHOD a register (Ljava/lang/Object;Ljava/lang/Object;)V
+	METHOD a randomValue (Ljava/util/Random;)Ljava/lang/Object;
+	METHOD b createNameToValueMap ()Ljava/util/Map;
+	METHOD c names ()Ljava/util/Set;
+	METHOD c getValue (Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD d containsName (Ljava/lang/Object;)Z
+	METHOD iterator iterator ()Ljava/util/Iterator;
 CLASS none/dl net/minecraft/engine/util/Vec3i
 	FIELD a x I
 	FIELD b y I
@@ -132,6 +174,13 @@ CLASS none/no net/minecraft/engine/sound/EnumSoundType
 		ARG 0 name
 	METHOD b getNames ()Ljava/util/Set;
 	METHOD values values ()[Lnone/no;
+CLASS none/oh net/minecraft/engine/util/ObjectIntBiMap
+	METHOD a getKey (I)Ljava/lang/Object;
+	METHOD a get (Ljava/lang/Object;)I
+	METHOD a put (Ljava/lang/Object;I)V
+	METHOD d expandCapacity (I)V
+	METHOD d (Ljava/lang/Object;)I
+	METHOD iterator iterator ()Ljava/util/Iterator;
 CLASS none/ok net/minecraft/engine/util/JsonUtils Utilities to do with Json
 	METHOD a (Lcom/google/gson/Gson;Ljava/io/Reader;Ljava/lang/Class;Z)Ljava/lang/Object;
 	METHOD a deserialize (Lcom/google/gson/Gson;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object; Deserializes the given Json to the given type @return An instance of the given type equivalent to the given Json
@@ -177,12 +226,38 @@ CLASS none/rf net/minecraft/engine/world/EnumDifficulty
 	FIELD c NORMAL Lnone/rf;
 	FIELD d HARD Lnone/rf;
 	METHOD values values ()[Lnone/rf;
+CLASS none/sk net/minecraft/vanilla/entity/EntityAreaEffectCloud
 CLASS none/sm net/minecraft/engine/entity/Entity
 	FIELD p posX D
 	FIELD q posY D
 	FIELD r posZ D
 	METHOD <init> (Lnone/ajq;)V
 		ARG 0 world
+CLASS none/so net/minecraft/engine/entity/Entities
+	CLASS none/so$a SpawnEggInfo
+		FIELD a entityId Lnone/kq;
+	FIELD a LIGHTNING_BOLT_ID Lnone/kq;
+	FIELD b registry Lnone/dc;
+	FIELD c spawnEggs Ljava/util/Map;
+	FIELD d allEntityIds Ljava/util/Set;
+	FIELD e PLAYER_ID Lnone/kq;
+	FIELD f LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD g entitySavegameIdsByIntId Ljava/util/List;
+	METHOD a allEntityIds ()Ljava/util/Set;
+	METHOD a getClassByIntId (I)Ljava/lang/Class;
+	METHOD a registerEntity (ILjava/lang/String;Ljava/lang/Class;Ljava/lang/String;)V
+	METHOD a createEntity (ILnone/ajq;)Lnone/sm;
+	METHOD a getId (Ljava/lang/Class;)Lnone/kq;
+	METHOD a createEntity (Ljava/lang/Class;Lnone/ajq;)Lnone/sm;
+	METHOD a addSpawnEgg (Ljava/lang/String;II)Lnone/so$a;
+	METHOD a createEntity (Lnone/du;Lnone/ajq;)Lnone/sm;
+	METHOD a getSavegameId (Lnone/kq;)Ljava/lang/String;
+	METHOD a createEntity (Lnone/kq;Lnone/ajq;)Lnone/sm;
+	METHOD a getId (Lnone/sm;)Lnone/kq;
+	METHOD a isEntityOfType (Lnone/sm;Lnone/kq;)Z
+	METHOD b registerEntities ()V
+	METHOD b isEntityId (Lnone/kq;)Z
+	METHOD b getSavegameId (Lnone/sm;)Ljava/lang/String;
 CLASS none/sr net/minecraft/engine/inventory/EnumSpecialSlotType
 	FIELD a MAINHAND Lnone/sr;
 	FIELD b OFFHAND Lnone/sr;
@@ -190,11 +265,67 @@ CLASS none/sr net/minecraft/engine/inventory/EnumSpecialSlotType
 	FIELD d LEGS Lnone/sr;
 	FIELD e CHEST Lnone/sr;
 	FIELD f HEAD Lnone/sr;
+CLASS none/ss net/minecraft/vanilla/entity/EntityXPOrb
 CLASS none/su net/minecraft/engine/entity/EnumHandedness
 	FIELD a LEFT_HANDED Lnone/su;
 	FIELD b RIGHT_HANDED Lnone/su;
 	METHOD a opposite ()Lnone/su;
+CLASS none/sv net/minecraft/entity/EntityLiving
+CLASS none/wt net/minecraft/vanilla/entity/EntityBat
+CLASS none/ww net/minecraft/vanilla/entity/EntityChicken
+CLASS none/wx net/minecraft/vanilla/entity/EntityCow
+CLASS none/wz net/minecraft/vanilla/entity/EntityMooshroom
+CLASS none/xa net/minecraft/vanilla/entity/EntityOcelot
+CLASS none/xb net/minecraft/vanilla/entity/EntityPig
+CLASS none/xc net/minecraft/vanilla/entity/EntityPolarBear
+CLASS none/xd net/minecraft/vanilla/entity/EntityRabbit
+CLASS none/xe net/minecraft/vanilla/entity/EntitySheep
+CLASS none/xf net/minecraft/vanilla/entity/EntitySnowman
+CLASS none/xg net/minecraft/vanilla/entity/EntitySquid
+CLASS none/xh net/minecraft/vanilla/entity/EntityVillagerGolem
+CLASS none/xj net/minecraft/vanilla/entity/EntityWolf
+CLASS none/xm net/minecraft/vanilla/entity/EntityDonkey
+CLASS none/xn net/minecraft/vanilla/entity/EntityHorse
+CLASS none/xp net/minecraft/vanilla/entity/EntityLlama
+CLASS none/xq net/minecraft/vanilla/entity/EntityMule
+CLASS none/xr net/minecraft/vanilla/entity/EntitySkeletonHorse
+CLASS none/xt net/minecraft/vanilla/entity/EntityZombieHorse
+CLASS none/xz net/minecraft/vanilla/entity/EntityEnderCrystal
+CLASS none/ya net/minecraft/vanilla/entity/EntityEnderDragon
+CLASS none/yu net/minecraft/vanilla/entity/EntityWither
+CLASS none/yw net/minecraft/vanilla/entity/EntityArmorStand
+CLASS none/yy net/minecraft/vanilla/entity/EntityItemFrame
+CLASS none/yz net/minecraft/vanilla/entity/EntityLeashKnot
 CLASS none/za net/minecraft/vanilla/entity/EntityPainting
+CLASS none/zh net/minecraft/vanilla/entity/EntityFallingBlock
+CLASS none/zi net/minecraft/engine/entity/EntityItem
+CLASS none/zj net/minecraft/vanilla/entity/EntityPrimedTNT
+CLASS none/zm net/minecraft/vanilla/entity/EntityBlaze
+CLASS none/zn net/minecraft/vanilla/entity/EntityCaveSpider
+CLASS none/zo net/minecraft/vanilla/entity/EntityCreeper
+CLASS none/zp net/minecraft/vanilla/entity/EntityElderGuardian
+CLASS none/zq net/minecraft/vanilla/entity/EntityEnderman
+CLASS none/zr net/minecraft/vanilla/entity/EntityEndermite
+CLASS none/zt net/minecraft/vanilla/entity/EntityEvocationIllager
+CLASS none/zu net/minecraft/vanilla/entity/EntityGhast
+CLASS none/zv net/minecraft/vanilla/entity/EntityGiant
+CLASS none/zw net/minecraft/vanilla/entity/EntityGuardian
+CLASS none/zx net/minecraft/vanilla/entity/EntityHusk
+CLASS none/zy net/minecraft/vanilla/entity/EntityMagmaCube
+CLASS none/aaa net/minecraft/vanilla/entity/EntityZombiePigman
+CLASS none/aad net/minecraft/vanilla/entity/EntityShulker
+CLASS none/aae net/minecraft/vanilla/entity/EntitySilverfish
+CLASS none/aaf net/minecraft/vanilla/entity/EntitySkeleton
+CLASS none/aag net/minecraft/vanilla/entity/EntitySlime
+CLASS none/aah net/minecraft/vanilla/entity/EntitySpider
+CLASS none/aai net/minecraft/vanilla/entity/EntityStray
+CLASS none/aaj net/minecraft/vanilla/entity/EntityVex
+CLASS none/aak net/minecraft/vanilla/entity/EntityVindicationIllager
+CLASS none/aal net/minecraft/vanilla/entity/EntityWitch
+CLASS none/aam net/minecraft/vanilla/entity/EntityWitherSkeleton
+CLASS none/aan net/minecraft/vanilla/entity/EntityZombie
+CLASS none/aao net/minecraft/vanilla/entity/EntityZombieVillager
+CLASS none/aas net/minecraft/vanilla/entity/EntityVillager
 CLASS none/aax net/minecraft/engine/entity/EntityPlayer
 	CLASS none/aax$b EnumChatVisibility
 		FIELD a FULL Lnone/aax$b;
@@ -209,6 +340,49 @@ CLASS none/aax net/minecraft/engine/entity/EntityPlayer
 	METHOD a openTileEntityScreen (Lnone/rb;)V
 	METHOD a openNonTileEntityScreen (Lnone/ri;)V
 	METHOD a openHorseInventoryScreen (Lnone/xl;Lnone/rb;)V
+CLASS none/abb net/minecraft/vanilla/entity/EntityDragonFireball
+CLASS none/abc net/minecraft/vanilla/entity/EntityEvocationFangs
+CLASS none/abd net/minecraft/vanilla/entity/EntityEyeOfEnderSignal
+CLASS none/abf net/minecraft/vanilla/entity/EntityFireworksRocket
+CLASS none/abg net/minecraft/vanilla/entity/EntityFireball
+CLASS none/abh net/minecraft/vanilla/entity/EntityLlamaSpit
+CLASS none/abk net/minecraft/vanilla/entity/EntityShulkerBullet
+CLASS none/abl net/minecraft/vanilla/entity/EntitySmallFireball
+CLASS none/abm net/minecraft/vanilla/entity/EntitySnowball
+CLASS none/abn net/minecraft/vanilla/entity/EntitySpectralArrow
+CLASS none/abp net/minecraft/vanilla/entity/EntityThrownEgg
+CLASS none/abq net/minecraft/vanilla/entity/EntityThrownEnderPearl
+CLASS none/abr net/minecraft/vanilla/entity/EntityThrownXPBottle
+CLASS none/abs net/minecraft/vanilla/entity/EntityThrownPotion
+CLASS none/abt net/minecraft/vanilla/entity/EntityArrow
+CLASS none/abu net/minecraft/vanilla/entity/EntityWitherSkull
+CLASS none/abw net/minecraft/vanilla/entity/EntityBoat
+	CLASS none/abw$b EnumType
+		FIELD a OAK Lnone/abw$b;
+		FIELD b SPRUCE Lnone/abw$b;
+		FIELD c BIRCH Lnone/abw$b;
+		FIELD d JUNGLE Lnone/abw$b;
+		FIELD e ACACIA Lnone/abw$b;
+		FIELD f DARK_OAK Lnone/abw$b;
+CLASS none/abx net/minecraft/vanilla/entity/EntityMinecart
+	CLASS none/abx$a EnumType
+		FIELD a RIDEABLE Lnone/abx$a;
+		FIELD b CHEST Lnone/abx$a;
+		FIELD c FURNACE Lnone/abx$a;
+		FIELD d TNT Lnone/abx$a;
+		FIELD e SPAWNER Lnone/abx$a;
+		FIELD f HOPPER Lnone/abx$a;
+		FIELD g COMMAND_BLOCK Lnone/abx$a;
+CLASS none/aby net/minecraft/vanilla/entity/EntityMinecartChest
+CLASS none/abz net/minecraft/vanilla/entity/EntityCommandBlockMinecart
+CLASS none/acb net/minecraft/vanilla/entity/EntityMinecartFurnace
+CLASS none/acc net/minecraft/vanilla/entity/EntityMinecartHopper
+	METHOD D getWorld ()Lnone/ajq;
+CLASS none/acd net/minecraft/vanilla/entity/EntityMinecartRideable
+CLASS none/ace net/minecraft/vanilla/entity/EntityMinecartSpawner
+CLASS none/acf net/minecraft/vanilla/entity/EntityMinecartTnt
+CLASS none/adm net/minecraft/engine/item/ItemAir
+CLASS none/adn net/minecraft/vanilla/item/ItemAnvil
 CLASS none/ado net/minecraft/vanilla/item/ItemArmor
 	CLASS none/ado$a ArmorMaterial
 		FIELD a LEATHER Lnone/ado$a;
@@ -216,12 +390,28 @@ CLASS none/ado net/minecraft/vanilla/item/ItemArmor
 		FIELD c IRON Lnone/ado$a;
 		FIELD d GOLD Lnone/ado$a;
 		FIELD e DIAMOND Lnone/ado$a;
+CLASS none/adp net/minecraft/vanilla/item/ItemArmorStand
+CLASS none/adq net/minecraft/vanilla/item/ItemArrow
 CLASS none/adr net/minecraft/vanilla/item/ItemAxe
+CLASS none/ads net/minecraft/vanilla/item/ItemBanner
+CLASS none/adt net/minecraft/vanilla/item/ItemBed
 CLASS none/adu net/minecraft/engine/item/ItemBlock
+CLASS none/adv net/minecraft/vanilla/item/ItemPlacesBlock
 CLASS none/adw net/minecraft/vanilla/item/ItemBoat
+CLASS none/adx net/minecraft/vanilla/item/ItemBook
+CLASS none/ady net/minecraft/vanilla/item/ItemGlassBottle
 CLASS none/adz net/minecraft/vanilla/item/ItemBow
+CLASS none/aea net/minecraft/vanilla/item/ItemSoup
 CLASS none/aeb net/minecraft/vanilla/item/ItemBucket
+CLASS none/aec net/minecraft/vanilla/item/ItemCarrotOnAStick
+CLASS none/aed net/minecraft/vanilla/item/ItemChorusFruit
+CLASS none/aee net/minecraft/vanilla/item/ItemClock
 CLASS none/aef net/minecraft/vanilla/item/ItemCoal
+CLASS none/aeg net/minecraft/vanilla/item/ItemCompass
+CLASS none/aeh net/minecraft/vanilla/item/ItemNonEmptyMap
+CLASS none/aej net/minecraft/vanilla/item/ItemTool
+CLASS none/aek net/minecraft/vanilla/item/ItemDoor
+	FIELD a doorBlock Lnone/als;
 CLASS none/ael net/minecraft/vanilla/util/EnumDyeColor
 	FIELD a WHITE Lnone/ael;
 	FIELD b ORANGE Lnone/ael;
@@ -248,6 +438,26 @@ CLASS none/ael net/minecraft/vanilla/util/EnumDyeColor
 	METHOD b getDyeMeta ()I
 	METHOD b byNonDyeMeta (I)Lnone/ael;
 	METHOD values values ()[Lnone/ael;
+CLASS none/aem net/minecraft/vanilla/item/ItemDye
+CLASS none/aen net/minecraft/vanilla/item/ItemColored
+CLASS none/aeo net/minecraft/vanilla/item/ItemEgg
+CLASS none/aep net/minecraft/vanilla/item/ItemElytra
+CLASS none/aeq net/minecraft/vanilla/item/ItemFillingMap
+CLASS none/aer net/minecraft/vanilla/item/ItemEnchantedBook
+CLASS none/aes net/minecraft/vanilla/item/ItemEndCrystal
+CLASS none/aet net/minecraft/vanilla/item/ItemEnderEye
+CLASS none/aeu net/minecraft/vanilla/item/ItemEnderPearl
+CLASS none/aev net/minecraft/vanilla/item/ItemExperienceBottle
+CLASS none/aew net/minecraft/vanilla/item/ItemFireCharge
+CLASS none/aex net/minecraft/vanilla/item/ItemFireworkCharge
+CLASS none/aey net/minecraft/vanilla/item/ItemFireworks
+CLASS none/aez net/minecraft/vanilla/item/ItemFish
+	CLASS none/aez$a EnumType
+		FIELD a COD Lnone/aez$a;
+		FIELD b SALMON Lnone/aez$a;
+		FIELD c CLOWNFISH Lnone/aez$a;
+		FIELD d PUFFERFISH Lnone/aez$a;
+CLASS none/afa net/minecraft/vanilla/item/ItemFishingRod
 CLASS none/afb net/minecraft/vanilla/item/ItemFlintAndSteel
 CLASS none/afc net/minecraft/vanilla/item/ItemFood
 CLASS none/afd net/minecraft/vanilla/item/ItemGoldenApple
@@ -305,7 +515,25 @@ CLASS none/afg net/minecraft/engine/item/Item
 	METHOD d setMaxStackSize (I)Lnone/afg;
 	METHOD u registerItems ()V
 CLASS none/afi net/minecraft/engine/item/ItemStack
-CLASS none/afk net/minecraft/engine/item/Items
+	FIELD a NULL Lnone/afi;
+	FIELD c count I
+	FIELD e item Lnone/afg;
+	FIELD f tag Lnone/du;
+	FIELD g isNull Z
+	FIELD h damage I
+	METHOD E getCount ()I
+	METHOD F refreshIsNull ()V
+	METHOD a writeToNBT (Lnone/du;)Lnone/du;
+	METHOD b isNull ()Z
+	METHOD b areEqual (Lnone/afi;Lnone/afi;)Z
+	METHOD c getItem ()Lnone/afg;
+	METHOD d isEqualTo (Lnone/afi;)Z
+	METHOD e setCount (I)V
+	METHOD f increaseCount (I)V
+	METHOD g decreaseCount (I)V
+	METHOD l copy ()Lnone/afi;
+	METHOD o hasTag ()Z
+CLASS none/afk net/minecraft/vanilla/item/Items
 	FIELD A diamond_axe Lnone/afg;
 	FIELD B stick Lnone/afg;
 	FIELD C bowl Lnone/afg;
@@ -515,19 +743,58 @@ CLASS none/afk net/minecraft/engine/item/Items
 	FIELD y diamond_shovel Lnone/afg;
 	FIELD z diamond_pickaxe Lnone/afg;
 	METHOD a getItem (Ljava/lang/String;)Lnone/afg;
+CLASS none/afl net/minecraft/vanilla/item/ItemLead
+CLASS none/afm net/minecraft/vanilla/item/ItemLeaves
+CLASS none/afn net/minecraft/vanilla/item/ItemLingeringPotion
+CLASS none/afo net/minecraft/vanilla/item/ItemFilledMap
+CLASS none/afp net/minecraft/vanilla/item/ItemMilkBucket
+CLASS none/afq net/minecraft/vanilla/item/ItemMinecart
+	FIELD b minecartType Lnone/abx$a;
 CLASS none/afr net/minecraft/engine/item/ItemWithSubtypes
 	CLASS none/afr$1
 		METHOD a getName (Lnone/afi;)Ljava/lang/String;
 	CLASS none/afr$a ISubtypeName
 		METHOD a getName (Lnone/afi;)Ljava/lang/String;
+CLASS none/afs net/minecraft/vanilla/item/ItemNameTag
 CLASS none/aft net/minecraft/vanilla/item/ItemPickaxe
+CLASS none/afu net/minecraft/vanilla/item/ItemPiston
+CLASS none/afv net/minecraft/vanilla/item/ItemPotion
 CLASS none/afx net/minecraft/vanilla/item/ItemRecord
 CLASS none/afy net/minecraft/vanilla/item/ItemRedstone
+CLASS none/afz net/minecraft/vanilla/item/ItemSaddle
+CLASS none/aga net/minecraft/vanilla/item/ItemFoodCrops
+	FIELD b cropsBlock Lnone/als;
+	FIELD c growsOn Lnone/als;
+CLASS none/agb net/minecraft/vanilla/item/ItemCrops
+	FIELD a cropBlock Lnone/als;
+	FIELD b growsOn Lnone/als;
+CLASS none/agd net/minecraft/vanilla/item/ItemShears
+CLASS none/age net/minecraft/vanilla/item/ItemShield
 CLASS none/agf net/minecraft/vanilla/item/ItemShovel
+CLASS none/agg net/minecraft/vanilla/item/ItemShulkerBox
 CLASS none/agh net/minecraft/vanilla/item/ItemSign
+CLASS none/agi net/minecraft/vanilla/item/ItemNetherStar
+CLASS none/agj net/minecraft/vanilla/item/ItemSkull
+CLASS none/agk net/minecraft/vanilla/item/ItemSlab
+	FIELD b singleSlab Lnone/anz;
+	FIELD c doubleSlab Lnone/anz;
+CLASS none/agl net/minecraft/vanilla/item/ItemSnowLayer
+CLASS none/agm net/minecraft/vanilla/item/ItemSnowball
+CLASS none/agn net/minecraft/vanilla/item/ItemSpawnEgg
+CLASS none/ago net/minecraft/vanilla/item/ItemSpectralArrow
+CLASS none/agp net/minecraft/vanilla/item/ItemSplashPotion
 CLASS none/agq net/minecraft/vanilla/item/ItemSword
+CLASS none/agr net/minecraft/vanilla/item/ItemPlant
+CLASS none/ags net/minecraft/vanilla/item/ItemTippedArrow
+CLASS none/agu net/minecraft/vanilla/item/ItemWaterlily
+CLASS none/agv net/minecraft/vanilla/item/ItemWritableBook
+CLASS none/agw net/minecraft/vanilla/item/ItemWrittenBook
 CLASS none/ajq net/minecraft/engine/world/World
+	METHOD o getBlockState (Lnone/co;)Lnone/atj;
 CLASS none/aju net/minecraft/engine/world/IBlockAccess
+	METHOD o getBlockState (Lnone/co;)Lnone/atj;
+CLASS none/ajz
+	METHOD o getBlockState (Lnone/co;)Lnone/atj;
 CLASS none/ali net/minecraft/engine/block/BlockAir
 CLASS none/alj net/minecraft/vanilla/block/BlockAnvil
 	FIELD a FACING Lnone/atw;
@@ -603,15 +870,20 @@ CLASS none/als net/minecraft/engine/block/Block
 		ARG 1 resLocation
 		ARG 2 block
 	METHOD a getAmountDropped (Ljava/util/Random;)I
+	METHOD a byItem (Lnone/afg;)Lnone/als;
+	METHOD a getId (Lnone/als;)I
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD b setBlastResistance (F)Lnone/als;
 		ARG 0 thirdOfBlastResistance
+	METHOD b byId (I)Lnone/als;
 	METHOD c setHardness (F)Lnone/als;
 		ARG 0 hardness
+	METHOD c getBlockStateById (I)Lnone/atj;
 	METHOD c setUnlocalizedName (Ljava/lang/String;)Lnone/als;
 		ARG 0 unlocalizedName
 	METHOD d getDamageDropped (Lnone/atj;)I
 	METHOD e getMetaFromState (Lnone/atj;)I
+	METHOD j getBlockStateId (Lnone/atj;)I
 	METHOD t getDefaultState ()Lnone/atj;
 	METHOD w registerBlocks ()V
 	METHOD y setDefaultState (Lnone/atj;)V
@@ -1830,9 +2102,15 @@ CLASS none/arz net/minecraft/vanilla/tileentity/TileBeacon
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asa net/minecraft/engine/tileentity/TileEntity
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD b world Lnone/ajq;
+	FIELD c pos Lnone/co;
+	METHOD D getWorld ()Lnone/ajq;
 	METHOD a registerTileEntity (Ljava/lang/String;Ljava/lang/Class;)V
+	METHOD a setWorld (Lnone/ajq;)V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
+	METHOD u hasWorld ()Z
 CLASS none/asb net/minecraft/vanilla/tileentity/TileBrewingStand
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
@@ -1860,6 +2138,8 @@ CLASS none/ask net/minecraft/vanilla/tileentity/TileFlowerPot
 CLASS none/asl net/minecraft/vanilla/tileentity/TileFurnace
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
+CLASS none/asm
+	METHOD D getWorld ()Lnone/ajq;
 CLASS none/asn net/minecraft/vanilla/tileentity/TileHopper
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
@@ -2307,6 +2587,8 @@ CLASS none/bqq
 	METHOD b end ()V
 CLASS none/bze net/minecraft/engine/client/renderer/VertexFormats
 	FIELD f POS_COLOR Lnone/bzg;
+CLASS none/ccq
+	METHOD b createNameToValueMap ()Ljava/util/Map;
 CLASS net/minecraft/client/main/Main net/minecraft/client/main/Main The client main class
 	CLASS net/minecraft/client/main/Main$1
 		METHOD getPasswordAuthentication getPasswordAuthentication ()Ljava/net/PasswordAuthentication;
