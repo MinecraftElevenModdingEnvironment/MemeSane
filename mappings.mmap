@@ -144,7 +144,199 @@ CLASS none/dl net/minecraft/engine/util/Vec3i
 	METHOD p getX ()I
 	METHOD q getY ()I
 	METHOD r getZ ()I
+CLASS none/ds net/minecraft/engine/nbt/NBTByteArray
+	FIELD b data [B
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c getData ()[B
+CLASS none/dt net/minecraft/engine/nbt/NBTByte
+	FIELD b value B
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c copy ()Lnone/dt;
+	METHOD d longValue ()J
+	METHOD e intValue ()I
+	METHOD f shortValue ()S
+	METHOD g byteValue ()B
+	METHOD h doubleValue ()D
+	METHOD i floatValue ()F
 CLASS none/du net/minecraft/engine/nbt/NBTCompound
+	FIELD b data Ljava/util/Map;
+	METHOD a getType ()B
+	METHOD a readEntry (BLjava/lang/String;Ljava/io/DataInput;ILnone/ec;)Lnone/ei;
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a readByte (Ljava/io/DataInput;Lnone/ec;)B
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD a getUUID (Ljava/lang/String;)Ljava/util/UUID;
+	METHOD a setByte (Ljava/lang/String;B)V
+	METHOD a setDouble (Ljava/lang/String;D)V
+	METHOD a setFloat (Ljava/lang/String;F)V
+	METHOD a setInt (Ljava/lang/String;I)V
+	METHOD a makeCorruptCrashReport (Ljava/lang/String;ILjava/lang/ClassCastException;)Lnone/b;
+	METHOD a setLong (Ljava/lang/String;J)V
+	METHOD a setString (Ljava/lang/String;Ljava/lang/String;)V
+	METHOD a setUUID (Ljava/lang/String;Ljava/util/UUID;)V
+	METHOD a set (Ljava/lang/String;Lnone/ei;)V
+	METHOD a writeEntry (Ljava/lang/String;Lnone/ei;Ljava/io/DataOutput;)V
+	METHOD a setShort (Ljava/lang/String;S)V
+	METHOD a setBoolean (Ljava/lang/String;Z)V
+	METHOD a setByteArray (Ljava/lang/String;[B)V
+	METHOD a setIntArray (Ljava/lang/String;[I)V
+	METHOD a mergeFrom (Lnone/du;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD b readUTF (Ljava/io/DataInput;Lnone/ec;)Ljava/lang/String;
+	METHOD b hasUUID (Ljava/lang/String;)Z
+	METHOD b isTypeAt (Ljava/lang/String;I)Z
+	METHOD b_ isEmpty ()Z
+	METHOD c keySet ()Ljava/util/Set;
+	METHOD c get (Ljava/lang/String;)Lnone/ei;
+	METHOD c getList (Ljava/lang/String;I)Lnone/ea;
+	METHOD d size ()I
+	METHOD d getTypeAt (Ljava/lang/String;)B
+	METHOD e has (Ljava/lang/String;)Z
+	METHOD f getByte (Ljava/lang/String;)B
+	METHOD g copy ()Lnone/du;
+	METHOD g getShort (Ljava/lang/String;)S
+	METHOD h setInt (Ljava/lang/String;)I
+	METHOD i getLong (Ljava/lang/String;)J
+	METHOD j getFloat (Ljava/lang/String;)F
+	METHOD k getDouble (Ljava/lang/String;)D
+	METHOD l getString (Ljava/lang/String;)Ljava/lang/String;
+	METHOD m getByteArray (Ljava/lang/String;)[B
+	METHOD n getIntArray (Ljava/lang/String;)[I
+	METHOD o getCompound (Ljava/lang/String;)Lnone/du;
+	METHOD p getBoolean (Ljava/lang/String;)Z
+	METHOD q remove (Ljava/lang/String;)V
+CLASS none/dv net/minecraft/engine/nbt/NBTDouble
+	FIELD b value D
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c copy ()Lnone/dv;
+	METHOD d longValue ()J
+	METHOD e intValue ()I
+	METHOD f shortValue ()S
+	METHOD g byteValue ()B
+	METHOD h doubleValue ()D
+	METHOD i floatValue ()F
+CLASS none/dw net/minecraft/engine/nbt/NBTEnd
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c copy ()Lnone/dw;
+CLASS none/dx net/minecraft/engine/nbt/NBTFloat
+	FIELD b value F
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c copy ()Lnone/dx;
+	METHOD d longValue ()J
+	METHOD e intValue ()I
+	METHOD f shortValue ()S
+	METHOD g byteValue ()B
+	METHOD h doubleValue ()D
+	METHOD i floatValue ()F
+CLASS none/dy net/minecraft/engine/nbt/NBTIntArray
+	FIELD b data [I
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c copy ()Lnone/dy;
+	METHOD d getData ()[I
+CLASS none/dz net/minecraft/engine/nbt/NBTInt
+	FIELD b value I
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c copy ()Lnone/dz;
+	METHOD d longValue ()J
+	METHOD e intValue ()I
+	METHOD f shortValue ()S
+	METHOD g byteValue ()B
+	METHOD h doubleValue ()D
+	METHOD i floatValue ()F
+CLASS none/ea net/minecraft/engine/nbt/NBTList
+	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD c data Ljava/util/List;
+	FIELD d tagType B
+	METHOD a getType ()B
+	METHOD a remove (I)Lnone/ei;
+	METHOD a set (ILnone/ei;)V
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD a add (Lnone/ei;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD b getCompound (I)Lnone/du;
+	METHOD b_ isEmpty ()Z
+	METHOD c size ()I
+	METHOD c getInt (I)I
+	METHOD d copy ()Lnone/ea;
+	METHOD d getIntArray (I)[I
+	METHOD e getDouble (I)D
+	METHOD f getFloat (I)F
+	METHOD g getTagType ()I
+	METHOD g getString (I)Ljava/lang/String;
+	METHOD h get (I)Lnone/ei;
+CLASS none/eb net/minecraft/engine/nbt/NBTLong
+	FIELD b value J
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c copy ()Lnone/eb;
+	METHOD d longValue ()J
+	METHOD e intValue ()I
+	METHOD f shortValue ()S
+	METHOD g byteValue ()B
+	METHOD h doubleValue ()D
+	METHOD i floatValue ()F
+CLASS none/ef net/minecraft/engine/nbt/NBTPrimitive
+	METHOD d longValue ()J
+	METHOD e intValue ()I
+	METHOD f shortValue ()S
+	METHOD g byteValue ()B
+	METHOD h doubleValue ()D
+	METHOD i floatValue ()F
+CLASS none/eg net/minecraft/engine/nbt/NBTShort
+	FIELD b value S
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD c copy ()Lnone/eg;
+	METHOD d longValue ()J
+	METHOD e intValue ()I
+	METHOD f shortValue ()S
+	METHOD g byteValue ()B
+	METHOD h doubleValue ()D
+	METHOD i floatValue ()F
+CLASS none/eh net/minecraft/engine/nbt/NBTString
+	FIELD b value Ljava/lang/String;
+	METHOD a getType ()B
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD b_ isEmpty ()Z
+	METHOD c copy ()Lnone/eh;
+	METHOD c_ getValue ()Ljava/lang/String;
+CLASS none/ei net/minecraft/engine/nbt/NBTBase
+	FIELD a TYPE_NAMES [Ljava/lang/String;
+	METHOD a getType ()B
+	METHOD a createByType (B)Lnone/ei;
+	METHOD a read (Ljava/io/DataInput;ILnone/ec;)V
+	METHOD a write (Ljava/io/DataOutput;)V
+	METHOD b copy ()Lnone/ei;
+	METHOD b_ isEmpty ()Z
+	METHOD c_ getValue ()Ljava/lang/String;
 CLASS none/kq net/minecraft/engine/util/ResourceLocation
 CLASS none/kt net/minecraft/engine/startup/Bootstrap
 	METHOD a hasInitialized ()Z
