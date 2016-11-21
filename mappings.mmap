@@ -1,3 +1,26 @@
+CLASS none/a net/minecraft/engine/util/TextFormatting
+	FIELD a BLACK Lnone/a;
+	FIELD b DARK_BLUE Lnone/a;
+	FIELD c DARK_GREEN Lnone/a;
+	FIELD d DARK_AQUA Lnone/a;
+	FIELD e DARK_RED Lnone/a;
+	FIELD f DARK_PURPLE Lnone/a;
+	FIELD g GOLD Lnone/a;
+	FIELD h GRAY Lnone/a;
+	FIELD i DARK_GRAY Lnone/a;
+	FIELD j BLUE Lnone/a;
+	FIELD k GREEN Lnone/a;
+	FIELD l AQUA Lnone/a;
+	FIELD m RED Lnone/a;
+	FIELD n LIGHT_PURPLE Lnone/a;
+	FIELD o YELLOW Lnone/a;
+	FIELD p WHITE Lnone/a;
+	FIELD q OBFUSCATED Lnone/a;
+	FIELD r BOLD Lnone/a;
+	FIELD s STRIKETHROUGH Lnone/a;
+	FIELD t UNDERLINE Lnone/a;
+	FIELD u ITALIC Lnone/a;
+	FIELD v RESET Lnone/a;
 CLASS none/b net/minecraft/engine/exceptions/CrashReport
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b message Ljava/lang/String;
@@ -700,9 +723,12 @@ CLASS none/afg net/minecraft/engine/item/Item
 	FIELD g registry Lnone/dc;
 	FIELD j rand Ljava/util/Random;
 	METHOD a registerItem (ILjava/lang/String;Lnone/afg;)V
+	METHOD a getId (Lnone/afg;)I
 	METHOD a forBlock (Lnone/als;)Lnone/afg;
 	METHOD a registerItemBlock (Lnone/als;Lnone/afg;)V
+	METHOD b byNameOrId (Ljava/lang/String;)Lnone/afg;
 	METHOD b registerItemBlock (Lnone/als;)V
+	METHOD c byId (I)Lnone/afg;
 	METHOD c setUnlocalizedName (Ljava/lang/String;)Lnone/afg;
 	METHOD d setMaxStackSize (I)Lnone/afg;
 	METHOD u registerItems ()V
@@ -715,6 +741,7 @@ CLASS none/afi net/minecraft/engine/item/ItemStack
 	FIELD h damage I
 	METHOD E getCount ()I
 	METHOD F refreshIsNull ()V
+	METHOD a getTooltip (Lnone/aax;Z)Ljava/util/List;
 	METHOD a writeToNBT (Lnone/du;)Lnone/du;
 	METHOD b isNull ()Z
 	METHOD b areEqual (Lnone/afi;Lnone/afi;)Z
@@ -1068,6 +1095,7 @@ CLASS none/als net/minecraft/engine/block/Block
 	METHOD b setBlastResistance (F)Lnone/als;
 		ARG 0 thirdOfBlastResistance
 	METHOD b byId (I)Lnone/als;
+	METHOD b byNameOrId (Ljava/lang/String;)Lnone/als;
 	METHOD c setHardness (F)Lnone/als;
 		ARG 0 hardness
 	METHOD c getBlockStateById (I)Lnone/atj;
@@ -2429,7 +2457,9 @@ CLASS none/beq net/minecraft/engine/client/MinecraftClient Global variables for 
 	FIELD u gameSettings Lnone/bes;
 	METHOD G shutdown ()V Called when the game stops
 	METHOD I currentTime ()J Gets the current time in milliseconds @return The current time in milliseconds
+	METHOD N getTextureManager ()Lnone/byx;
 	METHOD a run ()V Called from the main method to run the game
+	METHOD a setScreenSize (II)V
 	METHOD a checkGlErrors (Ljava/lang/String;)V
 		ARG 0 phase
 		VAR 2 errorId
@@ -2441,7 +2471,10 @@ CLASS none/beq net/minecraft/engine/client/MinecraftClient Global variables for 
 	METHOD as isJava64Bit ()Z
 	METHOD at startTimerHackThread ()V
 		VAR 1 thread
+	METHOD d getVersionReleaseType ()Ljava/lang/String;
+	METHOD n stopGame ()V
 	METHOD x isFancyGraphicsEnabled ()Z
+	METHOD z instance ()Lnone/beq;
 CLASS none/bes net/minecraft/engine/client/settings/GameSettings
 	FIELD A touchscreen Z
 	FIELD B mainHand Lnone/su;
@@ -2527,44 +2560,524 @@ CLASS none/bes net/minecraft/engine/client/settings/GameSettings
 CLASS none/bex
 	METHOD a getSessionId ()Ljava/lang/String;
 	METHOD c getUsername ()Ljava/lang/String;
-CLASS none/bgk
+CLASS none/bfe net/minecraft/engine/client/renderer/TextRenderer
+	METHOD a stringWidth (Ljava/lang/String;)I
+	METHOD a drawStringWithShadow (Ljava/lang/String;FFI)I
+		ARG 0 text
+		ARG 1 x
+		ARG 2 y
+		ARG 3 color
+	METHOD a drawString (Ljava/lang/String;FFIZ)I
+		ARG 0 text
+		ARG 1 x
+		ARG 2 y
+		ARG 3 color
+		ARG 4 shadow
+	METHOD a drawString (Ljava/lang/String;III)I
+		ARG 0 text
+		ARG 1 x
+		ARG 2 y
+		ARG 3 color
+CLASS none/bfg net/minecraft/engine/client/Gui
+	FIELD b OPTIONS_BACKGROUND_TEXTURE Lnone/kq;
+	FIELD c STATS_ICONS_TEXTURE Lnone/kq;
+	FIELD d ICONS_TEXTURE Lnone/kq;
+	FIELD e zLevel F
+	METHOD a drawImage (FFIIII)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 u
+		ARG 3 v
+		ARG 4 width
+		ARG 5 height
+	METHOD a drawImage (IIFFIIFF)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 u
+		ARG 3 v
+		ARG 4 width
+		ARG 5 height
+		ARG 6 textureWidth
+		ARG 7 textureHeight
+	METHOD a drawImage (IIFFIIIIFF)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 u
+		ARG 3 v
+		ARG 4 widthOnTexture
+		ARG 5 heightOnTexture
+		ARG 6 width
+		ARG 7 height
+		ARG 8 textureWidth
+		ARG 9 textureHeight
+	METHOD a drawHorizontalLine (IIII)V
+		ARG 0 x1
+		ARG 1 x2
+		ARG 2 y
+		ARG 3 color
+	METHOD a drawRect (IIIII)V
+		ARG 0 x1
+		ARG 1 y1
+		ARG 2 x2
+		ARG 3 y2
+		ARG 4 color
+	METHOD a drawVerticalGradientRect (IIIIII)V
+		ARG 0 x1
+		ARG 1 y1
+		ARG 2 x2
+		ARG 3 y2
+		ARG 4 topColor
+		ARG 5 bottomColor
+	METHOD a drawTexAtlasSprite2D (IILnone/byw;II)V
+		ARG 0 x
+		ARG 1 y
+		ARG 3 width
+		ARG 4 height
+	METHOD a drawCenteredString (Lnone/bfe;Ljava/lang/String;III)V
+	METHOD b drawVerticalLine (IIII)V
+		ARG 0 x
+		ARG 1 y1
+		ARG 2 y2
+		ARG 3 color
+	METHOD b drawImage (IIIIII)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 u
+		ARG 3 v
+		ARG 4 width
+		ARG 5 height
+	METHOD c drawString (Lnone/bfe;Ljava/lang/String;III)V
+CLASS none/bfk net/minecraft/engine/client/gui/Button
+	FIELD a WIDGETS_TEXTURE Lnone/kq;
+	FIELD f width I
+	FIELD g height I
+	FIELD h x I
+	FIELD i y I
+	FIELD j text Ljava/lang/String;
+	FIELD k buttonId I
+	FIELD l enabled Z
+	FIELD m visible Z
+	FIELD n hovered Z
+	METHOD a isHovered ()Z
+	METHOD a setWidth (I)V
+	METHOD a draw (Lnone/beq;II)V
+	METHOD b getWidth ()I
+	METHOD c isHovered (Lnone/beq;II)Z
+CLASS none/bfp
+	METHOD c isHovered (Lnone/beq;II)Z
+CLASS none/bfr net/minecraft/vanilla/client/gui/SelectLanguageButton
+	METHOD a draw (Lnone/beq;II)V
+CLASS none/bfu
+	METHOD c isHovered (Lnone/beq;II)Z
+CLASS none/bfv
+	METHOD a draw (Lnone/beq;II)V
+CLASS none/bgc
+	METHOD c isHovered (Lnone/beq;II)Z
+CLASS none/bgi
+	METHOD b getWidth ()I
+	METHOD c isHovered (Lnone/beq;II)Z
+CLASS none/bgk net/minecraft/vanilla/client/gui/RealmsProxyScreen
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a drawVerticalGradientRect (IIIIII)V
+	METHOD a drawTooltip (Ljava/lang/String;II)V
+	METHOD a drawTooltip (Ljava/util/List;II)V
+	METHOD a drawTooltip (Lnone/afi;II)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD b drawImage (IIIIII)V
+	METHOD c drawBackground ()V
+	METHOD d_ drawBackground (I)V
+	METHOD e tick ()V
+	METHOD k handleMouseInput ()V
+	METHOD l handleKeyboardInput ()V
 	METHOD m onClosed ()V
+CLASS none/bgo
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
 CLASS none/bgp
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+	METHOD k handleMouseInput ()V
 	METHOD m onClosed ()V
+CLASS none/bgq
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+CLASS none/bgs
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+CLASS none/bgt
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+CLASS none/bgu
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
 CLASS none/bgv
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+	METHOD k handleMouseInput ()V
 	METHOD m onClosed ()V
+CLASS none/bgw
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
+CLASS none/bgx
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+CLASS none/bgy
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD c drawBackground ()V
 CLASS none/bgz
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
+CLASS none/bha
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
 CLASS none/bhb
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
+CLASS none/bhc
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+CLASS none/bhd
+	METHOD a onKeyTyped (CI)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+CLASS none/bhe net/minecraft/vanilla/client/gui/SelectLanguageScreen
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
+CLASS none/bhg net/minecraft/vanilla/client/gui/OptionsScreen
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+CLASS none/bhh
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+CLASS none/bhi
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 CLASS none/bhj
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+	METHOD k handleMouseInput ()V
 	METHOD m onClosed ()V
+CLASS none/bhk
+	METHOD a draw (IIF)V
+CLASS none/bhl
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 CLASS none/bhm net/minecraft/engine/client/gui/Screen
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD f PROTOCOLS Ljava/util/Set;
+	FIELD g NEWLINE_SPLITTER Lcom/google/common/base/Splitter;
+	FIELD j mc Lnone/beq;
+	FIELD l width I
+	FIELD m height I
+	FIELD n buttons Ljava/util/List;
+	FIELD q textRenderer Lnone/bfe;
+	METHOD a onKeyTyped (CI)V
+	METHOD a setSize (II)V
+	METHOD a draw (IIF)V
+		ARG 0 mouseX
+		ARG 1 mouseY
+		ARG 2 partialTicks
+	METHOD a onMousePressed (III)V
+	METHOD a drawTooltip (Ljava/lang/String;II)V
+		ARG 0 text
+		ARG 1 x
+		ARG 2 y
+	METHOD a openLink (Ljava/net/URI;)V
+	METHOD a drawTooltip (Ljava/util/List;II)V
+		ARG 0 lines
+		ARG 1 x
+		ARG 2 y
+	METHOD a drawTooltip (Lnone/afi;II)V
+		ARG 0 stack
+		ARG 1 x
+		ARG 2 y
+	METHOD a doValidate (Lnone/beq;II)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD b validate (Lnone/beq;II)V
+	METHOD b addButton (Lnone/bfk;)Lnone/bfk;
+	METHOD c drawBackground ()V
+	METHOD c drawDefaultBackground (I)V
+	METHOD d isCutKeyCombo (I)Z
+	METHOD d_ drawBackground (I)V
+	METHOD e tick ()V
+	METHOD e isPasteKeyCombo (I)Z
+	METHOD e setClipboardContents (Ljava/lang/String;)V
+	METHOD f isCopyKeyCombo (I)Z
+	METHOD g isSelectAllKeyCombo (I)Z
+	METHOD k handleMouseInput ()V
+	METHOD l handleKeyboardInput ()V
 	METHOD m onClosed ()V
+	METHOD o getClipboardContents ()Ljava/lang/String;
+	METHOD p handleInput ()V
+	METHOD q isControlKeyDown ()Z
+	METHOD r isShiftKeyDown ()Z
+	METHOD s isAltKeyDown ()Z
+CLASS none/bhn
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+CLASS none/bho
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+CLASS none/bhp
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
+CLASS none/bhq
+	CLASS none/bhq$a
+		METHOD c isHovered (Lnone/beq;II)Z
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
 CLASS none/bht net/minecraft/vanilla/client/gui/MainMenuScreen
+	FIELD B outdatedSoftwareWarning1 Ljava/lang/String;
+	FIELD C outdatedSoftwareWarning2 Ljava/lang/String;
+	FIELD D outdatedSoftwareHelpUrl Ljava/lang/String;
+	FIELD E SPLASHES_LOCATION Lnone/kq;
+	FIELD F TITLE_TEXTURE Lnone/kq;
+	FIELD G PANORAMA_TEXTURES [Lnone/kq;
+	FIELD I realmsButton Lnone/bfk;
+	FIELD K realmsNotificationScreen Lnone/bhm;
+	FIELD f LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD g rand Ljava/util/Random;
+	FIELD i splashText Ljava/lang/String;
+	FIELD r resetDemoButton Lnone/bfk;
+	FIELD s ticksExisted I
+	FIELD u SYNC_LOCK Ljava/lang/Object;
+	FIELD v outdatedSoftwareWarning2Width I
+	FIELD w outdatedSoftwareWarning1Width I
+	METHOD a enableRealmsNotifications ()Z
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD b addNonDemoButtons (II)V
+	METHOD b drawPanorama (IIF)V
+	METHOD c addDemoButtons (II)V
+	METHOD e tick ()V
+	METHOD f switchToRealms ()V
 	METHOD m onClosed ()V
+CLASS none/bhu
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
+CLASS none/bhv
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+CLASS none/bhx
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+CLASS none/bhy
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
+CLASS none/bic
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
 CLASS none/bie
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
 CLASS none/bif
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD b layout ()V
 	METHOD m onClosed ()V
+CLASS none/big
+	CLASS none/big$d
+		METHOD a draw (Lnone/beq;II)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 CLASS none/bih
+	CLASS none/bih$a
+		METHOD a draw (Lnone/beq;II)V
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
 CLASS none/bij
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
 CLASS none/bin
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a drawTooltip (Lnone/afi;II)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+	METHOD k handleMouseInput ()V
 	METHOD m onClosed ()V
+CLASS none/bip
+	METHOD a draw (IIF)V
+	METHOD b layout ()V
+CLASS none/bir
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD e tick ()V
+CLASS none/biu
+	METHOD a draw (IIF)V
+CLASS none/biv
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+CLASS none/biw
+	CLASS none/biw$a
+		METHOD a draw (Lnone/beq;II)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 CLASS none/bix
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
 CLASS none/biz
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
 CLASS none/bja
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
-CLASS none/bjd
+CLASS none/bjd net/minecraft/vanilla/client/gui/SelectServerScreen
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
+	METHOD k handleMouseInput ()V
 	METHOD m onClosed ()V
+CLASS none/bjk
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
 CLASS none/bjw
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
 CLASS none/bjx
+	METHOD a onKeyTyped (CI)V
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD e tick ()V
 	METHOD m onClosed ()V
+CLASS none/bjy net/minecraft/vanilla/client/gui/SelectSingleplayerWorldScreen
+	METHOD a draw (IIF)V
+	METHOD a onMousePressed (III)V
+	METHOD a onButtonPressed (Lnone/bfk;)V
+	METHOD b layout ()V
+	METHOD k handleMouseInput ()V
 CLASS none/bno net/minecraft/engine/world/WorldClient
 CLASS none/bpq
 	METHOD a openEditBookScreen (Lnone/afi;Lnone/rh;)V
@@ -2577,6 +3090,8 @@ CLASS none/bpq
 	METHOD a openNonTileEntityScreen (Lnone/ri;)V
 	METHOD a openHorseInventoryScreen (Lnone/xl;Lnone/rb;)V
 CLASS none/bpw net/minecraft/engine/client/renderer/VertexBuffer
+	METHOD a tex (DD)Lnone/bpw;
+	METHOD a color (FFFF)Lnone/bpw;
 	METHOD a begin (ILnone/bzg;)V
 	METHOD b pos (DDD)Lnone/bpw;
 	METHOD b color (IIII)Lnone/bpw;
@@ -2777,8 +3292,25 @@ CLASS none/bqe net/minecraft/engine/client/renderer/Gl
 		ARG 0 mode
 CLASS none/bqq
 	METHOD b end ()V
+CLASS none/byw net/minecraft/engine/client/renderer/TextureAtlasSprite
+	FIELD l minU F
+	FIELD m maxU F
+	FIELD n minV F
+	FIELD o maxV F
+	METHOD e getMinU ()F
+	METHOD f getMaxU ()F
+	METHOD g getMinV ()F
+	METHOD h getMaxV ()F
+CLASS none/byx
+	METHOD a bindTexture (Lnone/kq;)V
 CLASS none/bze net/minecraft/engine/client/renderer/VertexFormats
+	FIELD e POS Lnone/bzg;
 	FIELD f POS_COLOR Lnone/bzg;
+	FIELD g POS_TEX Lnone/bzg;
+	FIELD i POS_TEX_COLOR Lnone/bzg;
+CLASS none/cae net/minecraft/engine/client/resources/I18n
+	METHOD a canTranslate (Ljava/lang/String;)Z
+	METHOD a translate (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 CLASS none/ccq
 	METHOD b createNameToValueMap ()Ljava/util/Map;
 CLASS net/minecraft/client/main/Main net/minecraft/client/main/Main The client main class
