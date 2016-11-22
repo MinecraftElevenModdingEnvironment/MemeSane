@@ -124,6 +124,17 @@ CLASS none/dc net/minecraft/engine/util/MappedRegistry
 	METHOD c getValue (Ljava/lang/Object;)Ljava/lang/Object;
 	METHOD d containsName (Ljava/lang/Object;)Z
 	METHOD iterator iterator ()Ljava/util/Iterator;
+CLASS none/dd net/minecraft/engine/util/DefaultedList
+	FIELD a values Ljava/util/List;
+	FIELD b _default Ljava/lang/Object;
+	METHOD a nullDefault ()Lnone/dd;
+	METHOD a create (ILjava/lang/Object;)Lnone/dd;
+	METHOD add add (ILjava/lang/Object;)V
+	METHOD clear clear ()V
+	METHOD get get (I)Ljava/lang/Object;
+	METHOD remove remove (I)Ljava/lang/Object;
+	METHOD set set (ILjava/lang/Object;)Ljava/lang/Object;
+	METHOD size size ()I
 CLASS none/dh
 	METHOD a register (Ljava/lang/Object;Ljava/lang/Object;)V
 	METHOD c names ()Ljava/util/Set;
@@ -360,9 +371,14 @@ CLASS none/ei net/minecraft/engine/nbt/NBTBase
 	METHOD b copy ()Lnone/ei;
 	METHOD b_ isEmpty ()Z
 	METHOD c_ getValue ()Ljava/lang/String;
+CLASS none/fb net/minecraft/engine/util/ITextComponent
 CLASS none/kq net/minecraft/engine/util/ResourceLocation
 CLASS none/kt net/minecraft/engine/startup/Bootstrap
 	METHOD a hasInitialized ()Z
+CLASS none/lf net/minecraft/engine/util/IUpdateListener
+	METHOD F_ tick ()V
+CLASS none/ll
+	METHOD F_ tick ()V
 CLASS none/ly
 	METHOD a openEditBookScreen (Lnone/afi;Lnone/rh;)V
 	METHOD a openVillagerTradeScreen (Lnone/ajb;)V
@@ -371,6 +387,10 @@ CLASS none/ly
 	METHOD a openTileEntityScreen (Lnone/rb;)V
 	METHOD a openNonTileEntityScreen (Lnone/ri;)V
 	METHOD a openHorseInventoryScreen (Lnone/xl;Lnone/rb;)V
+CLASS none/mi
+	METHOD F_ tick ()V
+CLASS none/mk
+	METHOD F_ tick ()V
 CLASS none/no net/minecraft/engine/sound/EnumSoundType
 	FIELD a MASTER Lnone/no;
 	FIELD b MUSIC Lnone/no;
@@ -435,12 +455,93 @@ CLASS none/ok net/minecraft/engine/util/JsonUtils Utilities to do with Json
 		ARG 0 containingObject The object to test
 		ARG 1 key The key we're looking for
 CLASS none/ot net/minecraft/engine/util/MathUtils
+CLASS none/rb net/minecraft/engine/inventory/IInventory
+	METHOD a getStackInSlot (I)Lnone/afi;
+	METHOD a setStackInSlot (ILnone/afi;)V
+	METHOD b getAndRemove (I)Lnone/afi;
+	METHOD b setField (II)V
+	METHOD b isItemValidForSlot (ILnone/afi;)Z
+	METHOD c_ getField (I)I
+	METHOD h getFieldCount ()I
+	METHOD m clear ()V
+	METHOD v_ size ()I
+	METHOD w_ isEmpty ()Z
+	METHOD y_ getMaxStackSize ()I
+CLASS none/rc net/minecraft/engine/inventory/InventoryUtils
+	METHOD a getAndRemove (Ljava/util/List;I)Lnone/afi;
+		ARG 0 items
+		ARG 1 index
+	METHOD a writeToNBT (Lnone/du;Lnone/dd;)Lnone/du;
+		ARG 0 nbt
+		ARG 1 items
+	METHOD a writeToNBT (Lnone/du;Lnone/dd;Z)Lnone/du;
+		ARG 0 nbt
+		ARG 1 items
+		ARG 2 serializeEmptyList
+	METHOD b readFromNBT (Lnone/du;Lnone/dd;)V
+		ARG 0 nbt
+		ARG 1 items
 CLASS none/rf net/minecraft/engine/world/EnumDifficulty
 	FIELD a PEACEFUL Lnone/rf;
 	FIELD b EASY Lnone/rf;
 	FIELD c NORMAL Lnone/rf;
 	FIELD d HARD Lnone/rf;
 	METHOD values values ()[Lnone/rf;
+CLASS none/ro net/minecraft/engine/util/IHasCustomName
+	METHOD h_ getCustomName ()Ljava/lang/String;
+	METHOD i_ getFormattedCustomName ()Lnone/fb;
+	METHOD n_ hasCustomName ()Z
+CLASS none/rq
+	METHOD a getStackInSlot (I)Lnone/afi;
+	METHOD a setStackInSlot (ILnone/afi;)V
+	METHOD b getAndRemove (I)Lnone/afi;
+	METHOD b setField (II)V
+	METHOD b isItemValidForSlot (ILnone/afi;)Z
+	METHOD c_ getField (I)I
+	METHOD h getFieldCount ()I
+	METHOD m clear ()V
+	METHOD v_ size ()I
+	METHOD w_ isEmpty ()Z
+	METHOD y_ getMaxStackSize ()I
+CLASS none/rt net/minecraft/engine/inventory/ISidedInventory
+	METHOD a isItemValidForSlot (ILnone/afi;Lnone/cv;)Z
+	METHOD a getSlotsForSide (Lnone/cv;)[I
+	METHOD b canExtractItem (ILnone/afi;Lnone/cv;)Z
+CLASS none/sf net/minecraft/engine/potion/MobEffect
+	FIELD b registry Lnone/dc;
+	METHOD a byId (I)Lnone/sf;
+	METHOD a getId (Lnone/sf;)I
+	METHOD b byName (Ljava/lang/String;)Lnone/sf;
+	METHOD k registerPotions ()V
+CLASS none/sh net/minecraft/vanilla/potion/MobEffects
+	FIELD A unluck Lnone/sf;
+	FIELD a speed Lnone/sf;
+	FIELD b slowness Lnone/sf;
+	FIELD c haste Lnone/sf;
+	FIELD d mining_fatigue Lnone/sf;
+	FIELD e strength Lnone/sf;
+	FIELD f instant_health Lnone/sf;
+	FIELD g instant_damage Lnone/sf;
+	FIELD h jump_boost Lnone/sf;
+	FIELD i nausea Lnone/sf;
+	FIELD j regeneration Lnone/sf;
+	FIELD k resistance Lnone/sf;
+	FIELD l fire_resistance Lnone/sf;
+	FIELD m water_breathing Lnone/sf;
+	FIELD n invisibility Lnone/sf;
+	FIELD o blindness Lnone/sf;
+	FIELD p night_vision Lnone/sf;
+	FIELD q hunger Lnone/sf;
+	FIELD r weakness Lnone/sf;
+	FIELD s poison Lnone/sf;
+	FIELD t wither Lnone/sf;
+	FIELD u health_boost Lnone/sf;
+	FIELD v absorption Lnone/sf;
+	FIELD w saturation Lnone/sf;
+	FIELD x glowing Lnone/sf;
+	FIELD y levitation Lnone/sf;
+	FIELD z luck Lnone/sf;
+	METHOD a getMobEffect (Ljava/lang/String;)Lnone/sf;
 CLASS none/sk net/minecraft/vanilla/entity/EntityAreaEffectCloud
 CLASS none/sm net/minecraft/engine/entity/Entity
 	FIELD p posX D
@@ -495,6 +596,8 @@ CLASS none/xb net/minecraft/vanilla/entity/EntityPig
 CLASS none/xc net/minecraft/vanilla/entity/EntityPolarBear
 CLASS none/xd net/minecraft/vanilla/entity/EntityRabbit
 CLASS none/xe net/minecraft/vanilla/entity/EntitySheep
+	FIELD by COLORS_BY_DYE_COLOR Ljava/util/Map;
+	METHOD a getColorByDyeColor (Lnone/ael;)[F
 CLASS none/xf net/minecraft/vanilla/entity/EntitySnowman
 CLASS none/xg net/minecraft/vanilla/entity/EntitySquid
 CLASS none/xh net/minecraft/vanilla/entity/EntityVillagerGolem
@@ -541,6 +644,18 @@ CLASS none/aam net/minecraft/vanilla/entity/EntityWitherSkeleton
 CLASS none/aan net/minecraft/vanilla/entity/EntityZombie
 CLASS none/aao net/minecraft/vanilla/entity/EntityZombieVillager
 CLASS none/aas net/minecraft/vanilla/entity/EntityVillager
+CLASS none/aaw
+	METHOD a getStackInSlot (I)Lnone/afi;
+	METHOD a setStackInSlot (ILnone/afi;)V
+	METHOD b getAndRemove (I)Lnone/afi;
+	METHOD b setField (II)V
+	METHOD b isItemValidForSlot (ILnone/afi;)Z
+	METHOD c_ getField (I)I
+	METHOD h getFieldCount ()I
+	METHOD m clear ()V
+	METHOD v_ size ()I
+	METHOD w_ isEmpty ()Z
+	METHOD y_ getMaxStackSize ()I
 CLASS none/aax net/minecraft/engine/entity/EntityPlayer
 	CLASS none/aax$b EnumChatVisibility
 		FIELD a FULL Lnone/aax$b;
@@ -596,6 +711,45 @@ CLASS none/acc net/minecraft/vanilla/entity/EntityMinecartHopper
 CLASS none/acd net/minecraft/vanilla/entity/EntityMinecartRideable
 CLASS none/ace net/minecraft/vanilla/entity/EntityMinecartSpawner
 CLASS none/acf net/minecraft/vanilla/entity/EntityMinecartTnt
+CLASS none/acr
+	METHOD a getStackInSlot (I)Lnone/afi;
+	METHOD a setStackInSlot (ILnone/afi;)V
+	METHOD b getAndRemove (I)Lnone/afi;
+	METHOD b setField (II)V
+	METHOD b isItemValidForSlot (ILnone/afi;)Z
+	METHOD c_ getField (I)I
+	METHOD h getFieldCount ()I
+	METHOD m clear ()V
+	METHOD v_ size ()I
+	METHOD w_ isEmpty ()Z
+	METHOD y_ getMaxStackSize ()I
+CLASS none/acu
+	CLASS none/acu$1
+		METHOD y_ getMaxStackSize ()I
+CLASS none/adc
+	METHOD a getStackInSlot (I)Lnone/afi;
+	METHOD a setStackInSlot (ILnone/afi;)V
+	METHOD b getAndRemove (I)Lnone/afi;
+	METHOD b setField (II)V
+	METHOD b isItemValidForSlot (ILnone/afi;)Z
+	METHOD c_ getField (I)I
+	METHOD h getFieldCount ()I
+	METHOD m clear ()V
+	METHOD v_ size ()I
+	METHOD w_ isEmpty ()Z
+	METHOD y_ getMaxStackSize ()I
+CLASS none/adg
+	METHOD a getStackInSlot (I)Lnone/afi;
+	METHOD a setStackInSlot (ILnone/afi;)V
+	METHOD b getAndRemove (I)Lnone/afi;
+	METHOD b setField (II)V
+	METHOD b isItemValidForSlot (ILnone/afi;)Z
+	METHOD c_ getField (I)I
+	METHOD h getFieldCount ()I
+	METHOD m clear ()V
+	METHOD v_ size ()I
+	METHOD w_ isEmpty ()Z
+	METHOD y_ getMaxStackSize ()I
 CLASS none/adm net/minecraft/engine/item/ItemAir
 CLASS none/adn net/minecraft/vanilla/item/ItemAnvil
 CLASS none/ado net/minecraft/vanilla/item/ItemArmor
@@ -1009,6 +1163,7 @@ CLASS none/agu net/minecraft/vanilla/item/ItemWaterlily
 CLASS none/agv net/minecraft/vanilla/item/ItemWritableBook
 CLASS none/agw net/minecraft/vanilla/item/ItemWrittenBook
 CLASS none/ajq net/minecraft/engine/world/World
+	METHOD P getTime ()J
 	METHOD o getBlockState (Lnone/co;)Lnone/atj;
 CLASS none/aju net/minecraft/engine/world/IBlockAccess
 	METHOD o getBlockState (Lnone/co;)Lnone/atj;
@@ -1030,10 +1185,10 @@ CLASS none/alk net/minecraft/vanilla/block/BlockBanner
 		METHOD e getMetaFromState (Lnone/atj;)I
 	FIELD a FACING Lnone/atw;
 	FIELD b ROTATION Lnone/aty;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 CLASS none/all net/minecraft/vanilla/block/BlockBarrier
-CLASS none/alm net/minecraft/engine/block/BlockTileEntity
+CLASS none/alm net/minecraft/engine/block/BlockHasBlockEntity
 CLASS none/aln net/minecraft/vanilla/block/BlockPressurePlate
 CLASS none/alo net/minecraft/vanilla/block/BlockAbstractRail
 	CLASS none/alo$b EnumShape
@@ -1055,7 +1210,7 @@ CLASS none/alo net/minecraft/vanilla/block/BlockAbstractRail
 		METHOD values values ()[Lnone/alo$b;
 	METHOD g getShapeProperty ()Lnone/atz;
 CLASS none/alp net/minecraft/vanilla/block/BlockBeacon
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/alq net/minecraft/vanilla/block/BlockBed
 	CLASS none/alq$a EnumPart
 		FIELD a HEAD Lnone/alq$a;
@@ -1352,7 +1507,7 @@ CLASS none/alw net/minecraft/vanilla/block/BlockBookshelf
 CLASS none/alx net/minecraft/vanilla/block/BlockBrewingStand
 	FIELD a HAS_BOTTLE [Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aly net/minecraft/vanilla/block/BlockCrops
@@ -1383,7 +1538,7 @@ CLASS none/ame net/minecraft/vanilla/block/BlockChest
 	FIELD a FACING Lnone/atw;
 	FIELD g type Lnone/ame$a;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/amf net/minecraft/vanilla/block/BlockChorusFlower
 	FIELD a AGE Lnone/aty;
@@ -1417,7 +1572,7 @@ CLASS none/amk net/minecraft/vanilla/block/BlockCommandBlock
 	FIELD b CONDITIONAL Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aml net/minecraft/vanilla/block/BlockComparator
 	CLASS none/aml$a EnumMode
@@ -1426,7 +1581,7 @@ CLASS none/aml net/minecraft/vanilla/block/BlockComparator
 	FIELD a POWERED Lnone/atv;
 	FIELD b MODE Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/amm net/minecraft/vanilla/block/BlockCraftingTable
@@ -1439,7 +1594,7 @@ CLASS none/amn net/minecraft/vanilla/block/BlockWheat
 CLASS none/amo net/minecraft/vanilla/block/BlockDaylightDetector
 	FIELD a POWER Lnone/aty;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/amp net/minecraft/vanilla/block/BlockDeadBush
@@ -1476,7 +1631,7 @@ CLASS none/amu net/minecraft/vanilla/block/BlockDispenser
 	FIELD b TRIGGERED Lnone/atv;
 	FIELD d rand Ljava/util/Random;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/amv net/minecraft/vanilla/block/BlockDoor
 	CLASS none/amv$a EnumHalf
@@ -1518,16 +1673,16 @@ CLASS none/amw net/minecraft/vanilla/block/BlockDoublePlant
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/amx net/minecraft/vanilla/block/BlockDragonEgg
 CLASS none/amy net/minecraft/vanilla/block/BlockDropper
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/amz net/minecraft/vanilla/block/BlockLiquidFlowing
 CLASS none/ana net/minecraft/vanilla/block/BlockEnchantmentTable
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/anb net/minecraft/vanilla/block/BlockEndGateway
 	METHOD a getAmountDropped (Ljava/util/Random;)I
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/anc net/minecraft/vanilla/block/BlockEndPortal
 	METHOD a getAmountDropped (Ljava/util/Random;)I
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/and net/minecraft/vanilla/block/BlockEndPortalFrame
 	FIELD a FACING Lnone/atw;
 	FIELD b EYE Lnone/atv;
@@ -1541,11 +1696,11 @@ CLASS none/anf net/minecraft/vanilla/block/BlockEnderChest
 	FIELD a FACING Lnone/atw;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/ang
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/anh net/minecraft/vanilla/block/BlockGravity
 CLASS none/ani net/minecraft/vanilla/block/BlockFarmland
 	FIELD a MOISTURE Lnone/aty;
@@ -1637,7 +1792,7 @@ CLASS none/ann net/minecraft/vanilla/block/BlockFlowerPot
 		FIELD v CACTUS Lnone/ann$a;
 	FIELD a LEGACY_DATA Lnone/aty;
 	FIELD b CONTENTS Lnone/atx;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/ano net/minecraft/vanilla/block/BlockFrostedIce
@@ -1651,8 +1806,9 @@ CLASS none/anq net/minecraft/vanilla/block/BlockDoubleStoneSlab
 CLASS none/anr net/minecraft/vanilla/block/BlockDoubleWoodenSlab
 	METHOD e isDouble ()Z
 CLASS none/ans net/minecraft/vanilla/block/BlockFurnace
+	FIELD a FACING Lnone/atw;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/ant net/minecraft/vanilla/block/BlockGlass
@@ -1691,7 +1847,7 @@ CLASS none/aof net/minecraft/vanilla/block/BlockHopper
 	FIELD a FACING Lnone/atw;
 	FIELD b ENABLED Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aog net/minecraft/vanilla/block/BlockHorizontal
 	FIELD D FACING Lnone/atw;
@@ -1723,13 +1879,13 @@ CLASS none/aoh net/minecraft/vanilla/block/BlockBigMushroom
 CLASS none/aoi net/minecraft/vanilla/block/BlockIce
 	METHOD a getAmountDropped (Ljava/util/Random;)I
 CLASS none/aoj net/minecraft/vanilla/block/BlockJukebox
-	CLASS none/aoj$a TE
+	CLASS none/aoj$a BE
 		FIELD a record Lnone/afi;
 		METHOD a readFromNBT (Lnone/du;)V
 		METHOD b writeToNBT (Lnone/du;)Lnone/du;
 	FIELD a HAS_RECORD Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aok net/minecraft/vanilla/block/BlockLadder
 	FIELD a FACING Lnone/atw;
@@ -1781,7 +1937,7 @@ CLASS none/aor net/minecraft/vanilla/block/BlockMelon
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 CLASS none/aot net/minecraft/vanilla/block/BlockMobSpawner
 	METHOD a getAmountDropped (Ljava/util/Random;)I
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 CLASS none/aou net/minecraft/vanilla/block/BlockMonsterEgg
 	CLASS none/aou$a EnumVariant
@@ -1859,7 +2015,7 @@ CLASS none/apd net/minecraft/vanilla/block/BlockBedrock
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 CLASS none/ape net/minecraft/vanilla/block/BlockNoteBlock
 	FIELD a INSTRUMENTS Ljava/util/List;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 CLASS none/apf net/minecraft/vanilla/block/BlockObserver
 	FIELD a POWERED Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
@@ -2074,10 +2230,10 @@ CLASS none/aql net/minecraft/vanilla/block/BlockShulkerBox
 	FIELD a FACING Lnone/atx;
 	FIELD b color Lnone/ael;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aqm net/minecraft/vanilla/block/BlockSign
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 CLASS none/aqn net/minecraft/vanilla/block/BlockSkull
 	CLASS none/aqn$1
@@ -2085,7 +2241,7 @@ CLASS none/aqn net/minecraft/vanilla/block/BlockSkull
 	FIELD a FACING Lnone/atw;
 	FIELD b NODROP Lnone/atv;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/aqo net/minecraft/vanilla/block/BlockSlime
@@ -2200,7 +2356,7 @@ CLASS none/are net/minecraft/vanilla/block/BlockStructureBlock
 	FIELD a MODE Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
 	METHOD a getAmountDropped (Ljava/util/Random;)I
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/arf net/minecraft/vanilla/block/BlockStructureVoid
 CLASS none/arg net/minecraft/vanilla/block/BlockTallGrass
@@ -2315,73 +2471,148 @@ CLASS none/arv net/minecraft/vanilla/block/BlockCarpet
 	METHOD e getMetaFromState (Lnone/atj;)I
 CLASS none/arw net/minecraft/vanilla/block/BlockYellowFlower
 	METHOD e getFlowerType ()Lnone/anm$b;
-CLASS none/arx net/minecraft/vanilla/tileentity/TileBanner
+CLASS none/arx net/minecraft/vanilla/blockentity/BEBanner
+	FIELD a customName Ljava/lang/String;
+	FIELD f baseColor Lnone/ael;
+	FIELD g patterns Lnone/ea;
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/arz net/minecraft/vanilla/tileentity/TileBeacon
+	METHOD h_ getCustomName ()Ljava/lang/String;
+	METHOD i_ getFormattedCustomName ()Lnone/fb;
+	METHOD n_ hasCustomName ()Z
+CLASS none/arz net/minecraft/vanilla/blockentity/BEBeacon
+	FIELD f VALID_MOB_EFFECTS Ljava/util/Set;
+	FIELD k levels I
+	FIELD l primaryEffect Lnone/sf;
+	FIELD m secondaryEffect Lnone/sf;
+	METHOD E applyEffectsToPlayers ()V
+	METHOD F updateBeaconState ()V
+	METHOD F_ tick ()V
+	METHOD a getStackInSlot (I)Lnone/afi;
+	METHOD a isItemValidForSlot (ILnone/afi;Lnone/cv;)Z
+	METHOD a getSlotsForSide (Lnone/cv;)[I
 	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b canExtractItem (ILnone/afi;Lnone/cv;)Z
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asa net/minecraft/engine/tileentity/TileEntity
+	METHOD f mobEffectById (I)Lnone/sf;
+	METHOD n updateBeacon ()V
+	METHOD v_ size ()I
+	METHOD w_ isEmpty ()Z
+CLASS none/asa net/minecraft/engine/blockentity/BlockEntity
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b world Lnone/ajq;
 	FIELD c pos Lnone/co;
+	FIELD f registry Lnone/dc;
 	METHOD D getWorld ()Lnone/ajq;
-	METHOD a registerTileEntity (Ljava/lang/String;Ljava/lang/Class;)V
+	METHOD a getClassByName (Ljava/lang/Class;)Lnone/kq;
+	METHOD a registerBlockEntity (Ljava/lang/String;Ljava/lang/Class;)V
 	METHOD a setWorld (Lnone/ajq;)V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
+	METHOD c writeBaseBlockEntityToNBT (Lnone/du;)Lnone/du;
 	METHOD u hasWorld ()Z
-CLASS none/asb net/minecraft/vanilla/tileentity/TileBrewingStand
+CLASS none/asb net/minecraft/vanilla/blockentity/BEBrewingStand
+	FIELD a SLOTS_FROM_TOP [I
+	FIELD f SLOTS_FROM_BOTTOM [I
+	FIELD g SLOTS_FROM_SIDE [I
+	FIELD h items Lnone/dd;
+	FIELD i brewTime I
+	FIELD l customName Ljava/lang/String;
+	FIELD m fuel I
+	METHOD F_ tick ()V
+	METHOD a getStackInSlot (I)Lnone/afi;
+	METHOD a setStackInSlot (ILnone/afi;)V
+	METHOD a isItemValidForSlot (ILnone/afi;Lnone/cv;)Z
+	METHOD a setCustomName (Ljava/lang/String;)V
+	METHOD a getSlotsForSide (Lnone/cv;)[I
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b getAndRemove (I)Lnone/afi;
+		ARG 0 slot
+	METHOD b setField (II)V
+	METHOD b isItemValidForSlot (ILnone/afi;)Z
+	METHOD b canExtractItem (ILnone/afi;Lnone/cv;)Z
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
+	METHOD c_ getField (I)I
+	METHOD h getFieldCount ()I
+	METHOD h_ getCustomName ()Ljava/lang/String;
+	METHOD m clear ()V
+	METHOD n hasBottleInEachSlot ()[Z
+	METHOD n_ hasCustomName ()Z
+	METHOD v_ size ()I
+	METHOD w_ isEmpty ()Z
+	METHOD y_ getMaxStackSize ()I
+CLASS none/asc net/minecraft/vanilla/blockentity/BEChest
+	METHOD F_ tick ()V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asc net/minecraft/vanilla/tileentity/TileChest
+	METHOD q getItems ()Lnone/dd;
+CLASS none/asd net/minecraft/vanilla/blockentity/BECommandBlock
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asd net/minecraft/vanilla/tileentity/TileCommandBlock
+CLASS none/ase net/minecraft/vanilla/blockentity/BEComparator
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/ase net/minecraft/vanilla/tileentity/TileComparator
+CLASS none/asf net/minecraft/vanilla/blockentity/BEDaylightDetector
+	METHOD F_ tick ()V
+CLASS none/asg net/minecraft/vanilla/blockentity/BEDispenser
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asf net/minecraft/vanilla/tileentity/TileDaylightDetector
-CLASS none/asg net/minecraft/vanilla/tileentity/TileDispenser
+	METHOD q getItems ()Lnone/dd;
+CLASS none/ash net/minecraft/vanilla/blockentity/BEDropper
+CLASS none/asi net/minecraft/vanilla/blockentity/BEEnchantingTable
+	METHOD F_ tick ()V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/ash net/minecraft/vanilla/tileentity/TileDropper
-CLASS none/asi net/minecraft/vanilla/tileentity/TileEnchantingTable
+CLASS none/asj net/minecraft/vanilla/blockentity/BEEnderChest
+	METHOD F_ tick ()V
+CLASS none/ask net/minecraft/vanilla/blockentity/BEFlowerPot
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asj net/minecraft/vanilla/tileentity/TileEnderChest
-CLASS none/ask net/minecraft/vanilla/tileentity/TileFlowerPot
+CLASS none/asl net/minecraft/vanilla/blockentity/BEFurnace
+	METHOD F_ tick ()V
+	METHOD a isItemValidForSlot (ILnone/afi;Lnone/cv;)Z
+	METHOD a getSlotsForSide (Lnone/cv;)[I
 	METHOD a readFromNBT (Lnone/du;)V
-	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asl net/minecraft/vanilla/tileentity/TileFurnace
-	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b canExtractItem (ILnone/afi;Lnone/cv;)Z
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asm
 	METHOD D getWorld ()Lnone/ajq;
-CLASS none/asn net/minecraft/vanilla/tileentity/TileHopper
+CLASS none/asn net/minecraft/vanilla/blockentity/BEHopper
+	METHOD F_ tick ()V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/aso
+	METHOD q getItems ()Lnone/dd;
+CLASS none/aso net/minecraft/engine/blockentity/BEInventory
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asp net/minecraft/vanilla/tileentity/TileMobSpawner
+CLASS none/asp net/minecraft/vanilla/blockentity/BEMobSpawner
+	METHOD F_ tick ()V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asq net/minecraft/vanilla/tileentity/TileNoteBlock
+CLASS none/asq net/minecraft/vanilla/blockentity/BENoteBlock
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/ass net/minecraft/vanilla/tileentity/TileShulkerBox
+CLASS none/asr net/minecraft/engine/blockentity/BELootableInventory
+	FIELD m lootTableName Lnone/kq;
+	FIELD n lootTableSeed J
+	METHOD a setLootTableNameAndSeed (Lnone/kq;J)V
+	METHOD q getItems ()Lnone/dd;
+CLASS none/ass net/minecraft/vanilla/blockentity/BEShulkerBox
+	METHOD F_ tick ()V
+	METHOD a isItemValidForSlot (ILnone/afi;Lnone/cv;)Z
+	METHOD a getSlotsForSide (Lnone/cv;)[I
+	METHOD a readFromNBT (Lnone/du;)V
+	METHOD b canExtractItem (ILnone/afi;Lnone/cv;)Z
+	METHOD b writeToNBT (Lnone/du;)Lnone/du;
+	METHOD q getItems ()Lnone/dd;
+CLASS none/ast net/minecraft/vanilla/blockentity/BESign
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/ast net/minecraft/vanilla/tileentity/TileSign
+CLASS none/asu net/minecraft/vanilla/blockentity/BESkull
+	METHOD F_ tick ()V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asu net/minecraft/vanilla/tileentity/TileSkull
-	METHOD a readFromNBT (Lnone/du;)V
-	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asv net/minecraft/vanilla/tileentity/TileStructureBlock
+CLASS none/asv net/minecraft/vanilla/blockentity/BEStructureBlock
 	CLASS none/asv$a EnumMode
 		FIELD a SAVE Lnone/asv$a;
 		FIELD b LOAD Lnone/asv$a;
@@ -2394,10 +2625,11 @@ CLASS none/asv net/minecraft/vanilla/tileentity/TileStructureBlock
 		METHOD values values ()[Lnone/asv$a;
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asw net/minecraft/vanilla/tileentity/TileEndGateway
+CLASS none/asw net/minecraft/vanilla/blockentity/BEEndGateway
+	METHOD F_ tick ()V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-CLASS none/asx net/minecraft/vanilla/tileentity/TileEndPortal
+CLASS none/asx net/minecraft/vanilla/blockentity/BEEndPortal
 CLASS none/ata net/minecraft/vanilla/block/BlockPiston
 	FIELD B sticky Z
 	FIELD a EXTENDED Lnone/atv;
@@ -2416,10 +2648,11 @@ CLASS none/atc net/minecraft/vanilla/block/BlockPistonMoving
 	FIELD a FACING Lnone/atw;
 	FIELD b TYPE Lnone/atx;
 	METHOD a getStateFromMeta (I)Lnone/atj;
-	METHOD a createTileEntity (Lnone/ajq;I)Lnone/asa;
+	METHOD a createBlockEntity (Lnone/ajq;I)Lnone/asa;
 	METHOD a getItemDropped (Lnone/atj;Ljava/util/Random;I)Lnone/afg;
 	METHOD e getMetaFromState (Lnone/atj;)I
-CLASS none/atd net/minecraft/vanilla/tileentity/TilePistonMoving
+CLASS none/atd net/minecraft/vanilla/blockentity/BEPistonMoving
+	METHOD F_ tick ()V
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/atj net/minecraft/engine/block/IBlockState
@@ -3089,6 +3322,10 @@ CLASS none/bpq
 	METHOD a openTileEntityScreen (Lnone/rb;)V
 	METHOD a openNonTileEntityScreen (Lnone/ri;)V
 	METHOD a openHorseInventoryScreen (Lnone/xl;Lnone/rb;)V
+CLASS none/bpt
+	METHOD b setField (II)V
+	METHOD c_ getField (I)I
+	METHOD h getFieldCount ()I
 CLASS none/bpw net/minecraft/engine/client/renderer/VertexBuffer
 	METHOD a tex (DD)Lnone/bpw;
 	METHOD a color (FFFF)Lnone/bpw;
@@ -3311,6 +3548,10 @@ CLASS none/bze net/minecraft/engine/client/renderer/VertexFormats
 CLASS none/cae net/minecraft/engine/client/resources/I18n
 	METHOD a canTranslate (Ljava/lang/String;)Z
 	METHOD a translate (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+CLASS none/ccm
+	METHOD F_ tick ()V
+CLASS none/ccp
+	METHOD F_ tick ()V
 CLASS none/ccq
 	METHOD b createNameToValueMap ()Ljava/util/Map;
 CLASS net/minecraft/client/main/Main net/minecraft/client/main/Main The client main class
