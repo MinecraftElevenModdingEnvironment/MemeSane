@@ -1,1 +1,1 @@
-gradlew enigma
+gradlew enigma --offline
