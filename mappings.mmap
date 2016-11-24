@@ -38,6 +38,21 @@ CLASS none/f net/minecraft/engine/exceptions/ReportedException An exception with
 	METHOD a getCrashReport ()Lnone/b; Gets the crash report associated with this ReportedException @return The crash report associated with this ReportedException
 	METHOD getCause getCause ()Ljava/lang/Throwable; Gets the cause of this throwable @return The cause of this throwable
 	METHOD getMessage getMessage ()Ljava/lang/String; Returns the display message of this throwable @return The display message of this throwable
+CLASS none/n
+	METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+	METHOD e getWorld ()Lnone/ajq;
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
+CLASS none/o
+	CLASS none/o$1
+		METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+		METHOD e getWorld ()Lnone/ajq;
+		METHOD h_ getLocalizedName ()Ljava/lang/String;
+CLASS none/q net/minecraft/vanilla/command/CommandAchievement
+CLASS none/ae
+	CLASS none/ae$1
+		METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+		METHOD e getWorld ()Lnone/ajq;
+		METHOD h_ getLocalizedName ()Ljava/lang/String;
 CLASS none/co net/minecraft/engine/util/BlockPos
 	CLASS none/co$a
 		FIELD b x I
@@ -78,10 +93,12 @@ CLASS none/co net/minecraft/engine/util/BlockPos
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
+	METHOD a fromLong (J)Lnone/co;
 	METHOD a add (Lnone/dl;)Lnone/co;
 		ARG 0 other
 	METHOD b subtract (Lnone/dl;)Lnone/co;
 		ARG 0 other
+	METHOD g toLong ()J
 CLASS none/ct net/minecraft/engine/util/DefaultedMappedRegistry
 	FIELD d defaultKey Ljava/lang/Object;
 	FIELD e defaultValue Ljava/lang/Object;
@@ -135,6 +152,7 @@ CLASS none/dd net/minecraft/engine/util/DefaultedList
 	METHOD remove remove (I)Ljava/lang/Object;
 	METHOD set set (ILjava/lang/Object;)Ljava/lang/Object;
 	METHOD size size ()I
+CLASS none/de net/minecraft/engine/particle/ParticleType
 CLASS none/dh
 	METHOD a register (Ljava/lang/Object;Ljava/lang/Object;)V
 	METHOD c names ()Ljava/util/Set;
@@ -235,7 +253,7 @@ CLASS none/du net/minecraft/engine/nbt/NBTCompound
 	METHOD f getByte (Ljava/lang/String;)B
 	METHOD g copy ()Lnone/du;
 	METHOD g getShort (Ljava/lang/String;)S
-	METHOD h setInt (Ljava/lang/String;)I
+	METHOD h getInt (Ljava/lang/String;)I
 	METHOD i getLong (Ljava/lang/String;)J
 	METHOD j getFloat (Ljava/lang/String;)F
 	METHOD k getDouble (Ljava/lang/String;)D
@@ -371,7 +389,276 @@ CLASS none/ei net/minecraft/engine/nbt/NBTBase
 	METHOD b copy ()Lnone/ei;
 	METHOD b_ isEmpty ()Z
 	METHOD c_ getValue ()Ljava/lang/String;
+CLASS none/et net/minecraft/engine/network/MinecraftByteBuf
+	FIELD a buf Lio/netty/buffer/ByteBuf;
+	METHOD a readByteArray ()[B
+	METHOD a readEnum (Ljava/lang/Class;)Ljava/lang/Enum;
+		ARG 0 type
+	METHOD a writeEnum (Ljava/lang/Enum;)Lnone/et;
+	METHOD a writeString (Ljava/lang/String;)Lnone/et;
+	METHOD a writeUUID (Ljava/util/UUID;)Lnone/et;
+	METHOD a writeItemStack (Lnone/afi;)Lnone/et;
+	METHOD a writeBlockPos (Lnone/co;)Lnone/et;
+	METHOD a writeNBT (Lnone/du;)Lnone/et;
+	METHOD a writeTextComponent (Lnone/fb;)Lnone/et;
+	METHOD a writeByteArray ([B)Lnone/et;
+	METHOD a writeVarIntArray ([I)Lnone/et;
+	METHOD a writeLongArray ([J)Lnone/et;
+	METHOD a readLongArray ([JI)[J
+		ARG 0 buffer
+		ARG 1 maxSize
+	METHOD alloc alloc ()Lio/netty/buffer/ByteBufAllocator;
+	METHOD array array ()[B
+	METHOD arrayOffset arrayOffset ()I
+	METHOD b readVarIntArray ()[I
+	METHOD b readByteArray (I)[B
+		ARG 0 maxSize
+	METHOD b writeVarLong (J)Lnone/et;
+	METHOD b readLongArray ([J)[J
+		ARG 0 buffer
+	METHOD bytesBefore bytesBefore (B)I
+	METHOD bytesBefore bytesBefore (IB)I
+	METHOD bytesBefore bytesBefore (IIB)I
+	METHOD c readVarIntArray (I)[I
+		ARG 0 maxSize
+	METHOD capacity capacity ()I
+	METHOD capacity capacity (I)Lio/netty/buffer/ByteBuf;
+	METHOD clear clear ()Lio/netty/buffer/ByteBuf;
+	METHOD compareTo compareTo (Lio/netty/buffer/ByteBuf;)I
+	METHOD copy copy ()Lio/netty/buffer/ByteBuf;
+	METHOD copy copy (II)Lio/netty/buffer/ByteBuf;
+	METHOD d writeVarInt (I)Lnone/et;
+	METHOD discardReadBytes discardReadBytes ()Lio/netty/buffer/ByteBuf;
+	METHOD discardSomeReadBytes discardSomeReadBytes ()Lio/netty/buffer/ByteBuf;
+	METHOD duplicate duplicate ()Lio/netty/buffer/ByteBuf;
+	METHOD e readBlockPos ()Lnone/co;
+	METHOD e readString (I)Ljava/lang/String;
+		ARG 0 maxSize
+	METHOD ensureWritable ensureWritable (I)Lio/netty/buffer/ByteBuf;
+	METHOD ensureWritable ensureWritable (IZ)I
+	METHOD f readTextComponent ()Lnone/fb;
+	METHOD forEachByte forEachByte (IILio/netty/buffer/ByteBufProcessor;)I
+	METHOD forEachByte forEachByte (Lio/netty/buffer/ByteBufProcessor;)I
+	METHOD forEachByteDesc forEachByteDesc (IILio/netty/buffer/ByteBufProcessor;)I
+	METHOD forEachByteDesc forEachByteDesc (Lio/netty/buffer/ByteBufProcessor;)I
+	METHOD g readVarInt ()I
+	METHOD getBoolean getBoolean (I)Z
+	METHOD getByte getByte (I)B
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILjava/io/OutputStream;I)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILjava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILjava/nio/channels/GatheringByteChannel;I)I
+	METHOD getBytes getBytes (I[B)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (I[BII)Lio/netty/buffer/ByteBuf;
+	METHOD getChar getChar (I)C
+	METHOD getDouble getDouble (I)D
+	METHOD getFloat getFloat (I)F
+	METHOD getInt getInt (I)I
+	METHOD getLong getLong (I)J
+	METHOD getMedium getMedium (I)I
+	METHOD getShort getShort (I)S
+	METHOD getUnsignedByte getUnsignedByte (I)S
+	METHOD getUnsignedInt getUnsignedInt (I)J
+	METHOD getUnsignedMedium getUnsignedMedium (I)I
+	METHOD getUnsignedShort getUnsignedShort (I)I
+	METHOD h readVarLong ()J
+	METHOD hasArray hasArray ()Z
+	METHOD hasMemoryAddress hasMemoryAddress ()Z
+	METHOD i readUUID ()Ljava/util/UUID;
+	METHOD indexOf indexOf (IIB)I
+	METHOD internalNioBuffer internalNioBuffer (II)Ljava/nio/ByteBuffer;
+	METHOD isDirect isDirect ()Z
+	METHOD isReadable isReadable ()Z
+	METHOD isReadable isReadable (I)Z
+	METHOD isWritable isWritable ()Z
+	METHOD isWritable isWritable (I)Z
+	METHOD j readNBT ()Lnone/du;
+	METHOD k readItemStack ()Lnone/afi;
+	METHOD markReaderIndex markReaderIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD markWriterIndex markWriterIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD maxCapacity maxCapacity ()I
+	METHOD maxWritableBytes maxWritableBytes ()I
+	METHOD memoryAddress memoryAddress ()J
+	METHOD nioBuffer nioBuffer ()Ljava/nio/ByteBuffer;
+	METHOD nioBuffer nioBuffer (II)Ljava/nio/ByteBuffer;
+	METHOD nioBufferCount nioBufferCount ()I
+	METHOD nioBuffers nioBuffers ()[Ljava/nio/ByteBuffer;
+	METHOD nioBuffers nioBuffers (II)[Ljava/nio/ByteBuffer;
+	METHOD order order ()Ljava/nio/ByteOrder;
+	METHOD order order (Ljava/nio/ByteOrder;)Lio/netty/buffer/ByteBuf;
+	METHOD readBoolean readBoolean ()Z
+	METHOD readByte readByte ()B
+	METHOD readBytes readBytes (I)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Ljava/io/OutputStream;I)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Ljava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Ljava/nio/channels/GatheringByteChannel;I)I
+	METHOD readBytes readBytes ([B)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes ([BII)Lio/netty/buffer/ByteBuf;
+	METHOD readChar readChar ()C
+	METHOD readDouble readDouble ()D
+	METHOD readFloat readFloat ()F
+	METHOD readInt readInt ()I
+	METHOD readLong readLong ()J
+	METHOD readMedium readMedium ()I
+	METHOD readShort readShort ()S
+	METHOD readSlice readSlice (I)Lio/netty/buffer/ByteBuf;
+	METHOD readUnsignedByte readUnsignedByte ()S
+	METHOD readUnsignedInt readUnsignedInt ()J
+	METHOD readUnsignedMedium readUnsignedMedium ()I
+	METHOD readUnsignedShort readUnsignedShort ()I
+	METHOD readableBytes readableBytes ()I
+	METHOD readerIndex readerIndex ()I
+	METHOD readerIndex readerIndex (I)Lio/netty/buffer/ByteBuf;
+	METHOD refCnt refCnt ()I
+	METHOD release release ()Z
+	METHOD release release (I)Z
+	METHOD resetReaderIndex resetReaderIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD resetWriterIndex resetWriterIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD retain retain ()Lio/netty/buffer/ByteBuf;
+	METHOD retain retain (I)Lio/netty/buffer/ByteBuf;
+	METHOD setBoolean setBoolean (IZ)Lio/netty/buffer/ByteBuf;
+	METHOD setByte setByte (II)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILjava/io/InputStream;I)I
+	METHOD setBytes setBytes (ILjava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILjava/nio/channels/ScatteringByteChannel;I)I
+	METHOD setBytes setBytes (I[B)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (I[BII)Lio/netty/buffer/ByteBuf;
+	METHOD setChar setChar (II)Lio/netty/buffer/ByteBuf;
+	METHOD setDouble setDouble (ID)Lio/netty/buffer/ByteBuf;
+	METHOD setFloat setFloat (IF)Lio/netty/buffer/ByteBuf;
+	METHOD setIndex setIndex (II)Lio/netty/buffer/ByteBuf;
+	METHOD setInt setInt (II)Lio/netty/buffer/ByteBuf;
+	METHOD setLong setLong (IJ)Lio/netty/buffer/ByteBuf;
+	METHOD setMedium setMedium (II)Lio/netty/buffer/ByteBuf;
+	METHOD setShort setShort (II)Lio/netty/buffer/ByteBuf;
+	METHOD setZero setZero (II)Lio/netty/buffer/ByteBuf;
+	METHOD skipBytes skipBytes (I)Lio/netty/buffer/ByteBuf;
+	METHOD slice slice ()Lio/netty/buffer/ByteBuf;
+	METHOD slice slice (II)Lio/netty/buffer/ByteBuf;
+	METHOD toString toString (IILjava/nio/charset/Charset;)Ljava/lang/String;
+	METHOD toString toString (Ljava/nio/charset/Charset;)Ljava/lang/String;
+	METHOD unwrap unwrap ()Lio/netty/buffer/ByteBuf;
+	METHOD writableBytes writableBytes ()I
+	METHOD writeBoolean writeBoolean (Z)Lio/netty/buffer/ByteBuf;
+	METHOD writeByte writeByte (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Ljava/io/InputStream;I)I
+	METHOD writeBytes writeBytes (Ljava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Ljava/nio/channels/ScatteringByteChannel;I)I
+	METHOD writeBytes writeBytes ([B)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes ([BII)Lio/netty/buffer/ByteBuf;
+	METHOD writeChar writeChar (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeDouble writeDouble (D)Lio/netty/buffer/ByteBuf;
+	METHOD writeFloat writeFloat (F)Lio/netty/buffer/ByteBuf;
+	METHOD writeInt writeInt (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeLong writeLong (J)Lio/netty/buffer/ByteBuf;
+	METHOD writeMedium writeMedium (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeShort writeShort (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeZero writeZero (I)Lio/netty/buffer/ByteBuf;
+	METHOD writerIndex writerIndex ()I
+	METHOD writerIndex writerIndex (I)Lio/netty/buffer/ByteBuf;
 CLASS none/fb net/minecraft/engine/util/ITextComponent
+	CLASS none/fb$a Serializer
+		METHOD a deserialize (Ljava/lang/String;)Lnone/fb;
+		METHOD a serialize (Lnone/fb;)Ljava/lang/String;
+CLASS none/kk net/minecraft/engine/entity/SynchedEntityDataKey
+	FIELD a id I
+	FIELD b serializer Lnone/kl;
+	METHOD a getId ()I
+	METHOD b getSerializer ()Lnone/kl;
+CLASS none/kl net/minecraft/engine/entity/SynchedEntityDataSerializer
+	METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+	METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+CLASS none/km net/minecraft/engine/entity/SynchedEntityDataSerializers
+	CLASS none/km$1
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$2
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$3
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$4
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$5
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$6
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$7
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$8
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$9
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$10
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$11
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$12
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	CLASS none/km$13
+		METHOD a deserialize (Lnone/et;)Ljava/lang/Object;
+		METHOD a serialize (Lnone/et;Ljava/lang/Object;)V
+	FIELD a BYTE Lnone/kl;
+	FIELD b INT Lnone/kl;
+	FIELD c FLOAT Lnone/kl;
+	FIELD d STRING Lnone/kl;
+	FIELD e TEXT_COMPONENT Lnone/kl;
+	FIELD f ITEM_STACK Lnone/kl;
+	FIELD g IBLOCKSTATE Lnone/kl;
+	FIELD h BOOLEAN Lnone/kl;
+	FIELD j BLOCKPOS Lnone/kl;
+	FIELD k OPTIONAL_BLOCKPOS Lnone/kl;
+	FIELD l FACING Lnone/kl;
+	FIELD m OPTIONAL_UUID Lnone/kl;
+	FIELD n registry Lnone/oh;
+	METHOD a byId (I)Lnone/kl;
+	METHOD a registerSerializer (Lnone/kl;)V
+	METHOD b getId (Lnone/kl;)I
+CLASS none/kn net/minecraft/engine/entity/SynchedEntityData
+	CLASS none/kn$a Entry
+		FIELD a key Lnone/kk;
+		FIELD b value Ljava/lang/Object;
+		METHOD a getKey ()Lnone/kk;
+		METHOD a setValue (Ljava/lang/Object;)V
+		METHOD b getValue ()Ljava/lang/Object;
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD c entity Lnone/sm;
+	FIELD d entriesById Ljava/util/Map;
+	FIELD e LOCK Ljava/util/concurrent/locks/ReadWriteLock;
+	FIELD f empty Z
+	METHOD a defineId (Ljava/lang/Class;Lnone/kl;)Lnone/kk;
+	METHOD a serializeEntries (Ljava/util/List;Lnone/et;)V
+	METHOD a serialize (Lnone/et;)V
+	METHOD a serializeEntry (Lnone/et;Lnone/kn$a;)V
+	METHOD a get (Lnone/kk;)Ljava/lang/Object;
+	METHOD a setDefault (Lnone/kk;Ljava/lang/Object;)V
+	METHOD b deserialize (Lnone/et;)Ljava/util/List;
+	METHOD b set (Lnone/kk;Ljava/lang/Object;)V
+	METHOD c entries ()Ljava/util/List;
+	METHOD c doGet (Lnone/kk;)Lnone/kn$a;
+	METHOD c doSetDefault (Lnone/kk;Ljava/lang/Object;)V
+	METHOD d isEmpty ()Z
 CLASS none/kq net/minecraft/engine/util/ResourceLocation
 CLASS none/kt net/minecraft/engine/startup/Bootstrap
 	METHOD a hasInitialized ()Z
@@ -379,18 +666,30 @@ CLASS none/lf net/minecraft/engine/util/IUpdateListener
 	METHOD F_ tick ()V
 CLASS none/ll
 	METHOD F_ tick ()V
+CLASS none/lw
+	METHOD a spawnEntity (Lnone/sm;)Z
+	METHOD u getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
 CLASS none/ly
+	METHOD H updatePortalCooldown ()V
 	METHOD a openEditBookScreen (Lnone/afi;Lnone/rh;)V
 	METHOD a openVillagerTradeScreen (Lnone/ajb;)V
 	METHOD a openEditCommandBlockScreen (Lnone/asd;)V
 	METHOD a openEditSignScreen (Lnone/ast;)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
 	METHOD a openTileEntityScreen (Lnone/rb;)V
 	METHOD a openNonTileEntityScreen (Lnone/ri;)V
 	METHOD a openHorseInventoryScreen (Lnone/xl;Lnone/rb;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD c changeDimension (I)Lnone/sm;
+	METHOD p stopRiding ()V
 CLASS none/mi
 	METHOD F_ tick ()V
 CLASS none/mk
 	METHOD F_ tick ()V
+CLASS none/nf
+	METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+	METHOD e getWorld ()Lnone/ajq;
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
 CLASS none/no net/minecraft/engine/sound/EnumSoundType
 	FIELD a MASTER Lnone/no;
 	FIELD b MUSIC Lnone/no;
@@ -409,10 +708,48 @@ CLASS none/no net/minecraft/engine/sound/EnumSoundType
 		ARG 0 name
 	METHOD b getNames ()Ljava/util/Set;
 	METHOD values values ()[Lnone/no;
+CLASS none/nq net/minecraft/engine/stats/Achievement
+CLASS none/nr net/minecraft/engine/stats/Achievements
+	FIELD A blazeRod Lnone/nq;
+	FIELD B potion Lnone/nq;
+	FIELD C theEnd Lnone/nq;
+	FIELD D theEnd2 Lnone/nq;
+	FIELD E enchantments Lnone/nq;
+	FIELD F overkill Lnone/nq;
+	FIELD G bookcase Lnone/nq;
+	FIELD H breedCow Lnone/nq;
+	FIELD I spawnWither Lnone/nq;
+	FIELD J killWither Lnone/nq;
+	FIELD K fullBeacon Lnone/nq;
+	FIELD L exploreAllBiomes Lnone/nq;
+	FIELD M overpowered Lnone/nq;
+	FIELD e achievementList Ljava/util/List;
+	FIELD f openInventory Lnone/nq;
+	FIELD g mineWood Lnone/nq;
+	FIELD h buildWorkBench Lnone/nq;
+	FIELD i buildPickaxe Lnone/nq;
+	FIELD j buildFurnace Lnone/nq;
+	FIELD k acquireIron Lnone/nq;
+	FIELD l buildHoe Lnone/nq;
+	FIELD m makeBread Lnone/nq;
+	FIELD n bakeCake Lnone/nq;
+	FIELD o buildBetterPickaxe Lnone/nq;
+	FIELD p cookFish Lnone/nq;
+	FIELD q onARail Lnone/nq;
+	FIELD r buildSword Lnone/nq;
+	FIELD s killEnemy Lnone/nq;
+	FIELD t killCow Lnone/nq;
+	FIELD u flyPig Lnone/nq;
+	FIELD v snipeSkeleton Lnone/nq;
+	FIELD w diamonds Lnone/nq;
+	FIELD x diamondsToYou Lnone/nq;
+	FIELD y portal Lnone/nq;
+	FIELD z ghast Lnone/nq;
 CLASS none/oh net/minecraft/engine/util/ObjectIntBiMap
 	METHOD a getKey (I)Ljava/lang/Object;
 	METHOD a get (Ljava/lang/Object;)I
 	METHOD a put (Ljava/lang/Object;I)V
+	METHOD c add (Ljava/lang/Object;)I
 	METHOD d expandCapacity (I)V
 	METHOD d (Ljava/lang/Object;)I
 	METHOD iterator iterator ()Ljava/util/Iterator;
@@ -455,6 +792,9 @@ CLASS none/ok net/minecraft/engine/util/JsonUtils Utilities to do with Json
 		ARG 0 containingObject The object to test
 		ARG 1 key The key we're looking for
 CLASS none/ot net/minecraft/engine/util/MathUtils
+	METHOD a fsqrtd (D)F
+	METHOD a randomUUID (Ljava/util/Random;)Ljava/util/UUID;
+	METHOD c fsqrtf (F)F
 CLASS none/rb net/minecraft/engine/inventory/IInventory
 	METHOD a getStackInSlot (I)Lnone/afi;
 	METHOD a setStackInSlot (ILnone/afi;)V
@@ -488,9 +828,9 @@ CLASS none/rf net/minecraft/engine/world/EnumDifficulty
 	FIELD d HARD Lnone/rf;
 	METHOD values values ()[Lnone/rf;
 CLASS none/ro net/minecraft/engine/util/IHasCustomName
-	METHOD h_ getCustomName ()Ljava/lang/String;
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
 	METHOD i_ getFormattedCustomName ()Lnone/fb;
-	METHOD n_ hasCustomName ()Z
+	METHOD n_ entityHasCustomName ()Z
 CLASS none/rq
 	METHOD a getStackInSlot (I)Lnone/afi;
 	METHOD a setStackInSlot (ILnone/afi;)V
@@ -513,6 +853,21 @@ CLASS none/sf net/minecraft/engine/potion/MobEffect
 	METHOD a getId (Lnone/sf;)I
 	METHOD b byName (Ljava/lang/String;)Lnone/sf;
 	METHOD k registerPotions ()V
+CLASS none/sg net/minecraft/engine/potion/PotionEffect
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD b mobEffect Lnone/sf;
+	FIELD c duration I
+	FIELD d amplifier I
+	FIELD f ambient Z
+	FIELD h showParticles Z
+	METHOD a getMobEffect ()Lnone/sf;
+	METHOD a writeToNBT (Lnone/du;)Lnone/du;
+	METHOD b getDuration ()I
+	METHOD b readFromNBT (Lnone/du;)Lnone/sg;
+	METHOD c getAmplifier ()I
+	METHOD d isAmbient ()Z
+	METHOD e showParticles ()Z
+	METHOD h decrementDuration ()I
 CLASS none/sh net/minecraft/vanilla/potion/MobEffects
 	FIELD A unluck Lnone/sf;
 	FIELD a speed Lnone/sf;
@@ -542,13 +897,164 @@ CLASS none/sh net/minecraft/vanilla/potion/MobEffects
 	FIELD y levitation Lnone/sf;
 	FIELD z luck Lnone/sf;
 	METHOD a getMobEffect (Ljava/lang/String;)Lnone/sf;
+CLASS none/sj
+	METHOD a setSize (FF)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/sk net/minecraft/vanilla/entity/EntityAreaEffectCloud
+	FIELD aA radiusPerTick F
+	FIELD aC ownerUUID Ljava/util/UUID;
+	FIELD a RADIUS Lnone/kk;
+	FIELD au duration I
+	FIELD av waitTime I
+	FIELD aw reapplicationDelay I
+	FIELD ax hasColor Z
+	FIELD ay durationOnUse I
+	FIELD az radiusOnUse F
+	FIELD b COLOR Lnone/kk;
+	FIELD d PARTICLE Lnone/kk;
+	FIELD e PARTICLE_PARAM_1 Lnone/kk;
+	FIELD f PARTICLE_PARAM_2 Lnone/kk;
+	FIELD g potion Lnone/agx;
+	FIELD h effects Ljava/util/List;
+	METHOD a setRadius (F)V
+	METHOD a setColor (I)V
+	METHOD a setPotion (Lnone/agx;)V
+	METHOD a setParticle (Lnone/de;)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD a addEffect (Lnone/sg;)V
+	METHOD b setRadiusOnUse (F)V
+	METHOD b setParticleParam1 (I)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD c setRadiusPerTick (F)V
+	METHOD d setParticleParam2 (I)V
+	METHOD e setDuration (I)V
+	METHOD g setWaitTime (I)V
+	METHOD i setSynchedDataDefaults ()V
+	METHOD j getRadius ()F
+	METHOD k getColor ()I
+	METHOD l getParticle ()Lnone/de;
+	METHOD n getParticleParam1 ()I
+	METHOD o getParticleParam2 ()I
+	METHOD r getDuration ()I
 CLASS none/sm net/minecraft/engine/entity/Entity
+	FIELD F shouldRemove Z
+	FIELD G width F
+	FIELD H height F
+	FIELD L fallDistance F
+	FIELD S rand Ljava/util/Random;
+	FIELD T age I
+	FIELD Y synchedData Lnone/kn;
+	FIELD Z FLAGS Lnone/kk;
+	FIELD aA CUSTOM_NAME Lnone/kk;
+	FIELD aB CUSTOM_NAME_VISIBLE Lnone/kk;
+	FIELD aC SILENT Lnone/kk;
+	FIELD aD NO_GRAVITY Lnone/kk;
+	FIELD aE invulnerable Z
+	FIELD aG tags Ljava/util/Set;
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD aj portalCooldown I
+	FIELD am dimension I
+	FIELD aq uuid Ljava/util/UUID;
+	FIELD ar uuidString Ljava/lang/String;
+	FIELD as glowing Z
+	FIELD at passengers Ljava/util/List;
+	FIELD au vehicle Lnone/sm;
+	FIELD ay fire I
+	FIELD az AIR Lnone/kk;
+	FIELD g nextEntityId I
+	FIELD h id I
+	FIELD l world Lnone/ajq;
 	FIELD p posX D
 	FIELD q posY D
 	FIELD r posZ D
+	FIELD s motionX D
+	FIELD t motionY D
+	FIELD u motionZ D
+	FIELD v rotationYaw F
+	FIELD w rotationPitch F
+	FIELD z onGround Z
 	METHOD <init> (Lnone/ajq;)V
 		ARG 0 world
+	METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+	METHOD H updatePortalCooldown ()V
+	METHOD O getId ()I
+	METHOD P tags ()Ljava/util/Set;
+	METHOD R getSynchedData ()Lnone/kn;
+	METHOD T kill ()V
+	METHOD X extinguish ()V
+	METHOD a setPosAndRotation (DDDFFIZ)V
+	METHOD a setSize (FF)V
+	METHOD a getAllPassengersOfType (Ljava/lang/Class;Ljava/util/Set;)V
+	METHOD a addTag (Ljava/lang/String;)Z
+	METHOD a setUUID (Ljava/util/UUID;)V
+	METHOD a dropItem (Lnone/afg;I)Lnone/zi;
+	METHOD a dropItem (Lnone/afg;IF)Lnone/zi;
+	METHOD a dropItem (Lnone/afi;F)Lnone/zi;
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD a doublesToNBT ([D)Lnone/ea;
+	METHOD a floatsToNBT ([F)Lnone/ea;
+	METHOD aK hasVehicle ()Z
+	METHOD aL hasPassengers ()Z
+	METHOD aR getAir ()I
+	METHOD aW isInvulnerable ()Z
+	METHOD ad isSilent ()Z
+	METHOD ae isNoGravity ()Z
+	METHOD at getNameId ()Ljava/lang/String;
+	METHOD au exists ()Z
+	METHOD ay getEyeHeight ()D
+	METHOD az dismountAllPassengers ()V
+	METHOD b setPos (DDD)V
+	METHOD b setRotation (FF)V
+		ARG 0 yaw
+		ARG 1 pitch
+	METHOD b setFlag (IZ)V
+	METHOD b getAllPassengersOfType (Ljava/lang/Class;)Ljava/util/Collection;
+	METHOD b removeTag (Ljava/lang/String;)Z
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD bB getVehicle ()Lnone/sm;
+	METHOD be getUUID ()Ljava/util/UUID;
+	METHOD bf getUUIDString ()Ljava/lang/String;
+	METHOD bi getEntityCustomName ()Ljava/lang/String;
+	METHOD bj isCustomNameVisible ()Z
+	METHOD bx getPassengers ()Ljava/util/List;
+	METHOD by getAllPassengers ()Ljava/util/Collection;
+	METHOD bz getBottommostEntity ()Lnone/sm;
+	METHOD c changeDimension (I)Lnone/sm;
+	METHOD c setEntityCustomName (Ljava/lang/String;)V
+	METHOD c distanceSq (Lnone/co;)D
+	METHOD c (Lnone/du;)Z
+	METHOD c setSilent (Z)V
+	METHOD d distanceSq (DDD)D
+	METHOD d distanceSqToCenter (Lnone/co;)D
+	METHOD d setNoGravity (Z)V
+	METHOD e getWorld ()Lnone/ajq;
+	METHOD e writeBaseEntityToNBT (Lnone/du;)Lnone/du;
+	METHOD f readBaseEntityFromNBT (Lnone/du;)V
+	METHOD g distanceTo (Lnone/sm;)F
+	METHOD g setGlowing (Z)V
+	METHOD h setMotion (DDD)V
+	METHOD h setId (I)V
+	METHOD h distanceSqTo (Lnone/sm;)D
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
+	METHOD i setSynchedDataDefaults ()V
+	METHOD i setFireTime (I)V
+		ARG 0 seconds
+	METHOD i setInvulnerable (Z)V
+	METHOD j setCustomNameVisible (Z)V
+	METHOD k getFlag (I)Z
+	METHOD l setAir (I)V
+	METHOD n_ entityHasCustomName ()Z
+	METHOD o addPassenger (Lnone/sm;)V
+	METHOD p stopRiding ()V
+	METHOD p removePassenger (Lnone/sm;)V
+	METHOD w isPassenger (Lnone/sm;)Z
+	METHOD x sharesBottommostEntity (Lnone/sm;)Z
+	METHOD y isInAllPassengers (Lnone/sm;)Z
 CLASS none/so net/minecraft/engine/entity/Entities
 	CLASS none/so$a SpawnEggInfo
 		FIELD a entityId Lnone/kq;
@@ -582,68 +1088,270 @@ CLASS none/sr net/minecraft/engine/inventory/EnumSpecialSlotType
 	FIELD e CHEST Lnone/sr;
 	FIELD f HEAD Lnone/sr;
 CLASS none/ss net/minecraft/vanilla/entity/EntityXPOrb
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/su net/minecraft/engine/entity/EnumHandedness
 	FIELD a LEFT_HANDED Lnone/su;
 	FIELD b RIGHT_HANDED Lnone/su;
 	METHOD a opposite ()Lnone/su;
 CLASS none/sv net/minecraft/entity/EntityLiving
+	METHOD a setPosAndRotation (DDDFFIZ)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD au exists ()Z
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+	METHOD p stopRiding ()V
+CLASS none/sw
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/th
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/wt net/minecraft/vanilla/entity/EntityBat
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/wv
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/ww net/minecraft/vanilla/entity/EntityChicken
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/wx net/minecraft/vanilla/entity/EntityCow
 CLASS none/wz net/minecraft/vanilla/entity/EntityMooshroom
 CLASS none/xa net/minecraft/vanilla/entity/EntityOcelot
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xb net/minecraft/vanilla/entity/EntityPig
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xc net/minecraft/vanilla/entity/EntityPolarBear
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xd net/minecraft/vanilla/entity/EntityRabbit
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xe net/minecraft/vanilla/entity/EntitySheep
 	FIELD by COLORS_BY_DYE_COLOR Ljava/util/Map;
 	METHOD a getColorByDyeColor (Lnone/ael;)[F
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xf net/minecraft/vanilla/entity/EntitySnowman
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xg net/minecraft/vanilla/entity/EntitySquid
 CLASS none/xh net/minecraft/vanilla/entity/EntityVillagerGolem
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xj net/minecraft/vanilla/entity/EntityWolf
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/xk
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD ay getEyeHeight ()D
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/xl
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xm net/minecraft/vanilla/entity/EntityDonkey
 CLASS none/xn net/minecraft/vanilla/entity/EntityHorse
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xp net/minecraft/vanilla/entity/EntityLlama
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD ay getEyeHeight ()D
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xq net/minecraft/vanilla/entity/EntityMule
 CLASS none/xr net/minecraft/vanilla/entity/EntitySkeletonHorse
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD ay getEyeHeight ()D
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/xt net/minecraft/vanilla/entity/EntityZombieHorse
+CLASS none/xy
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/xz net/minecraft/vanilla/entity/EntityEnderCrystal
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/ya net/minecraft/vanilla/entity/EntityEnderDragon
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/yu net/minecraft/vanilla/entity/EntityWither
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/yw net/minecraft/vanilla/entity/EntityArmorStand
+	METHOD a setSize (FF)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/yx
+	METHOD a dropItem (Lnone/afi;F)Lnone/zi;
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b setPos (DDD)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/yy net/minecraft/vanilla/entity/EntityItemFrame
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/yz net/minecraft/vanilla/entity/EntityLeashKnot
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b setPos (DDD)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/za net/minecraft/vanilla/entity/EntityPainting
+	METHOD a setPosAndRotation (DDDFFIZ)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+CLASS none/zc
+	METHOD T kill ()V
+	METHOD a setPosAndRotation (DDDFFIZ)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/zf
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zh net/minecraft/vanilla/entity/EntityFallingBlock
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zi net/minecraft/engine/entity/EntityItem
+	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD c ITEM Lnone/kk;
+	FIELD d age I
+	FIELD e pickupDelay I
+	FIELD f health I
+	FIELD g thrower Ljava/lang/String;
+	FIELD h owner Ljava/lang/String;
+	METHOD a setPickupDelay (I)V
+	METHOD a setItem (Lnone/afi;)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a tryMergeWith (Lnone/zi;)Z
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD c changeDimension (I)Lnone/sm;
+	METHOD d setOwner (Ljava/lang/String;)V
+	METHOD e setThrower (Ljava/lang/String;)V
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
+	METHOD i setSynchedDataDefaults ()V
+	METHOD k getItem ()Lnone/afi;
+	METHOD l getOwner ()Ljava/lang/String;
+	METHOD n getThrower ()Ljava/lang/String;
+	METHOD o getAge ()I
+	METHOD q setDefaultPickupDelay ()V
+	METHOD r setNoPickupDelay ()V
+	METHOD s setInfinitePickupDelay ()V
+	METHOD t canPickup ()Z
+	METHOD x mergeWithNearbyItems ()V
 CLASS none/zj net/minecraft/vanilla/entity/EntityPrimedTNT
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/zl
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zm net/minecraft/vanilla/entity/EntityBlaze
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zn net/minecraft/vanilla/entity/EntityCaveSpider
 CLASS none/zo net/minecraft/vanilla/entity/EntityCreeper
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zp net/minecraft/vanilla/entity/EntityElderGuardian
 CLASS none/zq net/minecraft/vanilla/entity/EntityEnderman
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zr net/minecraft/vanilla/entity/EntityEndermite
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/zt net/minecraft/vanilla/entity/EntityEvocationIllager
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zu net/minecraft/vanilla/entity/EntityGhast
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zv net/minecraft/vanilla/entity/EntityGiant
 CLASS none/zw net/minecraft/vanilla/entity/EntityGuardian
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/zx net/minecraft/vanilla/entity/EntityHusk
 CLASS none/zy net/minecraft/vanilla/entity/EntityMagmaCube
 CLASS none/aaa net/minecraft/vanilla/entity/EntityZombiePigman
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/aad net/minecraft/vanilla/entity/EntityShulker
+	METHOD a setPosAndRotation (DDDFFIZ)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b setPos (DDD)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aae net/minecraft/vanilla/entity/EntitySilverfish
 CLASS none/aaf net/minecraft/vanilla/entity/EntitySkeleton
 CLASS none/aag net/minecraft/vanilla/entity/EntitySlime
+	METHOD T kill ()V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aah net/minecraft/vanilla/entity/EntitySpider
+	METHOD ay getEyeHeight ()D
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aai net/minecraft/vanilla/entity/EntityStray
 CLASS none/aaj net/minecraft/vanilla/entity/EntityVex
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aak net/minecraft/vanilla/entity/EntityVindicationIllager
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD c setEntityCustomName (Ljava/lang/String;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aal net/minecraft/vanilla/entity/EntityWitch
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aam net/minecraft/vanilla/entity/EntityWitherSkeleton
 CLASS none/aan net/minecraft/vanilla/entity/EntityZombie
+	METHOD a setSize (FF)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aao net/minecraft/vanilla/entity/EntityZombieVillager
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aas net/minecraft/vanilla/entity/EntityVillager
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aaw
 	METHOD a getStackInSlot (I)Lnone/afi;
 	METHOD a setStackInSlot (ILnone/afi;)V
@@ -661,31 +1369,81 @@ CLASS none/aax net/minecraft/engine/entity/EntityPlayer
 		FIELD a FULL Lnone/aax$b;
 		FIELD b SYSTEM Lnone/aax$b;
 		FIELD c HIDDEN Lnone/aax$b;
+	METHOD T kill ()V
 	METHOD a openEditBookScreen (Lnone/afi;Lnone/rh;)V
 	METHOD a openVillagerTradeScreen (Lnone/ajb;)V
 	METHOD a openOldEditCommandBlockScreen (Lnone/ajf;)V
 	METHOD a openEditCommandBlockScreen (Lnone/asd;)V
 	METHOD a openEditSignScreen (Lnone/ast;)V
 	METHOD a openEditStructureBlockScreen (Lnone/asv;)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
 	METHOD a openTileEntityScreen (Lnone/rb;)V
 	METHOD a openNonTileEntityScreen (Lnone/ri;)V
 	METHOD a openHorseInventoryScreen (Lnone/xl;Lnone/rb;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
+	METHOD i setSynchedDataDefaults ()V
+	METHOD p stopRiding ()V
+CLASS none/aba
+	METHOD a setPosAndRotation (DDDFFIZ)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD h setMotion (DDD)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abb net/minecraft/vanilla/entity/EntityDragonFireball
 CLASS none/abc net/minecraft/vanilla/entity/EntityEvocationFangs
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abd net/minecraft/vanilla/entity/EntityEyeOfEnderSignal
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD h setMotion (DDD)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/abe
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abf net/minecraft/vanilla/entity/EntityFireworksRocket
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD h setMotion (DDD)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abg net/minecraft/vanilla/entity/EntityFireball
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/abh net/minecraft/vanilla/entity/EntityLlamaSpit
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD h setMotion (DDD)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abk net/minecraft/vanilla/entity/EntityShulkerBullet
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abl net/minecraft/vanilla/entity/EntitySmallFireball
 CLASS none/abm net/minecraft/vanilla/entity/EntitySnowball
 CLASS none/abn net/minecraft/vanilla/entity/EntitySpectralArrow
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+CLASS none/abo
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD h setMotion (DDD)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abp net/minecraft/vanilla/entity/EntityThrownEgg
 CLASS none/abq net/minecraft/vanilla/entity/EntityThrownEnderPearl
 CLASS none/abr net/minecraft/vanilla/entity/EntityThrownXPBottle
 CLASS none/abs net/minecraft/vanilla/entity/EntityThrownPotion
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abt net/minecraft/vanilla/entity/EntityArrow
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abu net/minecraft/vanilla/entity/EntityWitherSkull
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abw net/minecraft/vanilla/entity/EntityBoat
 	CLASS none/abw$b EnumType
 		FIELD a OAK Lnone/abw$b;
@@ -694,6 +1452,11 @@ CLASS none/abw net/minecraft/vanilla/entity/EntityBoat
 		FIELD d JUNGLE Lnone/abw$b;
 		FIELD e ACACIA Lnone/abw$b;
 		FIELD f DARK_OAK Lnone/abw$b;
+	METHOD a setPosAndRotation (DDDFFIZ)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD ay getEyeHeight ()D
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/abx net/minecraft/vanilla/entity/EntityMinecart
 	CLASS none/abx$a EnumType
 		FIELD a RIDEABLE Lnone/abx$a;
@@ -703,14 +1466,42 @@ CLASS none/abx net/minecraft/vanilla/entity/EntityMinecart
 		FIELD e SPAWNER Lnone/abx$a;
 		FIELD f HOPPER Lnone/abx$a;
 		FIELD g COMMAND_BLOCK Lnone/abx$a;
+	METHOD a setPosAndRotation (DDDFFIZ)V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD ay getEyeHeight ()D
+	METHOD b setPos (DDD)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD h setMotion (DDD)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/aby net/minecraft/vanilla/entity/EntityMinecartChest
 CLASS none/abz net/minecraft/vanilla/entity/EntityCommandBlockMinecart
+	CLASS none/abz$1
+		METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+		METHOD e getWorld ()Lnone/ajq;
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
+CLASS none/aca
+	METHOD T kill ()V
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD c changeDimension (I)Lnone/sm;
 CLASS none/acb net/minecraft/vanilla/entity/EntityMinecartFurnace
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
+	METHOD i setSynchedDataDefaults ()V
 CLASS none/acc net/minecraft/vanilla/entity/EntityMinecartHopper
 	METHOD D getWorld ()Lnone/ajq;
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/acd net/minecraft/vanilla/entity/EntityMinecartRideable
 CLASS none/ace net/minecraft/vanilla/entity/EntityMinecartSpawner
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/acf net/minecraft/vanilla/entity/EntityMinecartTnt
+	METHOD a readEntityFromNBT (Lnone/du;)V
+	METHOD b writeEntityToNBT (Lnone/du;)V
 CLASS none/acr
 	METHOD a getStackInSlot (I)Lnone/afi;
 	METHOD a setStackInSlot (ILnone/afi;)V
@@ -1162,9 +1953,60 @@ CLASS none/ags net/minecraft/vanilla/item/ItemTippedArrow
 CLASS none/agu net/minecraft/vanilla/item/ItemWaterlily
 CLASS none/agv net/minecraft/vanilla/item/ItemWritableBook
 CLASS none/agw net/minecraft/vanilla/item/ItemWrittenBook
+CLASS none/agx net/minecraft/engine/potion/Potion
+	FIELD a registry Lnone/ct;
+	FIELD b EMPTY_ID Lnone/kq;
+	FIELD c nextPotionId I
+	METHOD a byName (Ljava/lang/String;)Lnone/agx;
+	METHOD a registerPotion (Ljava/lang/String;Lnone/agx;)V
+	METHOD b registerPotions ()V
+CLASS none/aha net/minecraft/vanilla/potion/Potions
+	FIELD A long_poison Lnone/agx;
+	FIELD B strong_poison Lnone/agx;
+	FIELD C regeneration Lnone/agx;
+	FIELD D long_regeneration Lnone/agx;
+	FIELD E strong_regeneration Lnone/agx;
+	FIELD F strength Lnone/agx;
+	FIELD G long_strength Lnone/agx;
+	FIELD H strong_strength Lnone/agx;
+	FIELD I weakness Lnone/agx;
+	FIELD J long_weakness Lnone/agx;
+	FIELD a empty Lnone/agx;
+	FIELD b water Lnone/agx;
+	FIELD c mundane Lnone/agx;
+	FIELD d thick Lnone/agx;
+	FIELD e awkward Lnone/agx;
+	FIELD f night_vision Lnone/agx;
+	FIELD g long_night_vision Lnone/agx;
+	FIELD h invisibility Lnone/agx;
+	FIELD i long_invisibility Lnone/agx;
+	FIELD j leaping Lnone/agx;
+	FIELD k long_leaping Lnone/agx;
+	FIELD l strong_leaping Lnone/agx;
+	FIELD m fire_resistance Lnone/agx;
+	FIELD n long_fire_resistance Lnone/agx;
+	FIELD o swiftness Lnone/agx;
+	FIELD p long_swiftness Lnone/agx;
+	FIELD q strong_swiftness Lnone/agx;
+	FIELD r slowness Lnone/agx;
+	FIELD s long_slowness Lnone/agx;
+	FIELD t water_breathing Lnone/agx;
+	FIELD u long_water_breathing Lnone/agx;
+	FIELD v healing Lnone/agx;
+	FIELD w strong_healing Lnone/agx;
+	FIELD x harming Lnone/agx;
+	FIELD y strong_harming Lnone/agx;
+	FIELD z poison Lnone/agx;
+	METHOD a getPotion (Ljava/lang/String;)Lnone/agx;
+CLASS none/ajf
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
 CLASS none/ajq net/minecraft/engine/world/World
+	FIELD C profiler Lnone/ou;
+	FIELD E isClient Z
 	METHOD P getTime ()J
+	METHOD a spawnEntity (Lnone/sm;)Z
 	METHOD o getBlockState (Lnone/co;)Lnone/atj;
+	METHOD u getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
 CLASS none/aju net/minecraft/engine/world/IBlockAccess
 	METHOD o getBlockState (Lnone/co;)Lnone/atj;
 CLASS none/ajz
@@ -2477,9 +3319,9 @@ CLASS none/arx net/minecraft/vanilla/blockentity/BEBanner
 	FIELD g patterns Lnone/ea;
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
-	METHOD h_ getCustomName ()Ljava/lang/String;
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
 	METHOD i_ getFormattedCustomName ()Lnone/fb;
-	METHOD n_ hasCustomName ()Z
+	METHOD n_ entityHasCustomName ()Z
 CLASS none/arz net/minecraft/vanilla/blockentity/BEBeacon
 	FIELD f VALID_MOB_EFFECTS Ljava/util/Set;
 	FIELD k levels I
@@ -2547,6 +3389,9 @@ CLASS none/asc net/minecraft/vanilla/blockentity/BEChest
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 	METHOD q getItems ()Lnone/dd;
 CLASS none/asd net/minecraft/vanilla/blockentity/BECommandBlock
+	CLASS none/asd$1
+		METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+		METHOD e getWorld ()Lnone/ajq;
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/ase net/minecraft/vanilla/blockentity/BEComparator
@@ -2606,6 +3451,14 @@ CLASS none/ass net/minecraft/vanilla/blockentity/BEShulkerBox
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 	METHOD q getItems ()Lnone/dd;
 CLASS none/ast net/minecraft/vanilla/blockentity/BESign
+	CLASS none/ast$1
+		METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+		METHOD e getWorld ()Lnone/ajq;
+		METHOD h_ getLocalizedName ()Ljava/lang/String;
+	CLASS none/ast$2
+		METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+		METHOD e getWorld ()Lnone/ajq;
+		METHOD h_ getLocalizedName ()Ljava/lang/String;
 	METHOD a readFromNBT (Lnone/du;)V
 	METHOD b writeToNBT (Lnone/du;)Lnone/du;
 CLASS none/asu net/minecraft/vanilla/blockentity/BESkull
@@ -3312,6 +4165,7 @@ CLASS none/bjy net/minecraft/vanilla/client/gui/SelectSingleplayerWorldScreen
 	METHOD b layout ()V
 	METHOD k handleMouseInput ()V
 CLASS none/bno net/minecraft/engine/world/WorldClient
+	METHOD a spawnEntity (Lnone/sm;)Z
 CLASS none/bpq
 	METHOD a openEditBookScreen (Lnone/afi;Lnone/rh;)V
 	METHOD a openVillagerTradeScreen (Lnone/ajb;)V
@@ -3319,9 +4173,13 @@ CLASS none/bpq
 	METHOD a openEditCommandBlockScreen (Lnone/asd;)V
 	METHOD a openEditSignScreen (Lnone/ast;)V
 	METHOD a openEditStructureBlockScreen (Lnone/asv;)V
+	METHOD a onSynchedDataChanged (Lnone/kk;)V
 	METHOD a openTileEntityScreen (Lnone/rb;)V
 	METHOD a openNonTileEntityScreen (Lnone/ri;)V
 	METHOD a openHorseInventoryScreen (Lnone/xl;Lnone/rb;)V
+	METHOD p stopRiding ()V
+CLASS none/bpr
+	METHOD a setPosAndRotation (DDDFFIZ)V
 CLASS none/bpt
 	METHOD b setField (II)V
 	METHOD c_ getField (I)I
@@ -3610,5 +4468,9 @@ CLASS net/minecraft/client/main/Main net/minecraft/client/main/Main The client m
 		VAR 43 assetIndex
 		VAR 44 server
 		VAR 45 port
+CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
+	METHOD B_ getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+	METHOD e getWorld ()Lnone/ajq;
+	METHOD h_ getLocalizedName ()Ljava/lang/String;
 CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever Used to see if we are in vanilla
 	METHOD getClientModName getClientModName ()Ljava/lang/String; Returns "vanilla" in vanilla @return The client brand

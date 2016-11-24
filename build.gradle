@@ -11,7 +11,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'net.earthcomputer.meme:meme-gradle:1.0.0.38'
+		classpath 'net.earthcomputer.meme:meme-gradle:1.0.0.42'
 	}
 }
 
@@ -20,6 +20,7 @@ apply plugin: 'net.earthcomputer.meme.sane'
 meme {
 	artifactId = 'meme-sane'
 	bintrayPackageName = 'meme-sane'
+	enigmaVersion = '1.0.0.16-meme'
 }
 
 group = 'net.earthcomputer.meme'
