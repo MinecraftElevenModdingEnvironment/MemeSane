@@ -792,9 +792,46 @@ CLASS none/ok net/minecraft/engine/util/JsonUtils Utilities to do with Json
 		ARG 0 containingObject The object to test
 		ARG 1 key The key we're looking for
 CLASS none/ot net/minecraft/engine/util/MathUtils
+	FIELD a SQRT_TWO F
+	FIELD b SIN_TABLE [F
+	FIELD c rand Ljava/util/Random;
+	METHOD a randomUUID ()Ljava/util/UUID;
 	METHOD a fsqrtd (D)F
+	METHOD a dmaxabs2d (DD)D
+	METHOD a dclamp3d (DDD)D
+	METHOD a fsinf (F)F
+	METHOD a equivalent2f (FF)Z
+	METHOD a fclamp3f (FFF)F
+	METHOD a iabsi (I)I
+	METHOD a iclamp3i (III)I
+	METHOD a parseDoubleDefault (Ljava/lang/String;D)D
+	METHOD a parseDoubleDefaultMin (Ljava/lang/String;DD)D
+	METHOD a parseIntDefault (Ljava/lang/String;I)I
+	METHOD a parseIntDefaultMin (Ljava/lang/String;II)I
 	METHOD a randomUUID (Ljava/util/Random;)Ljava/util/UUID;
+	METHOD a drandrange (Ljava/util/Random;DD)D
+	METHOD a frandrange (Ljava/util/Random;FF)F
+	METHOD a irandrange (Ljava/util/Random;II)I
+	METHOD a vec3iToLong (Lnone/dl;)J
+	METHOD a dmeanl ([J)D
+	METHOD b dipolate3d (DDD)D
+	METHOD b fnegsinf (F)F
+	METHOD b packColor (FFF)I
+	METHOD b iclampanglei (I)I
+	METHOD b packColor (III)I
+	METHOD c ifloord (D)I
 	METHOD c fsqrtf (F)F
+	METHOD c hsvToRgb (FFF)I
+	METHOD c vec3iToLong (III)J
+	METHOD d lfloord (D)J
+	METHOD d ifloorf (F)I
+	METHOD e fabsf (F)F
+	METHOD f iceild (D)I
+	METHOD f iceilf (F)I
+	METHOD g dclampangled (D)D
+	METHOD g fclampanglef (F)F
+	METHOD g isPowerOfTwo (I)Z
+	METHOD h getFractionalPart (D)D
 CLASS none/rb net/minecraft/engine/inventory/IInventory
 	METHOD a getStackInSlot (I)Lnone/afi;
 	METHOD a setStackInSlot (ILnone/afi;)V
