@@ -20,7 +20,7 @@ apply plugin: 'net.earthcomputer.meme.sane'
 meme {
 	artifactId = 'meme-sane'
 	bintrayPackageName = 'meme-sane'
-	enigmaVersion = '1.0.0.19-meme'
+	enigmaVersion = '1.0.0.22-meme'
 }
 
 group = 'net.earthcomputer.meme'
